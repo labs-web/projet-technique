@@ -1,0 +1,36 @@
+# 🛠️ Stack Technique 
+
+## Back-end
+- **Langage** : PHP 8.2+
+- **Framework** : Laravel 10/11
+- **Architecture** : MVC, Service Pattern
+- **API** : Laravel API Resources (RESTful)
+- **Sécurité Web** : Laravel UI (Tailwind Scaffolding)
+- **Sécurité API** : Laravel Sanctum (Tokens Mobile)
+- **Autorisation** : Laravel Gates/Policies (Native) et Spatie Permissions (ACL)
+
+## Front-end (Web)
+- **Templating** : Laravel Blade (Components, Layouts)
+- **CSS Framework** : Tailwind CSS (v3+)
+- **Interactivité** : Alpine.js et AJAX Vanilla (Fetch API)
+- **UI Components** : Preline UI
+
+## Mobile (Android)
+- **Langage** : Kotlin
+- **UI Toolkit** : Jetpack Compose (Material Design 3)
+- **Architecture** : MVVM (Model-View-ViewModel)
+- **Networking** : Retrofit + OkHttp
+- **Persistence** : Room Database
+- **Async** : Coroutines & Flow
+
+## Base de Données
+- **SGBD** : MySQL 8.0 / MariaDB
+- **ORM** : Eloquent (Relations, Scopes, Accessors)
+
+## DevOps & Outils
+- **OS Serveur** : Linux Ubuntu LTS
+- **Web Server** : Nginx ou Apache
+- **Versionning** : Git (GitHub Flow)
+- **API Testing** : Postman / Insomnia
+- **Design** : Création des maquettes avec HTML et CSS avec Preline UI
+
