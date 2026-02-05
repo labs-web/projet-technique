@@ -2,7 +2,7 @@
 description: Workflow Maître pour la création de site web statique en mode UI-First (Agile).
 ---
 
-# Workflow : Processus de Développement (Laravel TALL)
+# Workflow : Processus de Développement (Laravel)
 
 Ce workflow orchestre le cycle de vie complet, de l'idée au déploiement.
 
