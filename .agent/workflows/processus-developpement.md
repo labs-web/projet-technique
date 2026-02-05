@@ -1,40 +1,47 @@
 ---
-description: Workflow Maître pour la création d'interfaces en mode UI-First (Agile).
+description: Workflow Maître pour la création de site web statique en mode UI-First (Agile).
 ---
 
-# Workflow : Processus de Développement (UI-First)
+# Workflow : Processus de Développement (Laravel TALL)
 
-Ce workflow privilégie le développement des interfaces visuelles avant la logique métier, garantissant une UX de qualité dès le départ.
+Ce workflow orchestre le cycle de vie complet, de l'idée au déploiement.
 
-## Phase 1 : Fondations Design System
-1.  **Configuration Tailwind** :
-    - Vérifier `tailwind.config.js` (Couleurs, Polices, Breakpoints).
-    - Mettre à jour `resources/css/app.css` (ou `index.css`).
-2.  **Tokens Design** :
-    - Définir les variables CSS ou extensions Tailwind pour les couleurs (Primary, Secondary, Surface).
+## Trigger
+Demande utilisateur : "Crée une landing page", "Ajoute une section features".
 
-## Phase 2 : Création de Composants (Atomique)
-1.  **Identification** : Lister les composants nécessaires pour la fonctionnalité (Boutons, Cards, Inputs).
-2.  **Développement** :
-    - Créer le composant Blade : `php artisan make:component NomComposant`.
-    - Styler avec Tailwind CSS (Focus sur l'esthétique et les micro-interactions).
-    - Utiliser `generate_image` si besoin pour des assets graphiques.
-3.  **Isolation** : Valider le rendu visuel indépendamment.
+## Phases Séquentielles (Checkpoints Obligatoires)
 
-## Phase 3 : Assemblage des Pages (Vues)
-1.  **Layout** : Créer ou mettre à jour le Layout principal (`resources/views/layouts/app.blade.php`).
-2.  **Structure** : Créer la vue cible : `resources/views/pages/ma-page.blade.php`.
-3.  **Intégration** : Assembler les composants dans la vue.
-4.  **Responsive** : Tester et ajuster les breakpoints (Mobile, Tablette, Desktop).
+### Phase 0 : Charte Graphique (Fondations)
+*Condition : Uniquement si non définie.*
+1. Lancer le workflow `/charte-graphique`.
+2. **STOP** : Attendre validation visuelle de la charte.
 
-## Phase 4 : Logique Métier (Back-end)
-*Une fois l'UI validée :*
-1.  **Routing** : Définir la route dans `web.php`.
-2.  **Contrôleur** : Créer le contrôleur et la méthode.
-3.  **Données** : Passer les vraies données (Models) à la vue à la place des mocks statiques.
+### Phase 1 : Conception UI (Wireframe)
+3. Lancer le workflow `/conception-ui`.
+4. **STOP** : Attendre validation du concept.
 
-## Critères de Qualité (Definition of Done)
-- [ ] Le design est cohérent avec le "Look & Feel" premium attendu.
-- [ ] Le responsive est fluide sur tous les écrans.
-- [ ] Le code HTML est sémantique.
-- [ ] Les composants sont réutilisables.
+### Phase 2 : Création Maquette Statique (UI-Kit)
+L'agent crée les maquettes statiques en HTML/CSS pur pour valider le design sans contraintes Backend.
+*Localisation : Dossier `ui-kit/` (Hors dossier Laravel `resources/`)*
+5. **Templates** : Créer les structures de page (`ui-kit/layouts/`).
+6. **Composants** : Créer les briques unitaires (`ui-kit/molecules/`).
+7. **STOP** : Attendre validation des fichiers `.html` dans `ui-kit/`.
+
+### Phase 3 : Intégration Laravel (TALL Stack)
+Portage du code statique vers l'architecture Laravel.
+*Stratégie : Intégration sans abstraction excessive (Pas de composants Blade, usage de Partials).*
+8. **Layouts Blade** : Convertir `ui-kit/layouts/` en Master Layouts (`resources/views/layouts/app.blade.php`).
+9. **Partials** : Extraire les blocs récurrents (Header, Footer, Nav) dans `resources/views/partials/`.
+10. **Pages** : Intégrer le contenu de `ui-kit/molecules/` dans les vues (`resources/views/pages/`) avec `@extends` et `@include`.
+11. **Routes** : Définir les routes d'accès dans `routes/web.php`.
+12. **STOP** : Validation fonctionnelle via `php artisan serve`.
+
+### Phase 4 : Logique Métier & Backend (Dynamisation)
+Transformation des vues statiques en pages dynamiques connectées à la logique Laravel.
+13. **Controllers** : Créer les contrôleurs (`php artisan make:controller`) et déplacer la logique des routes.
+14. **Données & Modèles** : Passer les données dynamiques aux vues (Tableaux ou DB).
+15. **Alpine.js** : Connecter les données Backend aux composants Alpine (`x-data="backendData"`).
+16. **STOP** : Validation des flux de données et de l'interactivité.
+
+## Loi Checkpoint
+**INTERDICTION** de passer à la phase suivante sans "GO" explicite de l'utilisateur.

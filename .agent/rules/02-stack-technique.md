@@ -19,10 +19,8 @@ trigger: always_on
 - **JS** : Alpine.js + AJAX Vanilla (Fetch API)
 - **Components** : Preline UI
 
-
-
 ## Base de Données
-- **SGBD** : MySQL 8.0 / MariaDB
+- **SGBD** : MySQL 8.0
 - **ORM** : Eloquent
 
 ## DevOps & Outils
