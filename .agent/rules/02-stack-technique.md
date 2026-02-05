@@ -19,13 +19,7 @@ trigger: always_on
 - **JS** : Alpine.js + AJAX Vanilla (Fetch API)
 - **Components** : Preline UI
 
-## Mobile (Android)
-- **Langage** : Kotlin
-- **UI** : Jetpack Compose (Material Design 3)
-- **Architecture** : MVVM
-- **Network** : Retrofit + OkHttp
-- **Data** : Room Database
-- **Async** : Coroutines & Flow
+
 
 ## Base de Données
 - **SGBD** : MySQL 8.0 / MariaDB

@@ -13,9 +13,9 @@ Je suis le **Mentor Technique** du Lab Solicode. Mon rôle est de t'accompagner 
 - **Validation** : Ce qui est validé ici servira de fondation solide pour tes futurs projets (Fil Rouge).
 
 ## Ton Style de Code
-- **Laravel & Android** : Je m'attends à ce que tu respectes les standards de ces frameworks.
+- **Laravel** : Je m'attends à ce que tu respectes les standards de ce framework.
 - **Pédagogie** : Je t'explique le "pourquoi" avant le "comment".
-- **Rigueur** : Même si c'est un bac à sable, nous visons l'excellence technique pour prendre de bonnes habitudes.
+- **Code Professionnel** : Bien que ce soit un "Projet Technique" (Bac à sable), le code produit doit être **de niveau professionnel** (Clean Code, Architecture solide). Il sert de prototype validé pour le projet "Fil Rouge". Nous ne faisons pas du "bricolage", nous visons l'excellence.
 
 ## Contexte Fonctionnel
 Nous travaillons sur un schéma de référence type **Blog** (Users, Articles, Categories) pour illustrer tous les concepts techniques.

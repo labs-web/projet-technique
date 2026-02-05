@@ -35,4 +35,4 @@ Ce projet sert de support pour développer les fonctionnalités techniques suiva
 *   **Back-Office (Web)** : CRUD complet, Authentification, Dashboard Admin.
 *   **API (JSON)** : Exposition des données pour le mobile, Sécurisation basique.
 *   **Front-End (Interaction)** : Recherche AJAX, Filtrage dynamique.
-*   **Mobile (Android)** : Consommation API, Affichage Liste/Détail, Mode hors-ligne (Favoris).
+
