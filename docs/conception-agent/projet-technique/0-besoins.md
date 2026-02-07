@@ -1,9 +1,11 @@
 # Cadrage du Besoin Métier
 
+
 ## 1. Contexte du Projet
 * **Nom du Projet** : Projet Technique (Laboratoire pour la réalisation de projet Fil Rouge)
 * **Description Courte** : Environnement d'auto-formation ("Bac à sable") basé sur une architecture Blog pour valider les compétences techniques Laravel (Blade/Alpine/API).
-* **Objectif Principal** : Maîtriser le framework Laravel et son écosystème à travers la réalisation d'un Blog complet, servant de validation technique formelle avant le projet Fil Rouge.
+* **Objectif Principal** : Maîtriser le framework Laravel et son écosystème à travers la réalisation d'un Blog complet.
+* **Vision "Grand Projet"** : Bien que démarrant avec 3 tables, l'architecture doit être conçue dès le départ pour supporter une montée en charge vers 20+ tables (Scalabilité, Modularité, Séparation des responsabilités). Ce projet est la fondation technique d'une future application d'envergure.
 
 ## 2. Description du Besoin
 Le système à concevoir est une **plateforme de Blog complète** servant de support d'apprentissage pour :
@@ -37,15 +39,17 @@ Le système à concevoir est une **plateforme de Blog complète** servant de sup
 
 ## 3. Contraintes Techniques
 *   **Backend** : PHP 8.2+, Laravel 10/11.
-*   **Architecture** :
-    *   Pattern MVC strict + Couche Service (`app/Services`).
+*   **Architecture "Scalable"** :
+    *   Pattern MVC strict + Couche Service (`app/Services`) obligatoire pour isoler la logique métier.
     *   Principes "Skinny Controller" / "Fat Model".
-*   **Base de Données** : MySQL 8.0, ORM Eloquent.
+    *   Préparation à la division par Domaines (pas de couplage fort).
+*   **Base de Données** : MySQL 8.0, ORM Eloquent. Structure pensée pour l'évolution (Index, Clés étrangères strictes).
 *   **Frontend & Design System** (Contrainte Majeure) :
     *   Templating : Laravel Blade.
     *   CSS : Tailwind CSS v3+.
     *   **UI-Kit Personnalisé (Workflow itératif)** :
         *   Dossier `ui-kit/` contenant les atomes, molécules et maquettes de référence.
+        *   **Phase d'Analyse & Conception UI** : Pour chaque demande utilisateur, une étape d'analyse préalable est OBLIGATOIRE pour identifier et concevoir les **Atomes**, **Molécules** et **Pages (Maquettes)** nécessaires avant tout développement Backend.
         *   **Règle d'Or (Just-In-Time)** : Si un développeur a besoin d'un composant non existant, il doit **D'ABORD** le créer et le valider dans le `ui-kit/` AVANT de l'implémenter dans le code applicatif. Il est interdit de créer du style "adhoc" directement dans les vues Laravel sans passer par la case UI-Kit.
 *   **Internationalisation** :
     *   Utilisation stricte des fichiers de langue Laravel (`lang/`) pour tous les textes statiques.
