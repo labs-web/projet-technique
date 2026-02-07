@@ -6,128 +6,136 @@ description: Initialise la structure du projet, configure les outils transverses
 # Skill : Expert Configuration Stack
 
 ## 🎯 Objectif & Périmètre
-**Mission** : Initialiser un environnement de développement Laravel robuste, standardisé et prêt à l'emploi.
+**Mission** : Installer et configurer de manière granulaire les technologies du stack technique Laravel.
 
 ### ✅ Actions Autorisées
-- **Initialiser** la structure du projet (Laravel Installer, Git init).
-- **Configurer** les outils transverses (Tailwind, Linter, .env).
-- **Échafauder** l'architecture des dossiers (`app/Services`, `ui-kit/`).
-- **Documenter** la prise en main technique (`README.md`).
+- **Installer** Laravel Backend dans le dossier `app/`.
+- **Installer** Tailwind CSS et Preline UI.
+- **Installer** Alpine.js pour l'interactivité front-end.
+- **Configurer** MySQL (création de base de données).
+- **Installer** Laravel Pint et IDE Helper (outils de qualité).
+- **Créer** l'architecture des dossiers (Services, Policies, ui-kit).
+- **Initialiser** Git avec un commit initial.
+- **Documenter** la prise en main technique.
 
 ### ❌ Limites (Ce qu'il ne fait PAS)
 - Ne crée PAS de logique métier (Déléguer à `backend-business`).
 - Ne crée PAS de composants UI détaillés (Déléguer à `designer-ui-kit`).
 
 ## 📥 Entrées / 📤 Sorties
-| Direction  | Nom                        | Description / Format                                         |
-| :--------- | :------------------------- | :----------------------------------------------------------- |
-| **Entrée** | `resources/specs-stack.md` | Spécifications techniques (Versions, Outils, Env)            |
-| **Sortie** | `Projet Initialisé`        | Dossier racine avec fichiers de config (`.env`, `pint.json`) |
-| **Sortie** | `Structure`                | Dossiers vides (`ui-kit/`, `app/Services/`)                  |
-| **Sortie** | `README.md`                | Documentation d'installation et de démarrage                 |
+
+- **Entrée** : `Action` (Nom de l'action à exécuter : laravel, tailwind, alpine, mysql, pint, architecture, git)
+- **Entrée** : Fichier `resources/specs-*.md` correspondant à l'action
+- **Sortie** : Technologie installée et configurée
+- **Sortie** : Rapport de validation
 
 ## 🔄 Algorithme d'Exécution
 
-⚠️ **IMPORTANT** : Cet algorithme détaille le COMMENT. Chaque commande doit être proposée au développeur et validée avant exécution.
-
-### Étape 1 : Préparation & Consultation (Phase 1)
-*Objectif : Charger les spécifications et présenter le plan d'installation.*
-
-1. **Lecture** : Charger le fichier `resources/specs-stack.md`.
-2. **Présentation** : Afficher au développeur un résumé des versions listées dans la section "Spécifications d'Initialisation Stack".
-3. **Confirmation** : Attendre l'approbation du développeur pour procéder.
+⚠️ **IMPORTANT** : Chaque action est indépendante. Le développeur choisit quelle(s) technologie(s) installer.
 
 ---
 
-### Étape 2 : Installation Laravel (Phase 2)
-*Objectif : Installer le framework Laravel dans le dossier `app/`.*
+### Action 1 : Installer Laravel Backend
+*Objectif : Installer Laravel dans le dossier `app/`.*
 
-1. **Lecture Section** : Consulter `specs-stack.md` → Section "1. Laravel Backend" → "Installation".
-2. **Proposition** : Afficher la commande au développeur.
-3. **Attendre** : Validation du développeur.
-4. **Exécution** : Lancer la commande après approbation (`SafeToAutoRun=false`).
-5. **Vérification** : Confirmer que le dossier `app/` contient la structure Laravel.
+1. **Lecture** : Charger `resources/specs-laravel.md`.
+2. **Présentation** : Afficher au développeur la version Laravel qui sera installée.
+3. **Proposition** : Afficher la commande `composer create-project`.
+4. **Attendre** : Validation du développeur.
+5. **Exécution** : Lancer la commande après approbation (SafeToAutoRun=false).
+6. **Configuration .env** : Proposer les modifications du fichier `.env` selon `specs-laravel.md`.
+7. **Attendre** : Validation du développeur.
+8. **Modification** : Appliquer les valeurs dans `app/.env`.
+9. **Post-Installation** : Proposer `php artisan key:generate`.
 
----
-
-### Étape 3 : Configuration .env (Phase 2)
-*Objectif : Configurer les variables d'environnement.*
-
-1. **Lecture Section** : Consulter `specs-stack.md` → Section "1. Laravel Backend" → "Configuration `.env`".
-2. **Proposition** : Afficher les modifications au développeur.
-3. **Attendre** : Validation du développeur.
-4. **Modification** : Appliquer les valeurs spécifiées dans le fichier `app/.env`.
+**Validation** : Laravel installé et configuré.
 
 ---
 
-### Étape 4 : Initialisation Git (Phase 2)
-*Objectif : Créer le dépôt Git avec un commit initial.*
-
-1. **Lecture Section** : Consulter `specs-stack.md` → Section "7. Git & Versionning" → "Initialisation".
-2. **Proposition** : Afficher les commandes au développeur.
-3. **Attendre** : Validation du développeur.
-4. **Exécution** : Lancer les commandes après approbation.
-
----
-
-### Étape 5 : Installation Tailwind CSS (Phase 3)
+### Action 2 : Installer Tailwind CSS
 *Objectif : Installer et configurer Tailwind CSS.*
 
-1. **Lecture Section** : Consulter `specs-stack.md` → Section "2. Tailwind CSS" → "Installation" et "Configuration".
-2. **Proposition** : Afficher les commandes d'installation au développeur.
+1. **Lecture** : Charger `resources/specs-tailwind.md`.
+2. **Proposition** : Afficher les commandes d'installation npm.
 3. **Attendre** : Validation du développeur.
 4. **Exécution** : Lancer les commandes.
-5. **Configuration** : Appliquer la configuration `tailwind.config.js` spécifiée dans `specs-stack.md`.
-6. **CSS** : Modifier `app/resources/css/app.css` selon le template de `specs-stack.md`.
+5. **Configuration** : Appliquer la configuration `tailwind.config.js` selon `specs-tailwind.md`.
+6. **CSS** : Modifier `app/resources/css/app.css` avec les directives Tailwind.
+7. **Preline UI** : Proposer l'installation de Preline.
+8. **Attendre** : Validation du développeur.
+9. **Exécution** : Installer Preline.
+
+**Validation** : Tailwind CSS et Preline UI installés.
 
 ---
 
-### Étape 6 : Installation Preline UI & Alpine.js (Phase 3)
-*Objectif : Installer les bibliothèques front-end.*
+### Action 3 : Installer Alpine.js
+*Objectif : Installer Alpine.js pour l'interactivité.*
 
-1. **Lecture Sections** : 
-   - Consulter `specs-stack.md` → Section "2. Tailwind CSS" → "Preline UI"
-   - Consulter `specs-stack.md` → Section "3. Alpine.js" → "Installation"
-2. **Proposition** : Afficher les commandes au développeur.
-3. **Attendre** : Validation du développeur.
-4. **Exécution** : Lancer les commandes.
-5. **Configuration Alpine** : Appliquer l'intégration dans `app/resources/js/app.js` selon `specs-stack.md`.
-
----
-
-### Étape 7 : Installation Laravel Pint (Phase 3)
-*Objectif : Configurer le linter pour la qualité du code.*
-
-1. **Lecture Section** : Consulter `specs-stack.md` → Section "5. Outils de Qualité" → "Laravel Pint".
-2. **Proposition** : Afficher la commande d'installation au développeur.
+1. **Lecture** : Charger `resources/specs-alpine.md`.
+2. **Proposition** : Afficher la commande `npm install alpinejs`.
 3. **Attendre** : Validation du développeur.
 4. **Exécution** : Lancer la commande.
-5. **Configuration** : Créer `app/pint.json` avec la configuration spécifiée dans `specs-stack.md`.
+5. **Configuration** : Appliquer l'intégration dans `app/resources/js/app.js` selon `specs-alpine.md`.
+
+**Validation** : Alpine.js installé et intégré.
 
 ---
 
-### Étape 8 : Création Architecture Dossiers (Phase 4)
-*Objectif : Échafauder l'arborescence des dossiers.*
+### Action 4 : Configurer MySQL
+*Objectif : Créer la base de données MySQL.*
 
-1. **Lecture Section** : Consulter `specs-stack.md` → Section "6. Architecture des Dossiers" → "Commandes de Création".
-2. **Proposition** : Afficher les commandes de création au développeur.
+1. **Lecture** : Charger `resources/specs-mysql.md`.
+2. **Présentation** : Afficher les paramètres de connexion.
+3. **Proposition** : Afficher le script SQL de création de base.
+4. **Attendre** : Validation du développeur.
+5. **Instructions** : Demander au développeur d'exécuter le script SQL manuellement.
+
+**Validation** : Base de données créée.
+
+---
+
+### Action 5 : Installer Laravel Pint
+*Objectif : Installer le linter de code.*
+
+1. **Lecture** : Charger `resources/specs-pint.md`.
+2. **Proposition** : Afficher la commande `composer require laravel/pint --dev`.
+3. **Attendre** : Validation du développeur.
+4. **Exécution** : Lancer la commande.
+5. **Configuration** : Créer `app/pint.json` avec la configuration spécifiée dans `specs-pint.md`.
+
+**Validation** : Laravel Pint installé et configuré.
+
+---
+
+### Action 6 : Créer Architecture Dossiers
+*Objectif : Échafauder l'arborescence.*
+
+1. **Lecture** : Charger `resources/specs-architecture.md`.
+2. **Proposition** : Afficher les commandes de création de dossiers.
 3. **Attendre** : Validation du développeur.
 4. **Exécution** : Créer les dossiers selon les commandes spécifiées.
 
+**Validation** : Architecture créée.
+
 ---
 
-### Étape 9 : Présentation Finale (Phase 5)
-*Objectif : Vérifier que l'environnement est opérationnel.*
+### Action 7 : Initialiser Git
+*Objectif : Créer le dépôt Git.*
 
-1. **Résumé** : Présenter la liste des composants installés.
-2. **Lecture Section** : Consulter `specs-stack.md` → Section "8. Démarrage Rapide" → "Serveurs de Développement".
-3. **Proposition Tests** : Afficher les commandes de test au développeur.
-4. **Validation Finale** : Confirmer que l'environnement fonctionne.
+1. **Lecture** : Charger `resources/specs-architecture.md` (section Git).
+2. **Proposition** : Afficher les commandes `git init`, `git add .`, `git commit`.
+3. **Attendre** : Validation du développeur.
+4. **Exécution** : Lancer les commandes.
+
+**Validation** : Dépôt Git initialisé.
 
 ---
 
 ## ⚠️ Règles d'Or
-1. **Source de Vérité** : `resources/specs-stack.md` contient TOUTES les commandes et configurations.
-2. **Pas de Duplication** : Le SKILL référence les sections, il ne répète JAMAIS le contenu.
-3. **Conventions** : Configuration "Opinionated" mais standard (PSR-12).
-4. **⚠️ VALIDATION OBLIGATOIRE** : Ce skill exécute des commandes système destructives. **CHAQUE commande doit être proposée au développeur et nécessite son approbation EXPLICITE avant exécution**. Ne JAMAIS utiliser `SafeToAutoRun=true`.
+
+1. **Source de Vérité** : Les fichiers `resources/specs-*.md` contiennent TOUTES les commandes et configurations.
+2. **Granularité** : Chaque action est indépendante et peut être appelée séparément.
+3. **Pas de Duplication** : Le SKILL référence les fichiers specs, il ne répète JAMAIS le contenu.
+4. **Conventions** : Configuration "Opinionated" mais standard (PSR-12).
+5. **⚠️ VALIDATION OBLIGATOIRE** : Ce skill exécute des commandes système destructives. **CHAQUE commande doit être proposée au développeur et nécessite son approbation EXPLICITE avant exécution**. Ne JAMAIS utiliser `SafeToAutoRun=true`.
