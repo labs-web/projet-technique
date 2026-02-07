@@ -12,7 +12,7 @@ Ce fichier définit les versions exactes, les commandes d'installation et les co
 
 ### Installation
 ```bash
-composer create-project laravel/laravel:^11.0 app
+composer create-project laravel/laravel app
 ```
 
 **Note** : Cela créera l'application Laravel dans le dossier `app/` au lieu de la racine du projet.
@@ -246,7 +246,7 @@ mkdir -p resources/views/layouts
 ```bash
 git init
 git add .
-git commit -m "Initial commit: Laravel 11 + Tailwind + Alpine"
+git commit -m "Initial commit: Laravel + Tailwind + Alpine"
 ```
 
 ### `.gitignore` (Déjà présent dans Laravel)
