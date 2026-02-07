@@ -4,50 +4,82 @@ description: Workflow principal d'implémentation de fonctionnalité. Assure une
 
 # Workflow : Implémentation de Fonctionnalité (`/impl-feature`)
 
-Ce workflow est le cœur du cycle de développement. Il assure une implémentation "Vertical Slice" complète, du design à l'intégration, en respectant la séparation des couches.
+## 1. Contexte & Flux Global
+**Objectif** : Implémenter une fonctionnalité complète de manière séquentielle (Vertical Slice), du design à l'intégration.
+**Flux Type** : `[Specs]` → `[UI Design]` → `[Data Schéma]` → `[Logique Métier]` → `[Exposition HTTP]` → `[Intégration Frontend]`
 
-### Flux de Données & Responsabilités
-Le flux est strictement séquentiel pour garantir que chaque couche s'appuie sur des fondations stables.
+## 2. Exécution
 
-**1. Étape : Design UI**
-*   **Skill Responsable** : `designer-ui-kit`
-*   **Entrée** : Spécifications Fonctionnelles
-*   **Sortie** : Maquettes HTML/CSS statiques dans le dossier `ui-kit/`
+### Étape 1 : Design UI
+> **Skill responsable** : `designer-ui-kit`
+> **Flux Data** : 📥 `[Spécifications]` → 📤 `[Maquettes HTML/CSS]`
 
-**2. Étape : Data Layer**
-*   **Skill Responsable** : `backend-data`
-*   **Entrée** : Maquettes validées (pour déduire les champs)
-*   **Sortie** : Migrations, Models Eloquent, Factories, Seeders
+**Instructions** :
+1. Analyser les besoins visuels.
+2. Créer ou mettre à jour les fichiers statiques dans `ui-kit/`.
+3. Valider le rendu visuel (Responsive, Thème).
+4. **STOP** : Demander la validation du développeur (Vérification visuelle `ui-kit/index.html`).
 
-**3. Étape : Business Logic**
-*   **Skill Responsable** : `backend-business`
-*   **Entrée** : Models disponibles
-*   **Sortie** : Services (`app/Services`), Policies, Gates
+**Validation** : Maquettes HTML validées par le développeur.
 
-**4. Étape : HTTP Layer**
-*   **Skill Responsable** : `backend-http`
-*   **Entrée** : Services fonctionnels, définitions des Routes
-*   **Sortie** : Controllers, FormRequests, API Resources, Routes
+---
 
-**5. Étape : Frontend Integration**
-*   **Skill Responsable** : `dev-frontend-js`
-*   **Entrée** : Controllers opérationnels, Maquettes HTML existantes
-*   **Sortie** : Vues Blade finales, Scripts Alpine.js/Vanilla JS
+### Étape 2 : Data Layer
+> **Skill responsable** : `backend-data`
+> **Flux Data** : 📥 `[Maquettes HTML]` → 📤 `[Migrations & Models]`
 
-### Détail des Transitions
+**Instructions** :
+1. Déduire le schéma de données depuis les maquettes (Champs de formulaires, Listes).
+2. Créer les migrations et les modèles Eloquent.
+3. Exécuter les migrations.
+4. **STOP** : Demander la validation du développeur (Schéma BDD correct).
 
-#### Transition 1 -> 2 : Du Visuel à la Donnée
-*   **Condition** : Le `ui-kit` contient les fichiers HTML statiques validés.
-*   **Action** : L'expert Data analyse les formulaires et listes du `ui-kit` pour déduire les attributs de la BDD.
+**Validation** : Structure de base de données validée par le développeur.
 
-#### Transition 2 -> 3 : De la Structure à la Logique
-*   **Condition** : Les tables existent et les Models sont prêts.
-*   **Action** : L'expert Métier implémente les règles de gestion (ex: "Un article doit être validé avant publication") dans les Services.
+---
 
-#### Transition 3 -> 4 : Exposition HTTP
-*   **Condition** : Les Services sont testables et fonctionnels.
-*   **Action** : L'expert HTTP expose ces services via des routes Web ou API, sécurisées par des FormRequests.
+### Étape 3 : Business Logic
+> **Skill responsable** : `backend-business`
+> **Flux Data** : 📥 `[Models]` → 📤 `[Services & Policies]`
 
-#### Transition 4 -> 5 : Intégration Finale
-*   **Condition** : Les endpoints/contrôleurs retournent les données attendues.
-*   **Action** : Le développeur Frontend injecte ces données dans les vues Blade (basées sur le `ui-kit`) et ajoute l'interactivité JS.
+**Instructions** :
+1. Implémenter les règles de gestion dans des Services dédiés.
+2. Définir les Policies d'accès.
+3. **STOP** : Demander la validation du développeur (Logique métier implémentée).
+
+**Validation** : Services testables et validés par le développeur.
+
+---
+
+### Étape 4 : HTTP Layer
+> **Skill responsable** : `backend-http`
+> **Flux Data** : 📥 `[Services]` → 📤 `[Controllers & Routes]`
+
+**Instructions** :
+1. Créer les FormRequests pour valider les entrées.
+2. Créer les Contrôleurs qui appellent les Services.
+3. Définir les Routes Web/API.
+4. **STOP** : Demander la validation du développeur (Endpoints testés).
+
+**Validation** : Routes fonctionnelles validées par le développeur.
+
+---
+
+### Étape 5 : Frontend Integration
+> **Skill responsable** : `dev-frontend-js`
+> **Flux Data** : 📥 `[Controllers & Maquettes]` → 📤 `[Vues Blade Finales]`
+
+**Instructions** :
+1. Convertir les fichiers HTML du `ui-kit` en vues Blade.
+2. Injecter les données dynamiques.
+3. Ajouter l'interactivité JS (Alpine/Fetch).
+4. **STOP** : Demander la validation du développeur (Fonctionnalité complète).
+
+**Validation** : Feature complète testée et validée par le développeur.
+
+---
+
+## 3. Critères de Qualité
+- [ ] **Linéarité** : Le flux suit strictement l'ordre Design -> Data -> Business -> Http -> Front.
+- [ ] **Complétion** : Tous les fichiers nécessaires ont été créés sans "TODO" critiques.
+- [ ] **Atomicité** : Chaque étape est réalisée par l'expert compétent uniquement.

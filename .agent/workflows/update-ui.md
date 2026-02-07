@@ -1,12 +1,41 @@
 ---
-description: Workflow de mise à jour de l'interface utilisateur. Modifie le design ou l'ergonomie.
+description: Workflow de mise à jour de l'interface utilisateur.
 ---
 
 # Workflow : Mise à jour Interface (`/update-ui`)
 
-*   **Objectif** : Modifier le design (CSS), le texte ou l'ergonomie d'une page existante.
-*   **Périmètre** : Couche Présentation uniquement.
-*   **Flux** :
-    1.  **Skill** `designer-ui-kit` : Modifie les fichiers HTML/CSS dans `ui-kit/`. **C'est la source de vérité.**
-    2.  **Skill** `dev-frontend-js` : Répercute les modifications HTML/CSS dans les fichiers `.blade.php`.
-*   **Interdit** : Modifier la logique PHP ou la base de données.
+## 1. Contexte & Flux Global
+**Objectif** : Modifier le design (CSS), le texte ou l'ergonomie d'une page existante et propager le changement.
+**Flux Type** : `[Demande UI]` → `[UI Kit Modifié]` → `[Blade Modifié]`
+
+## 2. Exécution
+
+### Étape 1 : Modification Design System
+> **Skill responsable** : `designer-ui-kit`
+> **Flux Data** : 📥 `[Demande]` → 📤 `[HTML/CSS Modifié]`
+
+**Instructions** :
+1. Modifier les fichiers HTML statiques dans `ui-kit/`.
+2. Vérifier le rendu visuel.
+3. **STOP** : Demander la validation du développeur (Le UI Kit est la source de vérité).
+
+**Validation** : Design validé dans le UI Kit par le développeur.
+
+---
+
+### Étape 2 : Propagation Frontend
+> **Skill responsable** : `dev-frontend-js`
+> **Flux Data** : 📥 `[HTML Modifié]` → 📤 `[Blade Modifié]`
+
+**Instructions** :
+1. Répercuter les changements HTML/CSS sur les fichiers Blade correspondants.
+2. Vérifier que la dynamique (JS/Variables) n'est pas cassée.
+3. **STOP** : Demander la validation du développeur.
+
+**Validation** : Interface finale validée par le développeur.
+
+---
+
+## 3. Critères de Qualité
+- [ ] **Cohérence** : Le UI Kit et Blade doivent être synchronisés.
+- [ ] **Régression** : La modification n'a pas cassé le JS existant.
