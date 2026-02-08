@@ -24,6 +24,11 @@ npm install preline --save-dev
 
 Suivre la documentation officielle de Preline pour Tailwind v4.
 
+> [!IMPORTANT]
+> **Configuration V4** : Toute la configuration se fait dans `resources/css/app.css`.
+> Nous ne créons **PAS** et ne modifions **PAS** de fichier `tailwind.config.js` pour cette étape.
+
+
 **Étape A : Installation des dépendances**
 Preline utilise `@tailwindcss/forms`.
 ```bash

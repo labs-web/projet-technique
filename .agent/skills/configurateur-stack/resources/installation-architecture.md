@@ -13,12 +13,12 @@ projet-technique/
 ├── app/                   # Application Laravel (créé par composer)
 │   ├── app/
 │   │   ├── Services/      # Logique métier (Service Pattern)
-│   │   ├── Policies/      # Autorisations
+
 │   │   └── Http/
 │   │       └── Requests/  # Form Requests
 │   ├── resources/
 │   │   ├── views/
-│   │   │   ├── components/    # Blade Components
+│   
 │   │   │   └── layouts/
 │   │   ├── css/
 │   │   └── js/
@@ -38,10 +38,8 @@ projet-technique/
 ### Création de l'architecture
 L'agent doit créer ces dossiers s'ils n'existent pas.
 - `app/app/Services`
-- `app/app/Policies`
 - `ui-kit/atoms`
 - `ui-kit/molecules`
-- `app/resources/views/components`
 - `app/resources/views/layouts`
 
 ---

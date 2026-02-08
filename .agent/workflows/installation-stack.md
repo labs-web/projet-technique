@@ -21,20 +21,24 @@ Ce workflow est **interactif**. Il s'adapte à l'état actuel du projet.
 @[/installation-stack] laravel
 → Affiche la commande pour installer Laravel (si absent).
 
-@[/installation-stack] tailwind
-→ Vérifie l'installation Tailwind et propose l'ajout de Preline UI.
+@[/installation-stack] preline
+→ Vérifie l'installation Tailwind et propose l'ajout de Preline UI (V4).
+
+@[/installation-stack] lucide
+→ Installe le package d'icônes Blade Lucide.
 
 @[/installation-stack] all
-→ Vérifie/Configure tout le stack : Laravel, Architecture, Tailwind, Alpine.
+→ Vérifie/Configure tout le stack : Laravel, Architecture, Preline, Alpine, Lucide.
 ```
 
 ### Technologies Gérées
 
 - `laravel` : Installation manuelle (commande fournie).
 - `architecture` : Création de l'arborescence (Services, Policies...).
-- `tailwind` : Vérification + Ajout Preline UI.
-- `alpine` : Installation Alpine.js + Configuration `app.js`.
-- `all` : Séquence complète (Laravel → Architecture → Tailwind → Alpine).
+- `preline` : Vérification + Installation Preline UI (sur Tailwind V4).
+- `alpine` : Installation Alpine.js.
+- `lucide` : Installation Blade Lucide Icons.
+- `all` : Séquence complète.
 
 ---
 
@@ -45,7 +49,7 @@ Ce workflow est **interactif**. Il s'adapte à l'état actuel du projet.
 
 **Instructions** :
 1. Identifier les technologies demandées.
-2. Si `all`, définir l'ordre : `[laravel, architecture, tailwind, alpine]`.
+2. Si `all`, définir l'ordre : `[laravel, architecture, preline, alpine, lucide]`.
 3. Afficher la liste des vérifications prévues.
 4. **STOP** : Demander confirmation.
 

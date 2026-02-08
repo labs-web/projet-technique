@@ -21,6 +21,7 @@ description: Guide et initialise la structure du projet, vérifie et valide les 
 - Ne crée PAS de composants UI détaillés.
 - N'installe PAS MySQL (Action obsolète).
 - N'installe PAS Pint (Action obsolète).
+- N'utilise PAS de composants Blade personnalisés (Préférer les Partials `@include`).
 - N'initialise PAS Git (À faire manuellement).
 
 ## 📥 Entrées / 📤 Sorties
