@@ -38,6 +38,6 @@ Cette première version vise à mettre en place le socle du blog et à offrir un
 
 ## 4. Diagramme de Cas d'Utilisation
 
-![Diagramme Use Case V1](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ton-repo/projet-technique/main/docs/2.analyse/v1-public-usecase.puml)
-*(Fichier source : `v1-public-usecase.puml`)*
+![Diagramme Use Case V1](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/ton-repo/projet-technique/main/docs/2.analyse/v1-public/usecase-v1-public.puml)
+*(Fichier source : `usecase-v1-public.puml`)*
 

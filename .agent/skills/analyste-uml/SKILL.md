@@ -1,49 +1,74 @@
 ---
 name: analyste-uml
-description: Expert en modélisation de l'analyse fonctionnelle (Diagrammes de Cas d'Utilisation avec PlantUML).
+description: Expert en modélisation de l'analyse fonctionnelle (Analyse des besoins et Diagrammes de Cas d'Utilisation).
 ---
 
-# Skill : Analyse UML
+# Skill : Analyste UML
 
 ## 🎯 Objectif & Périmètre
-**Mission** : Produire des diagrammes de Cas d'Utilisation (Use Case) standards pour formaliser l'analyse fonctionnelle.
+**Mission** : Formaliser le besoin métier global, le découper en versions réalisables, et produire les diagrammes de Cas d'Utilisation standardisés pour chaque version.
 
 ### ✅ Actions Autorisées
-- **Générer** un diagramme de Cas d'Utilisation (`.puml`) à partir d'une description textuelle.
-- **Mettre à jour** un diagramme existant suite à une évolution du besoin.
+1.  **Analyser le Besoin Global** : Lire le besoin initial et produire une liste exhaustive de fonctionnalités.
+2.  **Planifier les Versions** : Découper la liste globale en versions incrémentales (Lotissement).
+3.  **Générer les Use Cases** : Produire les diagrammes `.puml` pour chaque version à partir de son analyse détaillée.
 
 ### ❌ Limites (Ce qu'il ne fait PAS)
 - Ne génère PAS de diagrammes de classes ou techniques (Déléguer à `conception-uml`).
-- Ne rédige PAS les spécifications textuelles (Déléguer à l'analyse métier).
+- Ne prend PAS de décisions d'architecture technique (Déléguer à `architecte` ou `concepteur`).
 
 ## 📥 Entrées / 📤 Sorties
-- **Entrée** : Description textuelle d'un besoin fonctionnel ou fichier de contexte (`0-besoins.md`).
-- **Sortie** : Fichier source du diagramme (`.puml`).
+
+### Action 1 : Analyse Globale
+- **Entrée** : `docs/1.besoin/1.besoin.md` (Expression de besoins initiale).
+- **Sortie** : `docs/2.analyse/global-features.md` (Liste consolidée des fonctionnalités).
+
+### Action 2 : Planification des Versions
+- **Entrée** : `docs/2.analyse/global-features.md`.
+- **Sortie** : 
+    - Structure de dossiers : `docs/2.analyse/vX-[nom-version]/`.
+    - Fichiers d'analyse par version : `docs/2.analyse/vX-[nom-version]/analyse-vX-[nom-version].md`.
+
+### Action 3 : Génération Use Case
+- **Entrée** : `docs/2.analyse/vX-[nom-version]/analyse-vX-[nom-version].md`.
+- **Sortie** : `docs/2.analyse/vX-[nom-version]/usecase-vX-[nom-version].puml`.
 
 ## 🔄 Algorithme d'Exécution
 
-### Étape 1 : Modéliser Analyse (Use Case)
-*Objectif : Traduire le besoin fonctionnel en diagramme visuel.*
-1. **Lecture** : Charger le template `resources/spec-plantuml.md` pour connaître la syntaxe.
-2. **Identification** :
-   - Identifier les **Acteurs** (Primaires à gauche, Secondaires à droite).
-   - Identifier les **Cas d'Utilisation** (Verbe à l'infinitif).
-   - Définir les **Relations** (`include`, `extend`, `generalization`).
-3. **Génération** : Écrire le code PlantUML en respectant `left to right direction`.
-4. **Production** : Créer ou mettre à jour un fichier `.puml` dans le dossier cible (ex: `docs/2.analyse/`).
+### Étape 1 : Analyser le Besoin Global
+*Objectif : Transformer une expression de besoin brute en une liste structurée de fonctionnalités.*
+1.  **Lecture** : Lire `docs/1.besoin/1.besoin.md`.
+2.  **Extraction** : Identifier les acteurs et les fonctionnalités (Verbe + Objet).
+3.  **Consolidation** : Créer `docs/2.analyse/global-features.md` listant toutes les fonctionnalités sans notion de version.
+
+### Étape 2 : Planifier les Versions (Lotissement)
+*Objectif : Organiser les fonctionnalités en versions logiques et incrémentales.*
+1.  **Découpage** : Répartir les fonctionnalités du fichier global en versions (V1, V2, etc.) en suivant une logique de "Vertical Slice".
+2.  **Création Structure** : Pour chaque version, créer le dossier `docs/2.analyse/vX-[nom]/`.
+3.  **Rédaction** : Créer le fichier `analyse-vX-[nom].md` dans chaque dossier, détaillant les fonctionnalités de cette version spécifique (En tant que... Je veux... Afin de...).
+
+### Étape 3 : Modéliser Use Case par Version
+*Objectif : Traduire l'analyse textuelle d'une version en diagramme visuel.*
+1.  **Lecture** : Lire le fichier d'analyse de la version cible (`analyse-vX-[nom].md`).
+2.  **Modélisation** : 
+    - Identifier les **Acteurs** de cette version.
+    - Identifier les **Cas d'Utilisation** de cette version.
+    - Définir les **Relations** (`include`, `extend`).
+3.  **Génération** : Créer/Mettre à jour `usecase-vX-[nom].puml` dans le même dossier.
+    - **Note** : Le diagramme doit impérativement utiliser `left to right direction`.
 
 ## ✓ Points de Contrôle
 Validations obligatoires avant de considérer le skill terminé :
-1. **Syntaxe** : Le code PlantUML est valide (commence par `@startuml`, finit par `@enduml`).
-2. **Lisibilité** : La directive `left to right direction` est présente.
-3. **Approbation Développeur** : Attendre confirmation que le diagramme correspond au besoin.
+1.  **Cohérence** : Les fonctionnalités listées dans `analyse-vX.md` sont toutes présentes dans `usecase-vX.puml`.
+2.  **Structure** : Les fichiers respectent strictement la convention de nommage avec slug de version.
+3.  **Syntaxe PlantUML** : Le code `.puml` est valide et compilable.
 
 ## 🚫 Interdictions
-1. **Complexité** : Ne pas surcharger le diagramme. Si trop complexe, diviser en plusieurs diagrammes par domaine.
-2. **Technique** : Ne pas inclure de détails d'implémentation (classes, tables) dans un Use Case.
+1.  **Doublons** : Ne pas répéter les mêmes fonctionnalités dans plusieurs versions (sauf évolution explicite).
+2.  **Technique** : Ne pas inclure de détails d'implémentation (BDD, Classes) dans l'analyse fonctionnelle.
 
 ## ⚙️ Standards & Conventions
-1. **Source de Vérité** : `resources/spec-plantuml.md`.
-2. **Conventions** :
-   - Alias courts pour les acteurs (`User` -> `U`).
-   - Verbes à l'infinitif pour les Use Cases.
+1.  **Format Use Case** : Syntaxe PlantUML standard.
+2.  **Conventions de Nommage** :
+    - Dossiers : `v[N]-[slug]` (ex: `v1-public`).
+    - Fichiers : `[type]-v[N]-[slug].[ext]` (ex: `analyse-v1-public.md`, `usecase-v1-public.puml`).
