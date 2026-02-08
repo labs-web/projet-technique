@@ -5,91 +5,73 @@ description: Workflow unifié pour l'analyse fonctionnelle et la modélisation U
 # Workflow : Analyse Fonctionnelle & UML (`/analyse-uml`)
 
 ## 1. Contexte & Flux Global
-**Objectif** : Formaliser le besoin métier, structurer les lots (versions), et produire les diagrammes de Cas d'Utilisation. Ce workflow adapte son exécution selon la demande (analyse complète ou mise à jour ciblée).
-**Flux Type** : `[Demande]` → `[Diagnostic Stratégie]` → `[Exécution Composite]` → `[Validation]`
+**Objectif** : Formaliser le besoin métier, structurer les lots (versions), et produire les diagrammes associés.
+**Flux Type** : `[Analyse]` → `[Planification]` → `[Initialisation]` → `[Modélisation]`
 
 ## 2. Exécution
 
-### Étape 1 : Diagnostic & Stratégie
+### Étape 1 : Diagnostic & Routage
+**1. Analyse de la demande**
+- Déterminer le périmètre (Scope) : Global, Version ou Diagramme.
 
-**1. Préparation des Données (Orchestration)**
-- Analyser la demande utilisateur pour déterminer le **scope** :
-  - **Scope Global** : "Analyse tout le projet", "Initialise l'analyse".
-  - **Scope Version** : "Mets à jour la V2", "Ajoute une feature à la V1".
-  - **Scope Diagramme** : "Régénère le diagramme V3", "Corrige le PlantUML".
-
-**2. Décision (Routage)**
-- Si **Scope Global** ➔ Exécuter Étape 2a, puis 2b, puis 2c.
-- Si **Scope Version** ➔ Exécuter Étape 2b (ciblé), puis 2c.
-- Si **Scope Diagramme** ➔ Exécuter directement Étape 2c.
+**2. Décision**
+- **Scope Global** : Exécuter **Action A**. À la fin, proposer **Action B**.
+- **Scope Version** : Exécuter **Action B** (Ciblé) ou **Action D**.
+- **Scope Diagramme** : Exécuter **Action D** directement.
 
 ---
 
 ### Étape 2 : Exécution Composite
 
-#### 2a. Analyse du Besoin Global (Si requis)
-*Uniquement pour initier le projet ou refondre la vision.*
+#### Étape Action A : Analyse du Besoin Global
+*Pour initier le projet à partir de l'expression de besoin.*
 
 **1. Exécution Déléguée (Appel Skill)**
 - **Skill Cible** : `analyste-uml`
-- **Action** : `Analyser le Besoin Global`
-- **Inputs Fournis** :
-  - `Source` : `docs/1.besoin/besoin.md` (ou autre source fournie).
+- **Action** : `Action A : Analyser le Besoin Global`
+- **Inputs Fournis** : `docs/1.besoin/besoin.md`
 
-**2. Validation Humaine**
-- **STOP** : Valider la liste des fonctionnalités dans `docs/2.analyse/global/analyse-global.md`.
+**2. Validation & Transition**
+- **STOP** : Valider le contenu de `analyse-global.md`.
+- **Proposition** : "Souhaitez-vous passer à l'**Action B : Planifier les Versions** ?"
 
-#### 2b. Planification des Versions (Si requis)
-*Pour structurer la roadmap sans créer les fichiers.*
-
-**1. Exécution Déléguée (Appel Skill)**
-- **Skill Cible** : `analyste-uml`
-- **Action** : `Planifier les Versions (Stratégie)`
-- **Inputs Fournis** :
-  - `Source` : `docs/2.analyse/global/analyse-global.md`.
-
-**2. Validation Humaine (POINT D'ARRÊT MAJEUR)**
-- **STOP** : Présenter la roadmap définie dans `analyse-global.md`.
-- **Action Utilisateur** : Valider le découpage avant de lancer la création des dossiers.
-
-#### 2c. Initialisation des Versions (Si requis)
-*Pour créer concrètement l'arborescence validée.*
+#### Étape Action B : Planification des Versions (Stratégie)
+*Pour définir la roadmap sans créer de fichiers.*
 
 **1. Exécution Déléguée (Appel Skill)**
 - **Skill Cible** : `analyste-uml`
-- **Action** : `Initialiser une Version`
-- **Inputs Fournis** :
-  - `Version Cible` : Demander à l'utilisateur ("Toutes" par défaut après validation globale, ou spécifique).
-  - `Source` : `docs/2.analyse/global/analyse-global.md`.
+- **Action** : `Action B : Planifier les Versions (Stratégie)`
+- **Inputs Fournis** : `docs/2.analyse/global/analyse-global.md`
 
-**2. Validation Humaine**
-- **STOP** : Vérifier la création correcte des dossiers `vX` et fichiers `analyse-vX.md`.
+**2. Validation & Transition**
+- **STOP** : Valider la roadmap dans le fichier global.
+- **Proposition** : "Souhaitez-vous passer à l'**Action C : Initialiser une Version** ?"
 
-#### 2d. Génération des Diagrammes (Toujours)
-*Pour visualiser le résultat final.*
+#### Étape Action C : Initialiser une Version
+*Pour créer l'arborescence et les fichiers d'analyse.*
 
 **1. Exécution Déléguée (Appel Skill)**
 - **Skill Cible** : `analyste-uml`
-- **Action** : `Générer Use Case (Par Version)`
-- **Inputs Fournis** :
-  - `Version Cible` : "Toutes" ou nom spécifique (ex: "v2-social").
-  - `Source` : Fichiers `analyse-vX.md`.
+- **Action** : `Action C : Initialiser une Version`
+- **Inputs Fournis** : Choix utilisateur ("Toutes" ou version spécifique).
 
-**2. Validation Humaine**
-- **STOP** : Vérifier que le diagramme `.puml` est complet et syntaxiquement correct.
+**2. Validation & Transition**
+- **STOP** : Vérifier la présence des dossiers `vX` et fichiers `analyse-vX.md`.
+- **Proposition** : "Souhaitez-vous passer à l'**Action D : Générer Use Case** ?"
+
+#### Étape Action D : Générer Use Case
+*Pour visualiser les fonctionnalités via PlantUML.*
+
+**1. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `analyste-uml`
+- **Action** : `Action D : Générer Use Case (Par Version)`
+- **Inputs Fournis** : Les fichiers `analyse-vX.md` générés.
+
+**2. Validation Finale**
+- **STOP** : Vérifier la cohérence Texte/Diagramme et la syntaxe PlantUML.
 
 ---
 
-### Étape 3 : Synthèse & Clôture
-
-**1. Préparation des Données (Orchestration)**
-- Lister les fichiers créés ou modifiés.
-- Fournir les liens vers les diagrammes générés.
-
-**2. Validation Finale**
-- Confirmer que l'analyse textuelle (`.md`) e le diagramme (`.puml`) sont synchronisés.
-
 ## 3. Critères de Qualité
-- [ ] **Traçabilité** : Chaque diagramme correspond exactement à son fichier d'analyse Markdown.
-- [ ] **Standard** : Respect de PlantUML (Direction `left to right`).
-- [ ] **Portée** : Pas de détails techniques (BDD, Classes) dans l'analyse fonctionnelle.
+- [ ] **Cohérence** : Le diagramme reflète exactement l'analyse textuelle.
+- **Standard** : Respect de la syntaxe PlantUML (`left to right direction`).

@@ -85,10 +85,11 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 ### Scénario 1 : Analyse Complète (Workflow Standard)
 *À utiliser lors de l'initialisation du projet ou d'une refonte majeure.*
 1. **Initialisation** : Exécuter l'**Action A** (Analyse du Besoin Global).
-2. **Planification** : Exécuter l'**Action B** (Stratégie) pour définir la roadmap dans le fichier global.
-3. *Arrêt pour Validation Humaine de la Roadmap.*
-4. **Initialisation** : Exécuter l'**Action C** pour créer les fichiers de version (Toutes ou sélection).
-5. **Modélisation** : Exécuter l'**Action D** (Générer Use Case) pour les versions créées.
+2. **Arrêt / Proposition** : Proposer de passer à l'**Action B** (Planification).
+3. **Planification** : Exécuter l'**Action B** (Stratégie) (Seulement sur validation).
+4. **Arrêt / Proposition** : Proposer de passer à l'**Action C** (Initialisation).
+5. **Initialisation** : Exécuter l'**Action C** pour créer les fichiers de version.
+6. **Modélisation** : Exécuter l'**Action D** (Générer Use Case).
 
 ### Scénario 2 : Mise à jour d'une Version
 *À utiliser lorsqu'une spécification change pour une version donnée.*
