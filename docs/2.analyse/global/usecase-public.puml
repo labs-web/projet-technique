@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+' Acteurs
+actor "Visiteur" as Guest
+actor "Utilisateur Connecté" as User
+actor "Auteur" as Author
+actor "Éditeur" as Editor
+
+' Application Publique
+rectangle "Application Publique - Blog" {
+  ' Consultation publique
+  usecase "Consulter la page d'accueil" as UC1
+  usecase "Consulter la liste des articles" as UC2
+  usecase "Consulter le détail d'un article" as UC3
+  usecase "Consulter les articles par catégorie" as UC4
+  usecase "Rechercher des articles" as UC5
+  
+  ' Authentification
+  usecase "S'inscrire" as UC6
+  usecase "Se connecter" as UC7
+  usecase "Se déconnecter" as UC8
+  
+  ' Profil utilisateur
+  usecase "Accéder à son profil" as UC9
+  
+  ' Gestion des articles (cas de base)
+  usecase "Gestion des articles" as UC_Base_Articles
+  usecase "Gérer ses articles" as UC10
+  usecase "Gérer tous les articles" as UC11
+  
+  ' Gestion des catégories (cas de base)
+  usecase "Gestion des catégories" as UC_Base_Categories
+  usecase "Gérer les catégories de ses articles" as UC12
+  usecase "Gérer toutes les catégories" as UC13
+}
+
+' Relations Visiteur
+Guest -- UC1
+Guest -- UC2
+Guest -- UC3
+Guest -- UC4
+Guest -- UC5
+Guest -- UC6
+Guest -- UC7
+
+' Relations Utilisateur Connecté
+User -- UC8
+User -- UC9
+
+' Relations Auteur (extensions)
+UC10 <.. UC_Base_Articles : <<extend>>
+UC12 <.. UC_Base_Categories : <<extend>>
+Author -- UC10
+Author -- UC12
+
+' Relations Éditeur (extensions)
+UC11 <.. UC_Base_Articles : <<extend>>
+UC13 <.. UC_Base_Categories : <<extend>>
+Editor -- UC11
+Editor -- UC13
+
+@enduml

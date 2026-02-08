@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+' Acteurs
+actor "Client API Externe" as APIClient
+
+' API REST
+rectangle "API REST - Blog" {
+  usecase "S'authentifier via token" as UC1
+  usecase "Consulter les articles via API" as UC2
+  usecase "Consulter les catégories via API" as UC3
+  usecase "Accéder aux ressources sécurisées" as UC4
+}
+
+' Relations Client API
+APIClient -- UC1
+APIClient -- UC2
+APIClient -- UC3
+APIClient -- UC4
+
+@enduml

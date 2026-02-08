@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+' Acteurs
+actor "Administrateur" as Admin
+
+' Back-office Administration
+rectangle "Back-office Administration" {
+  usecase "Accéder au back-office" as UC1
+  usecase "Gérer les utilisateurs" as UC2
+  usecase "Gérer les rôles et permissions" as UC3
+  usecase "Gérer toutes les entités du système" as UC4
+}
+
+' Relations Administrateur
+Admin -- UC1
+Admin -- UC2
+Admin -- UC3
+Admin -- UC4
+
+@enduml
