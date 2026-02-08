@@ -33,31 +33,34 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
   3. **Consolidation** : Créer ou mettre à jour `docs/2.analyse/global/analyse-global.md` en listant toutes les fonctionnalités identifiées.
 
 ### Action B : Planifier les Versions (Stratégie)
-> **Description** : Définir la roadmap et le découpage en versions dans le fichier d'analyse global, SANS créer les fichiers finaux.
-- **Entrées** : `docs/2.analyse/global/analyse-global.md`.
-- **Sorties** : `docs/2.analyse/global/analyse-global.md` (Mis à jour avec la section Roadmap/Lotissement).
+> **Description** : Définir la roadmap et le découpage en versions dans un fichier dédié.
+- **Entrées** : `docs/2.analyse/global/analyse-global.md` (Contexte).
+- **Sorties** : `docs/2.analyse/global/planification-version.md` (Nouveau fichier contenant la Roadmap/Lotissement).
 - **❌ Interdictions Spécifiques** :
   - **INTERDICTION** de créer des dossiers ou des fichiers de version (`vX`). Action purement rédactionnelle/stratégique.
 - **✅ Points de Contrôle (Definition of Done)** :
-  - Le fichier global contient une section définissant clairement le contenu de chaque version.
+  - Le fichier `planification-version.md` existe.
+  - Il définit clairement le contenu de chaque version.
 - **📝 Instructions Détaillées** :
-  1. **Stratégie** : Définir le contenu de chaque version (V1, V2...) dans `analyse-global.md`.
-  2. **Rédaction** : Ajouter ou mettre à jour la section "Roadmap" ou "Lotissement" dans ce fichier.
+  1. **Stratégie** : Définir le contenu de chaque version (V1, V2...) en se basant sur `analyse-global.md`.
+  2. **Rédaction** : Créer le fichier `docs/2.analyse/global/planification-version.md` et y rédiger la roadmap.
 
 ### Action C : Initialiser une Version
 > **Description** : Créer concrètement l'arborescence et le fichier d'analyse pour une ou plusieurs versions validées.
-- **Entrées** : `docs/2.analyse/global/analyse-global.md` (Source vérifiée).
+- **Entrées** : 
+    - `docs/2.analyse/global/analyse-global.md` (Quoi - Fonctionnalités).
+    - `docs/2.analyse/global/planification-version.md` (Quand/Où - Roadmap).
 - **Paramètres** : `Version Cible` ("Toutes" ou nom spécifique ex: "v1-public").
 - **Sorties** :
     - Structure de dossiers : `docs/2.analyse/vX-[nom-version]/`.
     - Fichiers d'analyse : `docs/2.analyse/vX-[nom-version]/analyse-vX-[nom-version].md`.
 - **✅ Points de Contrôle (Definition of Done)** :
   - Le dossier et le fichier existent.
-  - Le contenu du fichier `analyse-vX.md` correspond à ce qui a été défini dans la roadmap globale.
+  - Le contenu du fichier `analyse-vX.md` correspond à ce qui a été défini dans la roadmap (`planification-version.md`) et les specs (`analyse-global.md`).
 - **📝 Instructions Détaillées** :
-  1. **Sélection** : Identifier la/les version(s) à traiter selon le paramètre.
+  1. **Sélection** : Identifier la/les version(s) à traiter selon le paramètre et la roadmap.
   2. **Création Struct** : Pour la version cible, créer le dossier `docs/2.analyse/vX-[nom]/` s'il n'existe pas.
-  3. **Génération** : Créer le fichier `analyse-vX-[nom].md` en y transférant les fonctionnalités définies dans l'analyse globale.
+  3. **Génération** : Créer le fichier `analyse-vX-[nom].md` en y transférant les fonctionnalités définies pour cette version.
 
 ### Action D : Générer Use Case (Par Version)
 > **Description** : Traduire l'analyse textuelle d'une version en diagramme visuel PlantUML.

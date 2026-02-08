@@ -44,7 +44,7 @@ description: Workflow unifié pour l'analyse fonctionnelle et la modélisation U
 - **Inputs Fournis** : `docs/2.analyse/global/analyse-global.md`
 
 **2. Validation & Transition**
-- **STOP** : Valider la roadmap dans le fichier global.
+- **STOP** : Valider la création et le contenu de `docs/2.analyse/global/planification-version.md`.
 - **Proposition** : "Souhaitez-vous passer à l'**Action C : Initialiser une Version** ?"
 
 #### Étape Action C : Initialiser une Version
@@ -53,7 +53,10 @@ description: Workflow unifié pour l'analyse fonctionnelle et la modélisation U
 **1. Exécution Déléguée (Appel Skill)**
 - **Skill Cible** : `analyste-uml`
 - **Action** : `Action C : Initialiser une Version`
-- **Inputs Fournis** : Choix utilisateur ("Toutes" ou version spécifique).
+- **Inputs Fournis** : 
+    - `docs/2.analyse/global/analyse-global.md`
+    - `docs/2.analyse/global/planification-version.md`
+    - Choix utilisateur ("Toutes" ou version spécifique).
 
 **2. Validation & Transition**
 - **STOP** : Vérifier la présence des dossiers `vX` et fichiers `analyse-vX.md`.
