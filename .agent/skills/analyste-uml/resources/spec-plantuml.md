@@ -11,6 +11,16 @@ Toujours inclure :
 @startuml
 left to right direction
 skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
 ' ... content
 @enduml
 ```
@@ -32,21 +42,36 @@ rectangle "Système Blog" {
 ```
 
 ### Relations
-- **Association simple** : `Actor -- Usecase`
+- **Association simple (Acteur ↔ Cas d'Utilisation)** : `Actor -- Usecase` (SANS orientation, pas de flèches)
 - **Inclusion** (Obligatoire) : `UC1 ..> UC2 : <<include>>`
 - **Extension** (Optionnel) : `UC1 <.. UC2 : <<extend>>`
 - **Généralisation** : `Admin --|> Guest`
+
+### ⚠️ Règles Importantes
+1. **Relations Acteur-UseCase** : Toujours utiliser `--` (sans flèche) pour les associations entre acteurs et cas d'utilisation.
+2. **Couleurs** : Schéma monochrome obligatoire (noir sur blanc) pour tous les éléments.
 
 ## 💡 Exemple Type
 ```puml
 @startuml
 left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs monochrome
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
 actor "User" as U
 rectangle "App" {
   usecase "Login" as UC1
   usecase "Logout" as UC2
 }
-U --> UC1
-U --> UC2
+U -- UC1
+U -- UC2
 @enduml
 ```

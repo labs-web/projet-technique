@@ -67,11 +67,15 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 
 ### Action D : Générer Use Case (Par Version)
 > **Description** : Traduire l'analyse textuelle d'une version en diagramme visuel PlantUML.
+> **Spécifications** : 
+> - Voir `resources/spec-plantuml.md` pour les standards PlantUML et le format des diagrammes.
+> - Voir `resources/spec-cas-utilisation.md` pour les règles de simplification CRUD.
 - **Entrées** : `docs/2.analyse/vX-[nom-version]/analyse-vX-[nom-version].md`.
 - **Sorties** : `docs/2.analyse/vX-[nom-version]/usecase-vX-[nom-version].puml`.
 - **❌ Interdictions Spécifiques** :
   - Ne pas inclure de détails techniques (classes, base de données).
 - **✅ Points de Contrôle (Definition of Done)** :
+  - Le diagramme respecte les standards définis dans `spec-plantuml.md`.
   - Le diagramme utilise `left to right direction`.
   - Toutes les fonctionnalités du fichier `.md` sont représentées.
   - La syntaxe PlantUML est valide.
@@ -81,16 +85,22 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
      - Identifier les **Acteurs**.
      - Identifier les **Cas d'Utilisation**.
      - Définir les **Relations** (`include`, `extend`).
-  3. **Génération** : Créer ou mettre à jour le fichier `.puml` dans le même dossier.
+  3. **Validation** : Vérifier la conformité avec les règles définies dans `resources/spec-plantuml.md`.
+  4. **Génération** : Créer ou mettre à jour le fichier `.puml` dans le même dossier.
+
 
 ### Action E : Générer Diagramme de Cas d'Utilisation Global
 > **Description** : Créer une vue d'ensemble de toutes les fonctionnalités du système sous forme de diagramme PlantUML global.
+> **Spécifications** : 
+> - Voir `resources/spec-plantuml.md` pour les standards PlantUML et le format des diagrammes.
+> - Voir `resources/spec-cas-utilisation.md` pour les règles de simplification CRUD.
 - **Entrées** : `docs/2.analyse/global/fonctionnalite-global.md` (Liste consolidée des fonctionnalités).
 - **Sorties** : `docs/2.analyse/global/usecase-global.puml`.
 - **❌ Interdictions Spécifiques** :
   - Ne pas inclure de détails techniques (classes, base de données).
   - Ne pas dupliquer les acteurs ou cas d'utilisation déjà présents dans les diagrammes de version.
 - **✅ Points de Contrôle (Definition of Done)** :
+  - Le diagramme respecte les standards définis dans `spec-plantuml.md`.
   - Le diagramme utilise `left to right direction`.
   - Toutes les fonctionnalités du fichier `fonctionnalite-global.md` sont représentées.
   - La syntaxe PlantUML est valide.
@@ -101,7 +111,8 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
      - Identifier tous les **Acteurs** mentionnés dans le document.
      - Identifier tous les **Cas d'Utilisation** (Fonctionnalités).
      - Définir les **Relations** (`include`, `extend`) si explicitement mentionnées.
-  3. **Génération** : Créer ou mettre à jour le fichier `usecase-global.puml` dans le dossier `docs/2.analyse/global/`.
+  3. **Validation** : Vérifier la conformité avec les règles définies dans `resources/spec-plantuml.md`.
+  4. **Génération** : Créer ou mettre à jour le fichier `usecase-global.puml` dans le dossier `docs/2.analyse/global/`.
 
 ---
 
