@@ -34,24 +34,38 @@ description: Workflow unifié pour l'analyse fonctionnelle et la modélisation U
 - **Skill Cible** : `analyste-uml`
 - **Action** : `Analyser le Besoin Global`
 - **Inputs Fournis** :
-  - `Source` : `docs/1.besoin/1.besoin.md` (ou autre source fournie).
+  - `Source` : `docs/1.besoin/besoin.md` (ou autre source fournie).
 
 **2. Validation Humaine**
-- **STOP** : Valider la liste des fonctionnalités dans `docs/2.analyse/global-features.md`.
+- **STOP** : Valider la liste des fonctionnalités dans `docs/2.analyse/global/analyse-global.md`.
 
 #### 2b. Planification des Versions (Si requis)
-*Pour structurer ou restructurer les lots.*
+*Pour structurer la roadmap sans créer les fichiers.*
 
 **1. Exécution Déléguée (Appel Skill)**
 - **Skill Cible** : `analyste-uml`
-- **Action** : `Planifier les Versions (Lotissement)`
+- **Action** : `Planifier les Versions (Stratégie)`
 - **Inputs Fournis** :
-  - `Source` : `docs/2.analyse/global-features.md`.
+  - `Source` : `docs/2.analyse/global/analyse-global.md`.
+
+**2. Validation Humaine (POINT D'ARRÊT MAJEUR)**
+- **STOP** : Présenter la roadmap définie dans `analyse-global.md`.
+- **Action Utilisateur** : Valider le découpage avant de lancer la création des dossiers.
+
+#### 2c. Initialisation des Versions (Si requis)
+*Pour créer concrètement l'arborescence validée.*
+
+**1. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `analyste-uml`
+- **Action** : `Initialiser une Version`
+- **Inputs Fournis** :
+  - `Version Cible` : Demander à l'utilisateur ("Toutes" par défaut après validation globale, ou spécifique).
+  - `Source` : `docs/2.analyse/global/analyse-global.md`.
 
 **2. Validation Humaine**
-- **STOP** : Vérifier la cohérence du découpage en versions (Dossiers `vX`).
+- **STOP** : Vérifier la création correcte des dossiers `vX` et fichiers `analyse-vX.md`.
 
-#### 2c. Génération des Diagrammes (Toujours)
+#### 2d. Génération des Diagrammes (Toujours)
 *Pour visualiser le résultat final.*
 
 **1. Exécution Déléguée (Appel Skill)**
