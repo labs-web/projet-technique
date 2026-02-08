@@ -23,6 +23,17 @@ description: Workflow d'ajustement API/HTTP. Change un code de retour ou une val
 
 ---
 
+### Étape 2 : Post-Mortem & Amélioration Continue
+> **Flux Data** : 📥 `[Bilan Exécution]` → 📤 `[Proposition Amélioration]`
+
+**Instructions** :
+1. Analyser le déroulement du workflow (points de friction, erreurs, règles manquantes).
+2. Demander au développeur : *"Avez-vous noté des améliorations à apporter aux Skills utilisés ?"*
+3. **SI OUI** : Proposer de lancer le workflow `/refine-skill`.
+4. **Validation** : Fin du workflow (et démarrage éventuel de l'amélioration).
+
+---
+
 ## 3. Critères de Qualité
 - [ ] **Standard** : Respect des codes HTTP (200, 201, 422...).
 - [ ] **Validation** : Aucune donnée ne rentre sans validation.

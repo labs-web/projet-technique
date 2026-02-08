@@ -79,6 +79,17 @@ Pour chaque technologie :
 
 ---
 
+### Étape 4 : Post-Mortem & Amélioration Continue
+> **Flux Data** : 📥 `[Bilan Exécution]` → 📤 `[Proposition Amélioration]`
+
+**Instructions** :
+1. Analyser le déroulement du workflow (points de friction, erreurs, règles manquantes).
+2. Demander au développeur : *"Avez-vous noté des améliorations à apporter aux Skills utilisés ?"*
+3. **SI OUI** : Proposer de lancer le workflow `/refine-skill`.
+4. **Validation** : Fin du workflow (et démarrage éventuel de l'amélioration).
+
+---
+
 ## 4. Critères de Qualité
 
 - [ ] **Sécurité** : Aucune commande destructive sans validation explicite.

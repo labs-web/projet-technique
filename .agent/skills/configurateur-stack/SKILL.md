@@ -33,6 +33,13 @@ description: Guide et initialise la structure du projet, vérifie et valide les 
 
 ⚠️ **RÈGLE CRITIQUE** : Avant toute modification de fichier ou exécution de commande, **AFFICHER UN PLAN DE MODIFICATION DÉTAILLÉ** et attendre la **VALIDATION EXPLICITE** du développeur.
 
+⚠️ **RÈGLE npm** : Ne JAMAIS enchaîner les commandes `npm` avec `&&`. Exécuter chaque installation dans un appel `run_command` distinct pour éviter les blocages et erreurs PowerShell.
+
+⚠️ **RÈGLE ARCHITECTURE** :
+- **PAS** de Composants Blade Custom (Utiliser des Partials `@include`).
+- **PAS** de dossier `Policies` sauf demande explicite.
+
+
 ---
 
 ### Action 1 : Install Laravel
@@ -57,7 +64,11 @@ description: Guide et initialise la structure du projet, vérifie et valide les 
    - **STOP** : Attendre validation formelle.
 4. **Exécution** : Appliquer les modifications validées.
 
-**Validation** : Preline UI installé et configuré selon les specs.
+5. **Vérification Contenu** :
+   - Lire `resources/css/app.css` : Vérifier la présence de `@plugin` et `@source`.
+   - Lire `resources/js/app.js` : Vérifier `import 'preline'`.
+
+**Validation** : Preline UI installé, configuré (CSS/JS verifiés).
 
 ---
 
@@ -71,7 +82,10 @@ description: Guide et initialise la structure du projet, vérifie et valide les 
    - **STOP** : Attendre validation formelle.
 4. **Exécution** : Appliquer les modifications validées.
 
-**Validation** : Alpine.js intégré selon les specs.
+5. **Vérification Contenu** :
+   - Lire `resources/js/app.js` : Vérifier `Alpine.start()`.
+
+**Validation** : Alpine.js intégré et démarré (JS vérifié).
 
 ---
 

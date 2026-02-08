@@ -36,6 +36,17 @@ description: Workflow de mise à jour de l'interface utilisateur.
 
 ---
 
+### Étape 3 : Post-Mortem & Amélioration Continue
+> **Flux Data** : 📥 `[Bilan Exécution]` → 📤 `[Proposition Amélioration]`
+
+**Instructions** :
+1. Analyser le déroulement du workflow (points de friction, erreurs, règles manquantes).
+2. Demander au développeur : *"Avez-vous noté des améliorations à apporter aux Skills utilisés ?"*
+3. **SI OUI** : Proposer de lancer le workflow `/refine-skill`.
+4. **Validation** : Fin du workflow (et démarrage éventuel de l'amélioration).
+
+---
+
 ## 3. Critères de Qualité
 - [ ] **Cohérence** : Le UI Kit et Blade doivent être synchronisés.
 - [ ] **Régression** : La modification n'a pas cassé le JS existant.

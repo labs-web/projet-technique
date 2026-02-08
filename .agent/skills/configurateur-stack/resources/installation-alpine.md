@@ -5,7 +5,7 @@ Ce fichier définit les versions, commandes d'installation et configurations pou
 ---
 
 ## Version
-- **Alpine.js** : `^3.14`
+- **Alpine.js** : `Latest Stable`
 
 ---
 
@@ -19,7 +19,8 @@ Ce fichier définit les versions, commandes d'installation et configurations pou
 
 ### Commande
 ```bash
-npm install alpinejs@^3.14
+npm install alpinejs
+
 ```
 
 ---

@@ -79,6 +79,17 @@ description: Workflow principal d'implémentation de fonctionnalité. Assure une
 
 ---
 
+### Étape 6 : Post-Mortem & Amélioration Continue
+> **Flux Data** : 📥 `[Bilan Exécution]` → 📤 `[Proposition Amélioration]`
+
+**Instructions** :
+1. Analyser le déroulement du workflow (points de friction, erreurs, règles manquantes).
+2. Demander au développeur : *"Avez-vous noté des améliorations à apporter aux Skills utilisés ?"*
+3. **SI OUI** : Proposer de lancer le workflow `/refine-skill`.
+4. **Validation** : Fin du workflow (et démarrage éventuel de l'amélioration).
+
+---
+
 ## 3. Critères de Qualité
 - [ ] **Linéarité** : Le flux suit strictement l'ordre Design -> Data -> Business -> Http -> Front.
 - [ ] **Complétion** : Tous les fichiers nécessaires ont été créés sans "TODO" critiques.
