@@ -18,7 +18,8 @@ description: Workflow unifié pour l'analyse fonctionnelle et la modélisation U
 - Mots-clés **"besoin"**, **"analyse globale"**, **"initialiser"**, **"analyser besoin"** → Détecter **Action A**
 - Mots-clés **"planif"**, **"roadmap"**, **"versions"**, **"découpage"**, **"stratégie"** → Détecter **Action B**
 - Mots-clés **"créer"**, **"version"**, **"v1"**, **"v2"**, **"v3"**, **"initialiser version"** → Détecter **Action C**
-- Mots-clés **"diagramme"**, **"usecase"**, **"puml"**, **"modéliser"**, **"générer"** → Détecter **Action D**
+- Mots-clés **"diagramme"**, **"version"**, **"usecase"**, **"puml version"**, **"modéliser version"** → Détecter **Action D**
+- Mots-clés **"diagramme global"**, **"usecase global"**, **"vue d'ensemble"**, **"global puml"** → Détecter **Action E**
 
 ---
 
@@ -37,7 +38,7 @@ Vous souhaitez [Description de l'action détectée].
 Action détectée : Action [X] - [Nom de l'action]
 → [Description courte]
 
-Voulez-vous procéder avec cette action ? (Tapez [X] pour confirmer, ou choisissez une autre option A/B/C/D)
+Voulez-vous procéder avec cette action ? (Tapez [X] pour confirmer, ou choisissez une autre option A/B/C/D/E)
 ```
 
 **STOP** : Attendre la confirmation du développeur.
@@ -60,7 +61,10 @@ Voulez-vous procéder avec cette action ? (Tapez [X] pour confirmer, ou choisiss
 > **D.** Générer Use Case (Par Version)  
 > → Traduire l'analyse textuelle en diagramme PlantUML
 >
-> **Quelle action souhaitez-vous exécuter ?** (Tapez A, B, C ou D)
+> **E.** Générer Diagramme de Cas d'Utilisation Global  
+> → Créer une vue d'ensemble de toutes les fonctionnalités du système
+>
+> **Quelle action souhaitez-vous exécuter ?** (Tapez A, B, C, D ou E)
 
 **STOP** : Attendre la sélection du développeur.
 
@@ -98,6 +102,12 @@ Selon le choix du développeur, exécuter l'action correspondante du skill `anal
   - Demander au développeur : "Quelle(s) version(s) ? (Toutes ou v1, v2, etc.)"
   - Fichiers `analyse-vX-[nom].md` correspondants
 - **STOP** : Vérifier la cohérence Texte/Diagramme et la syntaxe PlantUML
+
+#### Si Action E sélectionnée
+- **Skill Cible** : `analyste-uml`
+- **Action** : `Action E : Générer Diagramme de Cas d'Utilisation Global`
+- **Inputs Fournis** : `docs/2.analyse/global/fonctionnalite-global.md`
+- **STOP** : Vérifier la cohérence avec le fichier source et la syntaxe PlantUML
 
 ---
 

@@ -83,6 +83,26 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
      - Définir les **Relations** (`include`, `extend`).
   3. **Génération** : Créer ou mettre à jour le fichier `.puml` dans le même dossier.
 
+### Action E : Générer Diagramme de Cas d'Utilisation Global
+> **Description** : Créer une vue d'ensemble de toutes les fonctionnalités du système sous forme de diagramme PlantUML global.
+- **Entrées** : `docs/2.analyse/global/fonctionnalite-global.md` (Liste consolidée des fonctionnalités).
+- **Sorties** : `docs/2.analyse/global/usecase-global.puml`.
+- **❌ Interdictions Spécifiques** :
+  - Ne pas inclure de détails techniques (classes, base de données).
+  - Ne pas dupliquer les acteurs ou cas d'utilisation déjà présents dans les diagrammes de version.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - Le diagramme utilise `left to right direction`.
+  - Toutes les fonctionnalités du fichier `fonctionnalite-global.md` sont représentées.
+  - La syntaxe PlantUML est valide.
+  - Le diagramme offre une vision cohérente et exhaustive du périmètre fonctionnel complet.
+- **📝 Instructions Détaillées** :
+  1. **Lecture** : Lire le fichier `docs/2.analyse/global/fonctionnalite-global.md`.
+  2. **Modélisation** :
+     - Identifier tous les **Acteurs** mentionnés dans le document.
+     - Identifier tous les **Cas d'Utilisation** (Fonctionnalités).
+     - Définir les **Relations** (`include`, `extend`) si explicitement mentionnées.
+  3. **Génération** : Créer ou mettre à jour le fichier `usecase-global.puml` dans le dossier `docs/2.analyse/global/`.
+
 ---
 
 ## 🔄 Scénarios d'Exécution (Algorithmes)

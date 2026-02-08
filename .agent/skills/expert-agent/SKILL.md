@@ -24,10 +24,13 @@ description: Expert unifié de la gestion, création et maintenance des composan
 - **Sorties** : Fichier `.md` dans `.agent/skills/[nom]/SKILL.md`
 - **❌ Interdictions Spécifiques** :
   - Ne jamais créer de skill sans définir ses "Actions Atomiques" (nouveau format).
+  - **INTERDICTION** de modifier/ajouter/supprimer une action sans mettre à jour le workflow principal associé au skill.
 - **✅ Points de Contrôle** :
   - **Nommage** : Le nom est un **Rôle Humain** (ex: `analyste-uml`).
   - Le fichier respecte la structure `template-skill.md`.
   - Le dossier du skill est créé en `kebab-case`.
+  - **Spécifications génériques** : Les fichiers dans `resources/` doivent être **indépendants des livrables** (voir `specs-skill.md` section "Spécifications dans resources/").
+  - **Cohérence Skill ↔ Workflow** : Si le skill possède un workflow d'exécution (menu interactif), les actions du skill doivent correspondre exactement aux actions du workflow.
 - **📝 Instructions Détaillées** :
   1. **Lire** la spec : `specs/specs-skill.md`.
   2. **Si Création** :
@@ -94,3 +97,8 @@ description: Expert unifié de la gestion, création et maintenance des composan
 ## ⚙️ Standards & Conventions
 1. **Architecture** : `.agent/` est le seul domaine d'intervention.
 2. **Nomenclature** : Tout en `kebab-case` (dossiers et fichiers).
+3. **Relation Skill ↔ Workflow** :
+   - **Principe** : Chaque skill dispose d'un workflow d'exécution qui expose ses actions via un menu interactif.
+   - **Synchronisation Obligatoire** : Toute modification (ajout, suppression, renommage) d'une action dans un skill **DOIT** être répercutée dans le workflow associé.
+   - **Menu Interactif** : Le workflow doit présenter les actions disponibles de manière claire et permettre au développeur de choisir l'action à exécuter.
+   - **Exemple** : Le skill `analyste-uml` a pour workflow d'exécution `/analyse-uml` qui liste les Actions A, B, C, D, E et permet de les invoquer.
