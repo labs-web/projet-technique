@@ -11,22 +11,22 @@ description: Workflow de création de diagrammes de conception (Classes/DB).
 ## 2. Exécution
 
 ### Étape 1 : Génération Diagramme (Conception)
-> **Skill responsable** : `concepteur-uml`
-> **Flux Data** : 📥 `[Liste Entités]` → 📤 `[Bloc Mermaid]`
 
-**Instructions** :
-1. Lire la liste des entités ou le modèle de données validé.
-2. Utiliser le skill `concepteur-uml` pour traduire ces entités en diagramme Mermaid.
-   - Définir les Classes, Attributs (avec types) et Relations.
-   - Assurer les bonnes cardinalités.
-3. Intégrer le bloc `mermaid` dans le document de conception (ex: `implementation_plan.md` ou `docs/3.conception/`).
-4. **STOP** : Demander la validation du diagramme technique.
+**1. Préparation des Données (Orchestration)**
+- Rassembler la liste des entités ou le modèle de données validé (depuis l'analyse).
+- Identifier le fichier de destination (ex: `implementation_plan.md` ou `docs/3.conception/`).
 
-**Validation** : Le diagramme Mermaid représente correctement la structure de données.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `concepteur-uml`
+- **Action** : `Modéliser le Domaine (Class Diagram)` et/ou `Modéliser la BDD (ER Diagram)`
+- **Inputs Fournis** :
+  - `Entités` : Liste des entités à modéliser.
+  - `Type Diagramme` : Class ou ERD.
 
----
+**3. Validation Humaine**
+- **STOP** : Vérifier que les types de données sont explicites et les cardinalités correctes.
 
 ## 3. Critères de Qualité
 - [ ] **Précision** : Les types de données sont explicites (int, string, etc.).
 - [ ] **Relations** : Les cardinalités sont correctes et logiques.
-- [ ] **Standard** : Syntaxe Mermaid `classDiagram` valide.
+- [ ] **Standard** : Syntaxe Mermaid `classDiagram` ou `erDiagram` valide.

@@ -11,42 +11,51 @@ description: Workflow d'évolution métier. Change une règle de gestion.
 ## 2. Exécution
 
 ### Étape 1 : Implémentation Métier
-> **Skill responsable** : `developpeur-business`
-> **Flux Data** : 📥 `[Nouvelle Règle]` → 📤 `[Service Modifié]`
 
-**Instructions** :
-1. Modifier le code du Service concerné dans `app/Services/`.
-2. Vérifier si la signature de la méthode publique a changé.
-3. **STOP** : Demander la validation du développeur.
+**1. Préparation des Données (Orchestration)**
+- Identifier la règle métier à modifier et la méthode de Service concernée.
 
-**Validation** : Logique métier validée par le développeur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `developpeur-business`
+- **Action** : `Implémenter Logique (Méthode)` / `Créer Service Métier`
+- **Inputs Fournis** :
+  - `New Rule` : Description de la modification.
+  - `Service Call` : Nom du service.
+
+**3. Validation Humaine**
+- **STOP** : Vérifier que la logique est isolée et couverte par des tests.
 
 ---
 
 ### Étape 2 : Vérification d'Impact (Conditionnelle)
-> **Skill responsable** : `developpeur-http`
-> **Flux Data** : 📥 `[Service Modifié]` → 📤 `[Controller Vérifié]`
 
-**Instructions** :
-1. SI la signature a changé : Déclencher le workflow `/update-http`.
-2. SINON : Vérifier que le contrôleur fonctionne toujours avec la nouvelle logique.
-3. **STOP** : Demander la validation du développeur.
+**1. Préparation des Données (Orchestration)**
+- Vérifier si la signature de la méthode publique du Service a changé.
 
-**Validation** : Non-régression validée par le développeur.
+**2. Exécution Déléguée (Appel Skill)** (Si impact API)
+- **Skill Cible** : `developpeur-http`
+- **Action** : `Check Impact` (Implied check or call update-http)
+- **Inputs Fournis** :
+  - `Signature` : Nouvelle signature de méthode.
+
+**3. Validation Humaine**
+- **STOP** : Si la signature a changé, déclencher `/update-http`.
 
 ---
 
 ### Étape 3 : Post-Mortem & Amélioration Continue
-> **Flux Data** : 📥 `[Bilan Exécution]` → 📤 `[Proposition Amélioration]`
 
-**Instructions** :
-1. Analyser le déroulement du workflow (points de friction, erreurs, règles manquantes).
-2. Demander au développeur : *"Avez-vous noté des améliorations à apporter aux Skills utilisés ?"*
-3. **SI OUI** : Proposer de lancer le workflow `/refine-skill`.
-4. **Validation** : Fin du workflow (et démarrage éventuel de l'amélioration).
+**1. Préparation des Données (Orchestration)**
+- Analyser l'exécution.
 
----
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : (Interaction Directe)
+- **Action** : `Feedback`
+
+**3. Validation Humaine**
+- **STOP** : Vérifier si des améliorations sont possibles sur les skills.
 
 ## 3. Critères de Qualité
 - [ ] **Isolation** : La logique ne doit pas fuir dans le contrôleur.
 - [ ] **Types** : Le typage strict est respecté.
+- [ ] **Stabilité** : Aucune régression sur les fonctionnalités existantes.

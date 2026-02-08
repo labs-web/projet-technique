@@ -11,84 +11,105 @@ description: Workflow principal d'implémentation de fonctionnalité. Assure une
 ## 2. Exécution
 
 ### Étape 1 : Design UI
-> **Skill responsable** : `designer-ui`
-> **Flux Data** : 📥 `[Spécifications]` → 📤 `[Maquettes HTML/CSS]`
 
-**Instructions** :
-1. Analyser les besoins visuels.
-2. Créer ou mettre à jour les fichiers statiques dans `ui-kit/`.
-3. Valider le rendu visuel (Responsive, Thème).
-4. **STOP** : Demander la validation du développeur (Vérification visuelle `ui-kit/index.html`).
+**1. Préparation des Données (Orchestration)**
+- Analyser les besoins visuels depuis les spécifications.
+- Identifier les composants manquants dans `ui-kit/`.
 
-**Validation** : Maquettes HTML validées par le développeur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `designer-ui`
+- **Action** : `Développer Composant Atomique` / `Assembler Molécule / Organisme`
+- **Inputs Fournis** :
+  - `Needs` : Liste des composants ou maquettes à créer.
+  - `Context` : Thème et contraintes responsives.
+
+**3. Validation Humaine**
+- **STOP** : Vérifier le rendu visuel dans `ui-kit/index.html` (Responsive, Thème).
 
 ---
 
 ### Étape 2 : Data Layer
-> **Skill responsable** : `developpeur-data`
-> **Flux Data** : 📥 `[Maquettes HTML]` → 📤 `[Migrations & Models]`
 
-**Instructions** :
-1. Déduire le schéma de données depuis les maquettes (Champs de formulaires, Listes).
-2. Créer les migrations et les modèles Eloquent.
-3. Exécuter les migrations.
-4. **STOP** : Demander la validation du développeur (Schéma BDD correct).
+**1. Préparation des Données (Orchestration)**
+- Déduire le schéma de données depuis les maquettes (Champs de formulaires, Listes).
 
-**Validation** : Structure de base de données validée par le développeur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `developpeur-data`
+- **Action** : `Créer/Modifier Schéma (Migration)` et `Définir Modèle Eloquent`
+- **Inputs Fournis** :
+  - `Schema` : Structure des tables et relations.
+  - `Models` : Nom des modèles Eloquent.
+
+**3. Validation Humaine**
+- **STOP** : Vérifier que les migrations s'exécutent correctement et que le schéma correspond aux besoins.
 
 ---
 
 ### Étape 3 : Business Logic
-> **Skill responsable** : `developpeur-business`
-> **Flux Data** : 📥 `[Models]` → 📤 `[Services & Policies]`
 
-**Instructions** :
-1. Implémenter les règles de gestion dans des Services dédiés.
-2. Définir les Policies d'accès.
-3. **STOP** : Demander la validation du développeur (Logique métier implémentée).
+**1. Préparation des Données (Orchestration)**
+- Identifier les règles de gestion et les contrôles d'accès nécessaires.
 
-**Validation** : Services testables et validés par le développeur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `developpeur-business`
+- **Action** : `Créer Service Métier` / `Implémenter Logique (Méthode)` / `Définir Policy (Autorisation)`
+- **Inputs Fournis** :
+  - `Rules` : Règles métier à implémenter.
+  - `Service` : Nom du Service.
+
+**3. Validation Humaine**
+- **STOP** : Vérifier que la logique métier est isolée dans le Service et couverte par des Policies.
 
 ---
 
 ### Étape 4 : HTTP Layer
-> **Skill responsable** : `developpeur-http`
-> **Flux Data** : 📥 `[Services]` → 📤 `[Controllers & Routes]`
 
-**Instructions** :
-1. Créer les FormRequests pour valider les entrées.
-2. Créer les Contrôleurs qui appellent les Services.
-3. Définir les Routes Web/API.
-4. **STOP** : Demander la validation du développeur (Endpoints testés).
+**1. Préparation des Données (Orchestration)**
+- Définir les endpoints API ou Web requis.
+- Préparer les règles de validation des entrées.
 
-**Validation** : Routes fonctionnelles validées par le développeur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `developpeur-http`
+- **Action** : `Créer FormRequest (Validation)` / `Implémenter Contrôleur` / `Déclarer Routes`
+- **Inputs Fournis** :
+  - `Endpoints` : Méthodes HTTP et URLs.
+  - `Validation` : Règles de validation.
+
+**3. Validation Humaine**
+- **STOP** : Vérifier que les routes sont protégées et que les données entrantes sont bien validées.
 
 ---
 
 ### Étape 5 : Frontend Integration
-> **Skill responsable** : `developpeur-frontend`
-> **Flux Data** : 📥 `[Controllers & Maquettes]` → 📤 `[Vues Blade Finales]`
 
-**Instructions** :
-1. Convertir les fichiers HTML du `ui-kit` en vues Blade.
-2. Injecter les données dynamiques.
-3. Ajouter l'interactivité JS (Alpine/Fetch).
-4. **STOP** : Demander la validation du développeur (Fonctionnalité complète).
+**1. Préparation des Données (Orchestration)**
+- Récupérer les maquettes HTML validées et les contrôleurs prêts.
 
-**Validation** : Feature complète testée et validée par le développeur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `developpeur-frontend`
+- **Action** : `Créer/Adapter Composant Blade` / `Intégrer Page (View)` / `Ajouter Interactivité (Alpine.js)`
+- **Inputs Fournis** :
+  - `HTML` : Fichiers statiques du UI Kit.
+  - `Data` : Données passées par le contrôleur.
+
+**3. Validation Humaine**
+- **STOP** : Vérifier le fonctionnement complet de la fonctionnalité (Interactvité, Données réelles).
 
 ---
 
 ### Étape 6 : Post-Mortem & Amélioration Continue
-> **Flux Data** : 📥 `[Bilan Exécution]` → 📤 `[Proposition Amélioration]`
 
-**Instructions** :
-1. Analyser le déroulement du workflow (points de friction, erreurs, règles manquantes).
-2. Demander au développeur : *"Avez-vous noté des améliorations à apporter aux Skills utilisés ?"*
-3. **SI OUI** : Proposer de lancer le workflow `/refine-skill`.
-4. **Validation** : Fin du workflow (et démarrage éventuel de l'amélioration).
+**1. Préparation des Données (Orchestration)**
+- Analyser le déroulement du workflow (points de friction, erreurs).
 
----
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : (Interaction Directe)
+- **Action** : `Review`
+- **Inputs Fournis** :
+  - `Feedback` : Retours sur l'exécution.
+
+**3. Validation Humaine**
+- **STOP** : Si des améliorations sont identifiées, lancer le workflow `/refine-skill`.
 
 ## 3. Critères de Qualité
 - [ ] **Linéarité** : Le flux suit strictement l'ordre Design -> Data -> Business -> Http -> Front.

@@ -11,20 +11,20 @@ description: Workflow de création de diagrammes d'analyse (Use Cases).
 ## 2. Exécution
 
 ### Étape 1 : Génération Diagramme (Analyse)
-> **Skill responsable** : `analyste-uml`
-> **Flux Data** : 📥 `[Besoin Fonctionnel]` → 📤 `[Fichier .puml]`
 
-**Instructions** :
-1. Lire la description du besoin (ex: `0-besoins.md` ou autre document d'analyse).
-2. Utiliser le skill `analyste-uml` pour traduire ce besoin en diagramme PlantUML.
-   - Identifier les Acteurs et Cas d'Utilisation.
-   - Définir les relations (`include`, `extend`, `generalization`).
-3. Sauvegarder le diagramme dans `docs/2.analyse/` (ou dossier spécifié).
-4. **STOP** : Demander la validation du diagramme visuel.
+**1. Préparation des Données (Orchestration)**
+- Localiser le fichier de besoin (ex: `docs/1.besoin/0-besoins.md` ou autre).
+- Identifier le dossier cible pour l'analyse (ex: `docs/2.analyse/`).
 
-**Validation** : Le diagramme `.puml` reflète fidèlement le besoin fonctionnel.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `analyste-uml`
+- **Action** : `Générer Use Case (Par Version)` (ou `Analyser le Besoin Global` selon le cas)
+- **Inputs Fournis** :
+  - `Fichier Besoin` : Chemin du fichier source.
+  - `Version` : Nom de la version à modéliser.
 
----
+**3. Validation Humaine**
+- **STOP** : Vérifier que le diagramme `.puml` généré reflète fidèlement le besoin (Acteurs, Cas, Relations).
 
 ## 3. Critères de Qualité
 - [ ] **Clarté** : Le diagramme est lisible (pas trop d'éléments croisés).

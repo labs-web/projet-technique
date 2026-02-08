@@ -11,41 +11,51 @@ description: Workflow de mise à jour de l'interface utilisateur.
 ## 2. Exécution
 
 ### Étape 1 : Modification Design System
-> **Skill responsable** : `designer-ui`
-> **Flux Data** : 📥 `[Demande]` → 📤 `[HTML/CSS Modifié]`
 
-**Instructions** :
-1. Modifier les fichiers HTML statiques dans `ui-kit/`.
-2. Vérifier le rendu visuel.
-3. **STOP** : Demander la validation du développeur (Le UI Kit est la source de vérité).
+**1. Préparation des Données (Orchestration)**
+- Identifier les changements à apporter (Design Token ou Composant).
+- Localiser les fichiers concernés dans `ui-kit/`.
 
-**Validation** : Design validé dans le UI Kit par le développeur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `designer-ui`
+- **Action** : `Créer Styleguide (Tokens)` / `Développer Composant Atomique` / `Assembler Molécule / Organisme`
+- **Inputs Fournis** :
+  - `Change` : Nouvelle règle ou composant.
+  - `Context` : Fichiers statiques concernés.
+
+**3. Validation Humaine**
+- **STOP** : Vérifier le rendu visuel dans `ui-kit/` avant toute propagation.
 
 ---
 
 ### Étape 2 : Propagation Frontend
-> **Skill responsable** : `developpeur-frontend`
-> **Flux Data** : 📥 `[HTML Modifié]` → 📤 `[Blade Modifié]`
 
-**Instructions** :
-1. Répercuter les changements HTML/CSS sur les fichiers Blade correspondants.
-2. Vérifier que la dynamique (JS/Variables) n'est pas cassée.
-3. **STOP** : Demander la validation du développeur.
+**1. Préparation des Données (Orchestration)**
+- Récupérer les fichiers HTML/CSS modifiés.
 
-**Validation** : Interface finale validée par le développeur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `developpeur-frontend`
+- **Action** : `Créer/Adapter Composant Blade` / `Intégrer Page (View)`
+- **Inputs Fournis** :
+  - `HTML` : Fichier(s) UI Kit modifiés.
+  - `Blade` : Fichier(s) View concernés.
+
+**3. Validation Humaine**
+- **STOP** : Vérifier que l'intégration Blade correspond aux maquettes HTML validées sans régression JS.
 
 ---
 
 ### Étape 3 : Post-Mortem & Amélioration Continue
-> **Flux Data** : 📥 `[Bilan Exécution]` → 📤 `[Proposition Amélioration]`
 
-**Instructions** :
-1. Analyser le déroulement du workflow (points de friction, erreurs, règles manquantes).
-2. Demander au développeur : *"Avez-vous noté des améliorations à apporter aux Skills utilisés ?"*
-3. **SI OUI** : Proposer de lancer le workflow `/refine-skill`.
-4. **Validation** : Fin du workflow (et démarrage éventuel de l'amélioration).
+**1. Préparation des Données (Orchestration)**
+- Analyser le déroulement pour détecter des erreurs de communication.
 
----
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : (Interaction Directe)
+- **Action** : `Feedback`
+
+**3. Validation Humaine**
+- **STOP** : Appeler `/refine-skill` si nécessaire.
 
 ## 3. Critères de Qualité
 - [ ] **Cohérence** : Le UI Kit et Blade doivent être synchronisés.

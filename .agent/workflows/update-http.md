@@ -11,29 +11,34 @@ description: Workflow d'ajustement API/HTTP. Change un code de retour ou une val
 ## 2. Exécution
 
 ### Étape 1 : Modification HTTP
-> **Skill responsable** : `developpeur-http`
-> **Flux Data** : 📥 `[Demande]` → 📤 `[Code Modifié]`
 
-**Instructions** :
-1. Modifier le FormRequest (Validation) OU le Controller (Orchestration) OU la Resource (Sortie).
-2. Vérifier que la logique métier n'a pas été déplacée dans le contrôleur.
-3. **STOP** : Demander la validation du développeur.
+**1. Préparation des Données (Orchestration)**
+- Analyser la demande de modification (ex: règle de validation, code de retour, structure de réponse JSON).
 
-**Validation** : Endpoint modifié validé par le développeur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `developpeur-http`
+- **Action** : `Créer FormRequest (Validation)` / `Implémenter Contrôleur` / `Créer API Resource`
+- **Inputs Fournis** :
+  - `Changes` : Détails de la modification attendue.
+
+**3. Validation Humaine**
+- **STOP** : Vérifier que la logique métier n'a pas fuité dans le contrôleur.
 
 ---
 
 ### Étape 2 : Post-Mortem & Amélioration Continue
-> **Flux Data** : 📥 `[Bilan Exécution]` → 📤 `[Proposition Amélioration]`
 
-**Instructions** :
-1. Analyser le déroulement du workflow (points de friction, erreurs, règles manquantes).
-2. Demander au développeur : *"Avez-vous noté des améliorations à apporter aux Skills utilisés ?"*
-3. **SI OUI** : Proposer de lancer le workflow `/refine-skill`.
-4. **Validation** : Fin du workflow (et démarrage éventuel de l'amélioration).
+**1. Préparation des Données (Orchestration)**
+- Analyser le déroulement pour détecter des frictions.
 
----
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : (Interaction Directe)
+- **Action** : `Feedback`
+
+**3. Validation Humaine**
+- **STOP** : Si nécessaire, lancer `/refine-skill`.
 
 ## 3. Critères de Qualité
 - [ ] **Standard** : Respect des codes HTTP (200, 201, 422...).
-- [ ] **Validation** : Aucune donnée ne rentre sans validation.
+- [ ] **Validation** : Aucune donnée ne rentre sans validation (FormRequest).
+- [ ] **Cohérence** : Les modifs sont cohérentes avec les resources JSON existantes.

@@ -2,19 +2,25 @@
 trigger: always_on
 ---
 
-# [Nom de la Règle]
+# [XX-Nom de la Catégorie de Règles]
 
 ## Objectif
 
-Décrire clairement l'objectif de cette règle et pourquoi elle est nécessaire.
+Décrire l'objectif global de ce fichier de règles et le domaine couvert (ex: Sécurité, Conventions Code, Gouvernance).
 
 ## Instructions
 
-- **Instruction 1** : Description précise
-- **Instruction 2** : Description précise
-- **Instruction 3** : Description précise
+### 1. [Thème / Groupe de directives A]
 
-## Interdictions (si applicable)
+- **Verbe d'action** : Description précise de la règle.
+- **Respecter** : [Détail de la règle].
 
-- **INTERDICTION** de [action interdite]
-- **INTERDIT** de [action interdite]
+### 2. [Thème / Groupe de directives B]
+
+- **Utiliser** : Description précise.
+- **Structurer** : Description précise.
+
+## Interdictions
+
+- **INTERDICTION** de [Action proscrite].
+- **INTERDIT** de [Action proscrite].

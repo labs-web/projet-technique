@@ -4,59 +4,63 @@ description: Workflow unifié pour la maintenance, l'évolution et l'améliorati
 
 # Workflow : Maintenance Agent (`/maintenance-agent`)
 
-## 1. Contexte & Déclencheurs
-Ce workflow centralise la modification de la structure de l'agent (Skills, Rules, Workflows).
-- **Déclencheur** : Demande explicite du développeur ou appel d'un autre workflow.
-- **Objectif** : Garantir l'intégrité du "cerveau" de l'agent lors des évolutions.
-
----
+## 1. Contexte & Flux Global
+**Objectif** : Garantir l'intégrité et l'évolution contrôlée de la structure de l'agent (Skills, Rules, Workflows).
+**Flux Type** : `[Demande]` → `[Diagnostic]` → `[Exécution Agent]` → `[Validation]`
 
 ## 2. Exécution
 
 ### Étape 1 : Diagnostic & Routage
-> **Skill responsable** : `expert-agent`
-> **Action** : Analyse de la demande
 
-**Instructions** :
-1. **Identifier** l'objet de la demande :
-   - **Type** : Skill, Rule, ou Workflow ?
-   - **Action** : Création (`create`) ou Mise à jour/Correction (`update`) ?
-   - **Cible** : Nom de l'élément concerné.
-2. **Vérifier** l'existence de la cible (si mise à jour).
+**1. Préparation des Données (Orchestration)**
+- Analyser la demande pour identifier le type d'objet (Skill, Rule, Workflow) et l'action (Create, Update).
+- Identifier le nom de l'élément cible.
 
-**Validation** : Le triptyque Type/Action/Cible est défini.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `expert-agent`
+- **Action** : `(Implied Analysis Step)` (ou directement passer à l'étape suivante)
+- **Inputs Fournis** :
+  - `Demande` : Texte de la demande utilisateur.
+
+**3. Validation Humaine**
+- **STOP** : Valider le triptyque Type/Action/Cible avant toute modification.
 
 ---
 
 ### Étape 2 : Exécution de la Maintenance
-> **Skill responsable** : `expert-agent`
-> **Action** : Exécution des Actions A, B ou C
 
-**Instructions** :
-Confier l'exécution au skill `expert-agent` qui détient la logique, les templates et les spécifications.
+**1. Préparation des Données (Orchestration)**
+- Sélectionner l'action appropriée dans `expert-agent`.
 
-1. **Invoquer** l'action correspondante au type identifié :
-   - **Skill** → Action A (`Manage Skill`).
-   - **Rule** → Action B (`Manage Rule`).
-   - **Workflow** → Action C (`Manage Workflow`).
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `expert-agent`
+- **Action** : 
+  - `Manage Skill (Gérer Compétence)` (si Skill)
+  - `Manage Rule (Gérer Règle)` (si Rule)
+  - `Manage Workflow (Gérer Processus)` (si Workflow)
+- **Inputs Fournis** :
+  - `Name` : Nom de l'élément.
+  - `Mode` : Create ou Update.
+  - `Content` : Contenu ou spécifications.
 
-2. **Paramètres** : Fournir explicitement le mode (`Create` ou `Update`) et le nom de la cible.
-
-**Validation** : L'artefact (.md) est conforme aux standards du skill expert.
+**3. Validation Humaine**
+- **STOP** : Vérifier que l'artefact créé/modifié respecte les standards (`specs/`).
 
 ---
 
 ### Étape 3 : Checkpoint & Documentation
-> **Skill responsable** : (Interaction Directe)
 
-**Instructions** :
-1. **Présenter** les changements à l'utilisateur (Diff ou résumé).
-2. **STOP** : Demander une validation explicite avant d'appliquer définitivement (si destructif ou critique).
-3. **Confirmer** que les modifications sont bien isolées dans le dossier `.agent/`.
+**1. Préparation des Données (Orchestration)**
+- Résumer les changements effectués.
 
-**Validation** : Feu vert utilisateur.
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : (Interaction Directe)
+- **Action** : `Report`
+- **Inputs Fournis** :
+  - `Changes` : Diff ou résumé des fichiers touchés.
 
----
+**3. Validation Humaine**
+- **STOP** : Confirmer que les modifications sont bien isolées dans `.agent/`.
 
 ## 3. Critères de Qualité
 - [ ] **Unicité** : Pas de doublons fonctionnels.
