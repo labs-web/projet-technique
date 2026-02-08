@@ -3,49 +3,70 @@ name: developpeur-http
 description: Déclare les Routes, crée les Contrôleurs, FormRequests et API Resources.
 ---
 
-# Skill : Expert HTTP
+# Skill : Développeur HTTP
 
-## 🎯 Objectif & Périmètre
-**Mission** : Exposer la logique métier via le protocole HTTP (Web & API) en gérant l'entrée (Validation) et la sortie (Réponse).
+## 🎯 Périmètre Global
+**Mission** : Exposer la logique métier via le protocole HTTP (Web & API) en gérant l'entrée (Validation) et la sortie (Réponse/Vue).
 
-### ✅ Actions Autorisées
-- **Déclarer** les Routes (`web.php`, `api.php`).
-- **Créer** les Contrôleurs (Web & API) qui orchestrent l'appel aux Services.
-- **Valider** les entrées via des FormRequests.
-- **Formater** les sorties JSON via des API Resources.
+### 🚫 Interdictions Globales (Règles d'Or)
+1. **Skinny Controllers** : Ne jamais écrire de logique métier dans un contrôleur -> Déléguer au Service.
+2. **Validation** : Ne jamais valider `$request->all()` manuellement dans le contrôleur -> Utiliser `FormRequest`.
+3. **Responses** : Ne jamais retourner de JSON brut depuis un contrôleur API -> Utiliser `JsonResource`.
 
-### ❌ Limites (Ce qu'il ne fait PAS)
-- N'écrit AUCUNE logique métier dans les contrôleurs (Déléguer à `developpeur-business`).
-- N'écrit pas de requêtes Eloquent complexes (Déléguer à `developpeur-business` ou `developpeur-data`).
+---
 
-## 📥 Entrées / 📤 Sorties
-| Direction  | Nom                       | Description / Format                                 |
-| :--------- | :------------------------ | :--------------------------------------------------- |
-| **Entrée** | `resources/specs-http.md` | Endpoints, Méthodes HTTP, Codes retour, Formats JSON |
-| **Entrée** | `app/Services/*`          | Services métier disponibles à appeler                |
-| **Sortie** | `app/Http/Controllers/*`  | Classes Contrôleurs                                  |
-| **Sortie** | `app/Http/Requests/*`     | Classes de Validation                                |
-| **Sortie** | `routes/web.php`          | Définition des URLs                                  |
+## ⚡ Actions (Capacités Atomiques)
 
-## 🔄 Algorithme d'Exécution
+### Action A : Déclarer Routes
+> **Description** : Définir les endpoints HTTP et les lier aux contrôleurs.
+- **Entrées** : Spécification des URL et méthodes.
+- **Sorties** : `routes/web.php` ou `routes/api.php`.
+- **❌ Interdictions Spécifiques** :
+  - Ne pas utiliser de Closures pour les routes complexes (plus de 1 ligne).
+- **✅ Points de Contrôle (Definition of Done)** :
+  - Chaque route a un nom (`->name('...')`).
+  - Les middlewares d'authentification sont appliqués (`auth`, `guest`).
 
-### Étape 1 : Routing
-*Objectif : Définir les points d'entrée.*
-1. **Routes** : Ajouter les définitions dans `routes/web.php` ou `api.php`.
-2. **Naming** : Nommer les routes (ex: `articles.show`).
+### Action B : Créer FormRequest (Validation)
+> **Description** : Créer une classe pour valider les données entrantes.
+- **Entrées** : Règles de validation.
+- **Sorties** : `app/Http/Requests/[Name]Request.php`.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - La méthode `authorize()` retourne `true` (ou vérifie une Gate).
+  - Les règles sont précises (types, max, unique).
 
-### Étape 2 : Contrôle des Entrées
-*Objectif : Garantir la validité des données reçues.*
-1. **FormRequest** : Créer une classe Request dédiée par action (ex: `StoreArticleRequest`).
-2. **Règles** : Définir les règles de validation (`required`, `email`, `max:255`).
+### Action C : Implémenter Contrôleur
+> **Description** : Orchestrer la requête : Valider -> Appeler Service -> Répondre.
+- **Entrées** : Service Métier, FormRequest, Type de réponse (Vue/JSON).
+- **Sorties** : `app/Http/Controllers/[Name]Controller.php`.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - Le constructeur injecte le Service nécessaire.
+  - La méthode de contrôleur est courte (< 10 lignes idéalement).
+  - Retourne `view()` ou `redirect()` pour le Web.
 
-### Étape 3 : Orchestration (Controller)
-*Objectif : Faire le lien entre HTTP et Métier.*
-1. **Controller** : Créer la méthode du contrôleur.
-2. **Appel** : Instancier/Injected le Service et appeler la méthode métier.
-3. **Réponse** : Retourner une `View` (Web) ou une `JsonResource` (API).
+### Action D : Créer API Resource
+> **Description** : Formater la réponse JSON.
+- **Entrées** : Modèle de données.
+- **Sorties** : `app/Http/Resources/[Name]Resource.php`.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - La méthode `toArray()` définit explicitement les champs exposés (pas de `$this->resource->toArray()`).
 
-## ⚠️ Règles d'Or
-1. **Source de Vérité** : Les FormRequests sont la barrière de sécurité des entrées.
-2. **Skinny Controller** : Le contrôleur ne doit faire que : Valider -> Appeler Service -> Retourner Réponse.
-3. **Conventions** : Utiliser les Resource Controllers quand c'est possible (`index`, `store`, `show`...).
+---
+
+## 🔄 Scénarios d'Exécution (Algorithmes)
+
+### Scénario 1 : Endpoint API complet
+1. **Input** : Exécuter **Action B** pour valider l'entrée.
+2. **Output** : Exécuter **Action D** pour définir la sortie JSON.
+3. **Logic** : Exécuter **Action C** pour créer le contrôleur liant le tout.
+4. **Wiring** : Exécuter **Action A** pour rendre la route accessible.
+
+### Scénario 2 : Page Web
+1. **Controller** : Exécuter **Action C** (retournant une Vue).
+2. **Route** : Exécuter **Action A**.
+
+---
+
+## ⚙️ Standards & Conventions
+1. **REST** : Suivre les conventions de nommage REST pour les contrôleurs (`index`, `store`, `update`, `destroy`).
+2. **Injection** : Utiliser l'injection de dépendances dans les méthodes de contrôleur (ex: `show(Article $article)`).

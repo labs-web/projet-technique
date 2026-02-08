@@ -10,32 +10,37 @@ description: [Description courte du workflow]
 
 ## 2. Exécution
  
-### Étape 1 : [Titre de l'action]
-> **Skill responsable** : `[nom-du-skill]`
-> **Flux Data** : 📥 `[Entrée]` → 📤 `[Sortie]`
-   
-   
-**Instructions** :
-1. Exécuter l'action **[Nom de l'action]** (via le Skill).
-2. Produire le résultat attendu (Fichier, Analyse, Modification).
-3. **STOP** : Demander la validation du développeur (Lecture du fichier ou Confirmation de l'action).
+### Étape 1 : [Titre de l'étape - Quoi faire]
 
-**Validation** : [Livrable] validé par le développeur.
+**1. Préparation des Données (Orchestration)**
+- [Instruction pour rassembler/préparer les inputs nécessaires]
+- [Instruction pour vérifier les pré-requis]
 
----
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `[nom-du-skill]`
+- **Action** : `[Nom exact de l'action dans le Skill]`
+- **Inputs Fournis** :
+  - `[Input 1]` : [Description/Valeur]
+  - `[Input 2]` : [Description/Valeur]
 
-### Étape 2 : [Titre de l'action]
-> **Skill responsable** : `[nom-du-skill]`
-> **Flux Data** : 📥 `[Sortie Étape 1]` → 📤 `[Livrable Final]`
-
-**Instructions** :
-1. Exécuter l'action **[Nom de l'action]** (via le Skill).
-2. Produire le résultat attendu.
-3. **STOP** : Demander la validation du développeur.
-
-**Validation** : [Livrable] validé par le développeur.
+**3. Validation Humaine**
+- **STOP** : [Critère de validation explicite - ex: Vérifier le fichier X]
 
 ---
+
+### Étape 2 : [Titre de l'étape - Quoi faire]
+
+**1. Préparation des Données (Orchestration)**
+- [Préparer les inputs basés sur la sortie de l'étape précédente]
+
+**2. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `[nom-du-skill]`
+- **Action** : `[Nom exact de l'action dans le Skill]`
+- **Inputs Fournis** :
+  - `[Input 1]`
+
+**3. Validation Humaine**
+- **STOP** : [Critère de validation explicite]
 
 ## 3. Critères de Qualité
 - [ ] **Linéarité** : Le flux avance sans boucle.

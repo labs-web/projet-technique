@@ -1,118 +1,95 @@
 ---
 name: configurateur-stack
-description: Guide et initialise la structure du projet, vérifie et valide les installations techniques (Laravel, Tailwind, Alpine, Lucide).
+description: Expert de l'infrastructure technique (Installation et configuration de Laravel, Tailwind, Alpine, Lucide).
 ---
 
-# Skill : configurateur-stack
+# Skill : Configurateur Stack
 
-## 🎯 Objectif & Périmètre
-**Mission** : Guider le développeur dans l'initialisation du stack technique et valider la conformité de l'environnement.
-**Philosophie** : Privilégier l'installation manuelle guidée par l'IA et la vérification de l'existant.
+## 🎯 Périmètre Global
+**Mission** : Initialiser, configurer et valider le socle technique du projet conformément à la stack définie. Assurer que l'environnement de développement est sain et prêt pour le développement.
 
-### ✅ Actions Autorisées
-- **Guider** l'installation de Laravel Backend (Simple affichage de la commande).
-- **Vérifier** et **Compléter** l'installation de Tailwind CSS (Si déjà présent, ne rien faire sauf si demandé).
-- **Installer** Alpine.js pour l'interactivité front-end (Si absent).
-- **Installer** Lucide Icons.
-- **Créer** l'architecture des dossiers (Services, Policies, ui-kit).
-
-### ❌ Limites (Ce qu'il ne fait PAS)
-- Ne crée PAS de logique métier.
-- Ne crée PAS de composants UI détaillés.
-- N'installe PAS MySQL (Action obsolète).
-- N'installe PAS Pint (Action obsolète).
-- N'utilise PAS de composants Blade personnalisés (Préférer les Partials `@include`).
-- N'initialise PAS Git (À faire manuellement).
-
-## 📥 Entrées / 📤 Sorties
-
-- **Entrée** : `Action` (Nom de l'action à exécuter : laravel, tailwind, alpine, architecture)
-- **Sortie** : Plan de modification validé ou instructions manuelles.
-
-## 🔄 Algorithme d'Exécution
-
-⚠️ **RÈGLE CRITIQUE** : Avant toute modification de fichier ou exécution de commande, **AFFICHER UN PLAN DE MODIFICATION DÉTAILLÉ** et attendre la **VALIDATION EXPLICITE** du développeur.
-
-⚠️ **RÈGLE npm** : Ne JAMAIS enchaîner les commandes `npm` avec `&&`. Exécuter chaque installation dans un appel `run_command` distinct pour éviter les blocages et erreurs PowerShell.
-
-⚠️ **RÈGLE ARCHITECTURE** :
-- **PAS** de Composants Blade Custom (Utiliser des Partials `@include`).
-- **PAS** de dossier `Policies` sauf demande explicite.
-
+### 🚫 Interdictions Globales (Règles d'Or)
+1. **Stabilité** : Ne jamais briser une installation fonctionnelle. Toujours vérifier avant d'écraser.
+2. **Standard** : Respecter les versions définies dans `specs-stack.md` (ex: Tailwind v4, Laravel 11).
+3. **Sécurité** : Ne jamais commiter de fichiers `.env` ou de clés API.
+4. **Validation** : Toute commande d'installation doit être approuvée par l'utilisateur.
 
 ---
 
-### Action 1 : Install Laravel
-*Objectif : Fournir la commande pour installer Laravel.*
+## ⚡ Actions (Capacités Atomiques)
 
-1. **Lecture** : Charger `resources/installation-laravel.md`.
-2. **Vérification** : Effectuer les vérifications indiquées dans le fichier de ressources.
-3. **Plan de Modification** :
-   - Si manquant, afficher la commande d'installation décrite dans le fichier.
-   - **STOP** : Attendre validation formelle.
-4. **Validation** : Projet Laravel présent.
-5. **Configuration** : Vérifier `app/.env`.
-   - Si `DB_CONNECTION` != `mysql`, proposer de le corriger.
+### Action A : Installer Socle Laravel
+> **Description** : Installer une nouvelle application Laravel ou vérifier une installation existante.
+- **Entrées** : `resources/installation-laravel.md`.
+- **Sorties** : Projet Laravel fonctionnel à la racine.
+- **❌ Interdictions Spécifiques** :
+  - Ne pas installer de starter kits (Breeze/Jetstream) sauf demande explicite.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - Le fichier `artisan` est présent et exécutable.
+  - Le fichier `.env` est configuré (App Name, DB Connection).
+  - La commande `php artisan about` retourne les infos correctes.
+- **📝 Instructions Détaillées** :
+  1. **Vérification** : Tester si Laravel est déjà installé (`test-path artisan`).
+  2. **Installation** : Si absent, proposer la commande `composer create-project` (voir ressource).
+  3. **Configuration** : Vérifier/Créer le fichier `.env` et générer la clé d'application (`key:generate`).
 
+### Action B : Configurer Frontend (Tailwind + Alpine + Preline)
+> **Description** : Mettre en place la stack frontend moderne (Tailwind v4, Alpine.js, Preline UI).
+- **Entrées** : 
+  - `resources/installation-preline.md`
+  - `resources/installation-alpine.md`
+- **Sorties** : Fichiers `app.css` et `app.js` configurés, `tailwind.config.js` (si nécessaire).
+- **❌ Interdictions Spécifiques** :
+  - Ne pas mélanger les configurations Tailwind v3 et v4.
+  - Ne pas écraser `app.css` sans backup.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - `@tailwindcss/vite` est présent dans `package.json`.
+  - `Alpine` et `Preline` sont importés dans `app.js`.
+  - Le build `npm run dev` se lance sans erreur.
+- **📝 Instructions Détaillées** :
+  1. **Tailwind & Preline** : Suivre `resources/installation-preline.md` pour l'installation via NPM et la config CSS (`@theme`, `@plugin`, `@source`).
+  2. **Alpine.js** : Suivre `resources/installation-alpine.md` pour l'initialisation dans `app.js`.
+  3. **Build** : Lancer une compilation test.
 
----
+### Action C : Installer Outils Complémentaires (Lucide)
+> **Description** : Ajouter les bibliothèques d'icônes et utilitaires.
+- **Entrées** : `resources/installation-lucide.md`.
+- **Sorties** : Packages installés dans `package.json`.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - `lucide` (ou `lucide-laravel`) est listé dans les dépendances.
+  - Les icônes s'affichent correctement (Test visuel demandé).
 
-### Action 2 : Setup Preline UI
-*Objectif : Installer Preline UI sur une installation Tailwind existante.*
-
-1. **Lecture** : Charger `resources/installation-preline.md`.
-2. **Vérification** : Effectuer les vérifications indiquées dans le fichier de ressources.
-3. **Plan de Modification** :
-   - Si manquant ou incomplet, proposer les actions d'installation et configuration décrites dans le fichier.
-   - **STOP** : Attendre validation formelle.
-4. **Exécution** : Appliquer les modifications validées.
-
-5. **Vérification Contenu** :
-   - Lire `resources/css/app.css` : Vérifier la présence de `@plugin` et `@source`.
-   - Lire `resources/js/app.js` : Vérifier `import 'preline'`.
-
-**Validation** : Preline UI installé, configuré (CSS/JS verifiés).
-
----
-
-### Action 3 : Install Alpine.js
-*Objectif : Ajouter l'interactivité.*
-
-1. **Lecture** : Charger `resources/installation-alpine.md`.
-2. **Vérification** : Effectuer les vérifications indiquées dans le fichier de ressources.
-3. **Plan de Modification** :
-   - Si manquant ou incomplet, proposer les actions d'installation et configuration décrites dans le fichier.
-   - **STOP** : Attendre validation formelle.
-4. **Exécution** : Appliquer les modifications validées.
-
-5. **Vérification Contenu** :
-   - Lire `resources/js/app.js` : Vérifier `Alpine.start()`.
-
-**Validation** : Alpine.js intégré et démarré (JS vérifié).
-
----
-
-### Action 4 : Architecture Dossiers
-*Objectif : Créer l'arborescence complémentaire.*
-
-1. **Lecture** : Charger `resources/installation-architecture.md`.
-2. **Plan de Modification** :
-   - Identifier les dossiers manquants selon le fichier chargé.
-   - **STOP** : Attendre validation formelle.
-3. **Exécution** : Créer les dossiers.
-
-**Validation** : Structure complète selon les specs.
+### Action D : Initialiser Architecture Dossiers
+> **Description** : Créer la structure de dossiers standard du projet (Services, Enums, UI Kit).
+- **Entrées** : `resources/installation-architecture.md`.
+- **Sorties** : Arborescence de dossiers créée.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - Dossiers `app/Services`, `app/Enums`, `resources/views/components/ui` existent.
+- **📝 Instructions Détaillées** :
+  1. Lire la ressource d'architecture.
+  2. Créer les dossiers manquants.
+  3. Créer un `.gitkeep` si dossier vide nécessaire.
 
 ---
 
-### Action 5 : Install Lucide Icons
-*Objectif : Installer la bibliothèque d'icônes.*
+## 🔄 Scénarios d'Exécution (Algorithmes)
 
-1. **Lecture** : Charger `resources/installation-lucide.md`.
-2. **Vérification** : Effectuer les vérifications indiquées dans le fichier de ressources.
-3. **Plan de Modification** :
-   - Si manquant ou incomplet, proposer les actions d'installation et configuration décrites dans le fichier.
-   - **STOP** : Attendre validation formelle.
-4. **Exécution** : Appliquer les modifications validées.
+### Scénario 1 : Initialisation Complète (Projet Vide)
+1. **Backend** : Exécuter **Action A** (Laravel).
+2. **Frontend** : Exécuter **Action B** (Stack Frontend).
+3. **Tools** : Exécuter **Action C** (Lucide).
+4. **Structure** : Exécuter **Action D** (Architecture).
+5. **Validation** : Lancer `php artisan test` (si tests présents) et `npm run build`.
 
-**Validation** : Lucide Icons installé et configuré selon les specs.
+### Scénario 2 : Audit & Réparation Stack
+1. **Audit** : Vérifier la présence des fichiers clés (`artisan`, `vite.config.js`, `tailwind.config.js` ou CSS v4).
+2. **Correction** : 
+   - Si CSS cassé -> **Action B**.
+   - Si Dossiers manquants -> **Action D**.
+
+---
+
+## ⚙️ Standards & Conventions
+1. **NPM** : Préférer `npm` à `yarn` ou `pnpm` (sauf contrainte projet).
+2. **Vite** : Utiliser Vite comme bundler par défaut.
+3. **Assets** : Les assets compilés vont dans `public/build/`.

@@ -3,49 +3,65 @@ name: developpeur-frontend
 description: Intègre le HTML du ui-kit dans les fichiers Blade, ajoute l'interactivité JS.
 ---
 
-# Skill : Développeur Frontend JS
+# Skill : Développeur Frontend
 
-## 🎯 Objectif & Périmètre
-**Mission** : Rendre l'interface vivante en intégrant le design statique dans Laravel et en ajoutant l'interactivité utilisateur.
+## 🎯 Périmètre Global
+**Mission** : Transformer les maquettes statiques (UI Kit) en vues dynamiques Laravel (Blade) et implémenter l'interactivité client (Alpine.js, JS).
 
-### ✅ Actions Autorisées
-- **Intégrer** le HTML du `ui-kit` dans les fichiers `.blade.php` (Layouts, Components, Views).
-- **Développer** la couche interactive avec Alpine.js ou Vanilla JS.
-- **Connecter** le frontend à l'API via des appels AJAX (Fetch).
-- **Dynamiser** l'UI selon les données du Backend.
+### 🚫 Interdictions Globales (Règles d'Or)
+1. **No Logic in Views** : Ne jamais effectuer de requêtes DB dans une vue Blade.
+2. **Atomic Design** : Toujours utiliser des composants Blade (`<x-component>`) pour les éléments réutilisables.
+3. **Style** : Ne jamais écrire de CSS inline ou dans `<style>`, utiliser exclusivement les classes utilitaires Tailwind définies dans le UI Kit.
 
-### ❌ Limites (Ce qu'il ne fait PAS)
-- Ne crée pas le design system (Déléguer à `designer-ui`).
-- Ne touche pas à la logique Backend (sauf pour afficher les variables).
+---
 
-## 📥 Entrées / 📤 Sorties
-| Direction  | Nom                           | Description / Format                       |
-| :--------- | :---------------------------- | :----------------------------------------- |
-| **Entrée** | `ui-kit/`                     | Maquettes HTML/CSS statiques de référence  |
-| **Entrée** | `resources/specs-frontend.md` | Comportements attendus, interactions, flux |
-| **Sortie** | `resources/views/*`           | Fichiers Blade finaux                      |
-| **Sortie** | `resources/js/*`              | Scripts JS compilés (via Vite)             |
+## ⚡ Actions (Capacités Atomiques)
 
-## 🔄 Algorithme d'Exécution
+### Action A : Créer/Adapter Composant Blade
+> **Description** : Convertir un composant HTML statique du UI Kit en composant Blade réutilisable.
+- **Entrées** : `ui-kit/atoms/[name].html`.
+- **Sorties** : `resources/views/components/[name].blade.php`.
+- **❌ Interdictions Spécifiques** :
+  - Ne pas coder en dur les textes, utiliser des slots ou des props.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - Le composant accepte les attributs HTML standards (`$attributes->merge()`).
+  - Les variables par défaut sont définies (`@props`).
+- **📝 Instructions Détaillées** :
+  1. Copier le HTML du kit.
+  2. Remplacer le contenu variable par `{{ $slot }}`.
+  3. Gérer les classes dynamiques avec `@class([])`.
 
-### Étape 1 : Intégration Blade
-*Objectif : Transformer le statique en dynamique.*
-1. **Découpage** : Identifier les parties réutilisables (Header, Footer, Cards).
-2. **Components** : Créer des composants Blade (`x-card`, `x-button`) basés sur le HTML du ui-kit.
-3. **Views** : Construire les pages finales en assemblant layout et composants.
+### Action B : Intégrer Page (View)
+> **Description** : Assembler les composants pour créer une page complète connectée aux données.
+- **Entrées** : Maquette de page, Données attendues du contrôleur.
+- **Sorties** : `resources/views/[page].blade.php`.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - La vue étend un Layout principal (`<x-layouts.app>`).
+  - Les directives `@auth`, `@guest`, `@error` sont utilisées pour l'UX.
+  - Le titre de la page est défini.
 
-### Étape 2 : Injection des Données
-*Objectif : Afficher le contenu réel.*
-1. **Variables** : Utiliser `{{ $variable }}` pour afficher les données passées par le Contrôleur.
-2. **Boucles** : Utiliser `@foreach` pour les listes.
-3. **Conditions** : Utiliser `@if`, `@auth` pour l'affichage conditionnel.
+### Action C : Ajouter Interactivité (Alpine.js)
+> **Description** : Dynamiser les éléments d'interface (Modale, Dropdown, Toggle).
+- **Entrées** : Vue Blade existante.
+- **Sorties** : Code Alpine ajouté (`x-data`, `x-on:click`).
+- **❌ Interdictions Spécifiques** :
+  - Ne pas écrire de logique métier JS complexe dans le HTML -> Extraire dans un fichier JS si > 10 lignes.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - L'état est réactif.
+  - Pas de "FOUC" (Flash of Unstyled Content) -> utiliser `x-cloak`.
 
-### Étape 3 : Interactivité (JS)
-*Objectif : Gérer les actions utilisateur côté client.*
-1. **Alpine.js** : Ajouter des directives `x-data`, `x-show` pour les interactions simples (modales, dropdowns).
-2. **AJAX** : Écrire des scripts `fetch` pour les interactions sans rechargement de page.
+---
 
-## ⚠️ Règles d'Or
-1. **Source de Vérité** : Ne jamais inventer de CSS, toujours copier les classes du `ui-kit`.
-2. **Sécurité** : Toujours échapper les données utilisateurs (Blade le fait par défaut).
-3. **Performance** : Minimiser le JS, privilégier Alpine.js pour les besoins simples.
+## 🔄 Scénarios d'Exécution (Algorithmes)
+
+### Scénario 1 : Intégration d'une Feature
+1. **Composants** : Exécuter **Action A** pour tous les nouveaux atomes requis.
+2. **Assemblage** : Exécuter **Action B** pour créer la vue.
+3. **Scripting** : Exécuter **Action C** si de l'interactivité est requise.
+
+---
+
+## ⚙️ Standards & Conventions
+1. **Blade** : Utiliser la syntaxe des composants `<x-name>` et non `@include`.
+2. **Icons** : Utiliser les composants Lucid ou SVG inlinés optimisés.
+3. **Forms** : Toujours inclure `@csrf` et gérer l'affichage des erreurs `@error`.

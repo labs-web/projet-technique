@@ -1,49 +1,71 @@
 ---
 name: concepteur-uml
-description: Expert en modélisation technique et conception (Diagrammes de Classes avec Mermaid).
+description: Expert en modélisation technique et conception (Diagrammes de Classes et de BDD avec Mermaid).
 ---
 
-# Skill : Conception UML
+# Skill : Concepteur UML
 
-## 🎯 Objectif & Périmètre
-**Mission** : Produire des diagrammes de Classes (Class Diagram) pour structurer le modèle de données et les relations techniques.
+## 🎯 Périmètre Global
+**Mission** : Formaliser la solution technique à travers des diagrammes de conception (Classes, ERD) pour guider l'implémentation, en assurant la transition entre le besoin fonctionnel et le code.
 
-### ✅ Actions Autorisées
-- **Générer** un bloc `mermaid` (Classes, Relations, Types) à partir d'une liste d'entités ou d'un cas d'usage.
-- **Intégrer** ce bloc dans la documentation technique (`implementation_plan.md`, `design_doc.md`).
+### 🚫 Interdictions Globales (Règles d'Or)
+1. **Scope** : Ne jamais modéliser de processus métier (BPMN) ou de cas d'utilisation (Use Case) -> Déléguer à `analyste-uml`.
+2. **Format** : Utiliser exclusivement la syntaxe Mermaid pour les diagrammes.
+3. **Complexité** : Ne pas surcharger un diagramme. Si plus de 10 classes, découper en sous-domaines.
 
-### ❌ Limites (Ce qu'il ne fait PAS)
-- Ne génère PAS de Use Cases (Déléguer à `analyse-uml`).
-- Ne crée PAS les fichiers de migration Laravel (Déléguer à `developpeur-backend`).
+---
 
-## 📥 Entrées / 📤 Sorties
-- **Entrée** : Description textuelle d'un schéma de données ou d'entités.
-- **Sortie** : Bloc de code `mermaid`.
+## ⚡ Actions (Capacités Atomiques)
 
-## 🔄 Algorithme d'Exécution
+### Action A : Modéliser le Domaine (Class Diagram)
+> **Description** : Créer un diagramme de classes représentant les entités, leurs attributs, méthodes et relations.
+- **Entrées** :
+  - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Besoin analysé).
+  - `docs/3.conception/rules-business.md` (Règles de gestion, optionnel).
+- **Sorties** : `docs/3.conception/vX-[nom]/classes-vX-[nom].mermaid`
+- **❌ Interdictions Spécifiques** :
+  - Ne pas utiliser de types spécifiques au langage (ex: `List<String>`) mais des standards UML (`String[]` ou `0..*`).
+- **✅ Points de Contrôle (Definition of Done)** :
+  - Toutes les entités du besoin sont représentées.
+  - Les cardinalités sont précises.
+  - Les relations (Rea, Aggregation, Composition, Heritage) sont correctes.
+- **📝 Instructions Détaillées** :
+  1. **Analyse** : Identifier les noms (Classes) et les verbes (Méthodes) dans l'analyse.
+  2. **Structure** : Créer le dossier `docs/3.conception/vX-[nom]/` si inexistant.
+  3. **Rédaction** :
+     - Définir les classes et attributs.
+     - Ajouter les types de données génériques.
+     - Établir les relations.
+     - Sauvegarder dans le fichier `.mermaid`.
 
-### Étape 1 : Modéliser Conception (Classes / DB)
-*Objectif : Transformer des entités conceptuelles en diagramme technique.*
-1. **Lecture** : Charger le template `resources/spec-mermaid.md` pour la syntaxe précise.
-2. **Identification** :
-   - Identifier les **Classes** (Entities / Models).
-   - Identifier les **Attributs** (Types précis si possible : int, string, datetime).
-   - Définir les **Relations** (Cardinalités 1-n, n-n, Composition, Agrégation/Association).
-3. **Génération** : Écrire le code Mermaid en respectant l'en-tête `classDiagram`.
-4. **Production** : Insérer le bloc dans le fichier Markdown de conception.
+### Action B : Modéliser la BDD (ER Diagram)
+> **Description** : Traduire le modèle de classes en schéma relationnel de base de données physique.
+- **Entrées** : `docs/3.conception/vX-[nom]/classes-vX-[nom].mermaid`.
+- **Sorties** : `docs/3.conception/vX-[nom]/bdd-vX-[nom].mermaid`
+- **❌ Interdictions Spécifiques** :
+  - Ne pas oublier les clés étrangères (FK).
+  - Ne pas utiliser de types non supportés par le SGBD cible (MySQL/MariaDB).
+- **✅ Points de Contrôle (Definition of Done)** :
+  - Les tables sont normalisées (3NF).
+  - La convention de nommage Snake Case est respectée (`user_id`, `created_at`).
+- **📝 Instructions Détaillées** :
+  1. **Transformation** : Convertir Clsases -> Tables, Attributs -> Colonnes.
+  2. **Typage** : Assigner les types SQL (INT, VARCHAR, TIMESTAMP...).
+  3. **Relations** : Matérialiser les relations par des Clés Étrangères (FK).
+  4. **Table Pivot** : Créer les tables de jointure pour les relations Many-to-Many.
 
-## ✓ Points de Contrôle
-Validations obligatoires avant de considérer le skill terminé :
-1. **Syntaxe** : Le bloc Mermaid est valide (`classDiagram`, relations correctes).
-2. **Compréhension** : Le diagramme reflète correctement les contraintes cardinales.
-3. **Approbation Développeur** : Confirmer que la conception technique correspond à l'attente.
+---
 
-## 🚫 Interdictions
-1. **Types Flous** : Éviter les types génériques si possible (préférer `int`, `string`, `datetime` à `data`).
-2. **Cardinalités Incohérentes** : Vérifier que les relations one-to-many ou many-to-many sont explicites.
+## 🔄 Scénarios d'Exécution (Algorithmes)
+
+### Scénario 1 : Conception Complète d'une Version
+1. **Initialisation** : Lire l'analyse fonctionnelle de la version.
+2. **Architecture** : Exécuter l'**Action A** pour valider la structure objet.
+3. **Persistance** : Exécuter l'**Action B** pour préparer le schéma de base de données.
+4. **Validation** : Vérifier la cohérence entre Classes et BDD.
+
+---
 
 ## ⚙️ Standards & Conventions
-1. **Source de Vérité** : `resources/spec-mermaid.md`.
-2. **Conventions** :
-   - Noms de classes en PascalCase (ex: `UserProfile`).
-   - Attributs en camelCase ou snake_case (cohérence projet).
+1. **Notation** : PascalCase pour les Classes (`UserProfile`), snake_case pour la BDD (`user_profiles`).
+2. **Outil** : Utiliser Mermaid Live Editor pour prévisualiser si besoin, mais le code source reste dans les fichiers.

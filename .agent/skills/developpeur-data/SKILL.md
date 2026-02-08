@@ -3,49 +3,67 @@ name: developpeur-data
 description: Crée les Migrations, Modèles Eloquent, Factories et Seeders, et optimise les requêtes.
 ---
 
-# Skill : Expert Data
+# Skill : Développeur Data
 
-## 🎯 Objectif & Périmètre
-**Mission** : Concevoir et implémenter la couche de persistance des données (Schéma & Modèles).
+## 🎯 Périmètre Global
+**Mission** : Implémenter et maintenir la couche de persistance des données (Schéma BDD, Modèles Eloquent, Seeding), en garantissant l'intégrité et la performance des requêtes.
 
-### ✅ Actions Autorisées
-- **Créer** les Migrations pour définir le schéma de base de données.
-- **Définir** les Modèles Eloquent (Relations, Casts, Accessors).
-- **Générer** les Factories et Seeders pour les données de test.
-- **Optimiser** les performances (Index SQL, Foreign Keys).
+### 🚫 Interdictions Globales (Règles d'Or)
+1. **Never Delete** : Ne jamais supprimer ou modifier une migration déjà jouée en production -> Créer une nouvelle migration.
+2. **Mass Assignment** : Toujours protéger les modèles avec `$fillable` (whitelist) et jamais `$guarded = []`.
+3. **Naming** : Tables en `snake_case` Pluriel, Modèles en `PascalCase` Singulier.
 
-### ❌ Limites (Ce qu'il ne fait PAS)
-- N'écrit pas de Services ni de Contrôleurs (Déléguer à `developpeur-business` / `developpeur-http`).
-- Ne valide pas les données entrantes HTTP (Déléguer à `developpeur-http`).
+---
 
-## 📥 Entrées / 📤 Sorties
-| Direction  | Nom                         | Description / Format                                |
-| :--------- | :-------------------------- | :-------------------------------------------------- |
-| **Entrée** | `resources/specs-schema.md` | Dictionnaire des données, MCD, contraintes          |
-| **Entrée** | `ui-kit/`                   | (Optionnel) Pour déduire les champs des formulaires |
-| **Sortie** | `database/migrations/*`     | Fichiers de migration PHP                           |
-| **Sortie** | `app/Models/*`              | Classes Eloquent                                    |
-| **Sortie** | `database/seeders/*`        | Classes de Seeding                                  |
+## ⚡ Actions (Capacités Atomiques)
 
-## 🔄 Algorithme d'Exécution
+### Action A : Créer/Modifier Schéma (Migration)
+> **Description** : Générer une migration Laravel pour altérer la structure de la base de données.
+- **Entrées** : Description des changements (Nouvelle table ou Colonnes à ajouter).
+- **Sorties** : `database/migrations/YYYY_MM_DD_HHMMSS_[action]_[table]_table.php`.
+- **❌ Interdictions Spécifiques** :
+  - Ne pas oublier la méthode `down()` pour le rollback.
+  - Ne pas utiliser de types non standards sans raison (ex: `json` sur MySQL 5.7).
+- **✅ Points de Contrôle (Definition of Done)** :
+  - La migration s'exécute (`migrate`) et se rollback (`migrate:rollback`) sans erreur.
+  - Les clés étrangères ont `constrained()->onDelete('cascade')` (si approprié).
+- **📝 Instructions Détaillées** :
+  1. Utiliser `php artisan make:migration`.
+  2. Définir le schéma dans `up()`.
+  3. Vérifier les index nécessaires.
 
-### Étape 1 : Schéma de Données
-*Objectif : Définir la structure SQL.*
-1. **Migrations** : Créer les fichiers de migration avec `php artisan make:migration`.
-2. **Définition** : Déclarer les colonnes, types, index et contraintes de clés étrangères.
+### Action B : Définir Modèle Eloquent
+> **Description** : Configurer la classe Eloquent reflétant une table.
+- **Entrées** : Table associée, Relations, Attributs.
+- **Sorties** : `app/Models/[ModelName].php`.
+- **❌ Interdictions Spécifiques** :
+  - Ne pas inclure de logique métier complexe dans le modèle.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - `$fillable` est défini.
+  - `$casts` est utilisé pour les types natifs (boolean, date, array).
+  - Les méthodes de relation (`hasMany`, etc.) sont typées.
 
-### Étape 2 : Modélisation Eloquent
-*Objectif : Représenter les données en objets PHP.*
-1. **Modèles** : Créer/Mettre à jour les classes dans `app/Models`.
-2. **Relations** : Définir les méthodes `hasMany`, `belongsTo`, etc.
-3. **Configuration** : Définir `$fillable`, `$casts`, `$dates`.
+### Action C : Créer Jeu de Données (Factory/Seeder)
+> **Description** : Générer des données de test réalistes.
+- **Entrées** : Modèle cible.
+- **Sorties** : `database/factories/[Model]Factory.php`, `database/seeders/[Model]Seeder.php`.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - La Factory utilise `fake()` pour des données variées.
+  - Le Seeder est appelé dans `DatabaseSeeder.php`.
 
-### Étape 3 : Jeux de Données
-*Objectif : Peupler la base pour le développement.*
-1. **Factories** : Définir la structure des données générées aléatoirement.
-2. **Seeders** : Créer les scripts pour insérer des données fixes ou massives.
+---
 
-## ⚠️ Règles d'Or
-1. **Source de Vérité** : Les Migrations définissent l'état réel de la BDD.
-2. **Conventions** : Noms de tables au pluriel (anglais), Modèles au singulier (PascalCase).
-3. **Sécurité** : Toujours définir `$fillable` ou `$guarded` pour éviter le Mass Assignment.
+## 🔄 Scénarios d'Exécution (Algorithmes)
+
+### Scénario 1 : Création d'une Nouvelle Entité
+1. **Migration** : Exécuter **Action A** pour créer la table.
+2. **Model** : Exécuter **Action B** pour lier le code PHP.
+3. **Data** : Exécuter **Action C** pour permettre le développement avec des données.
+4. **Validation** : Lancer `php artisan migrate --seed` pour vérifier la chaîne complète.
+
+---
+
+## ⚙️ Standards & Conventions
+1. **Migrations** : Utiliser la syntaxe anonyme (`return new class extends Migration`).
+2. **ID** : Utiliser `$table->id()` (BigInt Auto Increment) par défaut, ou `$table->uuid('id')` si requis.
+3. **Dates** : Toujours inclure `$table->timestamps()`.

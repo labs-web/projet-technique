@@ -18,9 +18,20 @@ Un Workflow valide doit respecter la structure suivante :
 - **Flux** : Linéaire et unidirectionnel (Pas de boucles complexes).
 - **Validation Humaine** : Chaque étape critique doit avoir un point de contrôle (STOP).
 
+### Principes d'Interaction Workflow/Skill
+- **Rôle du Workflow (Orchestrateur)** :
+  - Il **NE DOIT PAS** expliquer "comment" réaliser une tâche (c'est le rôle du Skill).
+  - Il **NE DOIT PAS** répéter les instructions techniques du Skill.
+  - Il **DOIT** préparer et organiser les **Données d'Entrée (Inputs)** pour l'action.
+  - Il **DOIT** ordonner explicitement au Skill d'exécuter l'action.
+- **Appel de Skill** :
+  - Chaque étape impliquant une action doit préciser :
+    1. **Le SKILL Cible** : Quel expert solliciter.
+    2. **L'ACTION** : Quelle capacité activer.
+    3. **Les INPUTS** : Les données préparées nécessaires à l'action.
+
 ### Annotations Spéciales
 - `// turbo` : Autorise l'exécution automatique d'une commande spécifique.
-- `// turbo-all` : Autorise l'exécution automatique de toutes les commandes du workflow.
 
 ### Workflow de Création/Optimisation
 1. **Visualiser** le processus de bout en bout.

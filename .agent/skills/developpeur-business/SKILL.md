@@ -3,48 +3,67 @@ name: developpeur-business
 description: Implémente les Services, la logique métier, et définit les Policies/Gates.
 ---
 
-# Skill : Expert Métier
+# Skill : Développeur Business
 
-## 🎯 Objectif & Périmètre
-**Mission** : Encapsuler la logique métier complexe et les règles d'autorisation dans des classes dédiées (Services).
+## 🎯 Périmètre Global
+**Mission** : Encapsuler la logique métier complexe et les règles d'autorisation dans des classes dédiées (Services, Actions, Policies), garantissant l'indépendance vis-à-vis du framework HTTP.
 
-### ✅ Actions Autorisées
-- **Implémenter** les Services (`app/Services/*`) contenant la Business Logic.
-- **Définir** les Policies et Gates pour la gestion des droits.
-- **Manipuler** les Modèles Eloquent pour effectuer les traitements.
-- **Déclencher** des événements métier (Events/Listeners).
+### 🚫 Interdictions Globales (Règles d'Or)
+1. **No HTTP** : Ne jamais importer `Illuminate\Http\Request` ou `Response` dans un Service.
+2. **No Controller Logic** : Ne jamais écrire de logique métier dans un Contrôleur -> Déléguer au Service.
+3. **Atomicité** : Utiliser des transactions DB pour toute opération impliquant plusieurs écritures.
 
-### ❌ Limites (Ce qu'il ne fait PAS)
-- Ne connait pas HTTP (pas de `Request`, pas de `Response`, pas de `View`).
-- Ne gère pas la validation de format des entrées (Déléguer à `developpeur-http`).
+---
 
-## 📥 Entrées / 📤 Sorties
-| Direction  | Nom                           | Description / Format                              |
-| :--------- | :---------------------------- | :------------------------------------------------ |
-| **Entrée** | `resources/specs-business.md` | Règles de gestion, flux métier, matrice de droits |
-| **Entrée** | `app/Models/*`                | Modèles de données disponibles                    |
-| **Sortie** | `app/Services/*`              | Classes de Service (ex: `ArticleService`)         |
-| **Sortie** | `app/Policies/*`              | Classes de Policy (ex: `ArticlePolicy`)           |
+## ⚡ Actions (Capacités Atomiques)
 
-## 🔄 Algorithme d'Exécution
+### Action A : Créer Service Métier
+> **Description** : Créer une classe de Service pour encapsuler un domaine métier.
+- **Entrées** : Nom du domaine (ex: `Article`), Méthodes requises.
+- **Sorties** : `app/Services/[Nom]Service.php`.
+- **❌ Interdictions Spécifiques** :
+  - Ne pas créer de Service "Fourre-tout". Un Service = Un Domaine.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - La classe est dans le namespace `App\Services`.
+  - Les méthodes sont typées (arguments et retour).
+  - Aucune dépendance à `Request` ou `Auth::user()` (passer l'user en paramètre).
+- **📝 Instructions Détaillées** :
+  1. Créer le dossier `app/Services` si inexistant.
+  2. Créer la classe PHP.
+  3. Définir les méthodes publiques correspondant aux cas d'utilisation.
 
-### Étape 1 : Définition de l'Architecture Service
-*Objectif : Structurer le point d'entrée métier.*
-1. **Création** : Générer la classe Service dans `app/Services`.
-2. **Interface** : Définir les méthodes publiques (le contrat métier).
+### Action B : Implémenter Logique (Méthode)
+> **Description** : Coder le corps d'une méthode de service (Algorithme, Transaction, Event).
+- **Entrées** : Signature de la méthode, Règles de gestion.
+- **Sorties** : Code PHP dans la méthode.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - Utilisation de `DB::transaction` si modifications multiples.
+  - Gestion des exceptions (`throw` si erreur métier).
+  - Retourne des objets typés (DTO ou Model) et non des tableaux associatifs flous.
 
-### Étape 2 : Implémentation de la Logique
-*Objectif : Coder les règles de gestion.*
-1. **Traitement** : Écrire le code qui manipule les données (Calculs, conditions, workflow).
-2. **Transaction** : Utiliser `DB::transaction` pour les opérations atomiques.
-3. **Events** : Dispatcher des événements si nécessaire.
+### Action C : Définir Policy (Autorisation)
+> **Description** : Créer et implémenter une Policy pour sécuriser l'accès aux ressources.
+- **Entrées** : Modèle cible (ex: `Article`).
+- **Sorties** : `app/Policies/[Model]Policy.php`.
+- **✅ Points de Contrôle (Definition of Done)** :
+  - La Policy est enregistrée (automatique en Laravel 11 ou via AuthServiceProvider).
+  - Les méthodes standard (`view`, `create`, `update`, `delete`) sont implémentées.
+- **📝 Instructions Détaillées** :
+  1. Utiliser `php artisan make:policy [Name]Policy --model=[Model]`.
+  2. Implémenter la logique booléenne dans chaque méthode.
 
-### Étape 3 : Sécurisation (ACL)
-*Objectif : Protéger l'accès aux fonctionnalités.*
-1. **Policies** : Créer les Policies associées aux Modèles.
-2. **Règles** : Implémenter les méthodes `view`, `create`, `update`, `delete` avec la logique de droits.
+---
 
-## ⚠️ Règles d'Or
-1. **Source de Vérité** : Le Service est le seul point d'entrée pour modifier l'état métier.
-2. **Indépendance** : Le code ne doit jamais dépendre de la classe `Illuminate\Http\Request`.
-3. **Conventions** : Nommage explicite des méthodes (`publishArticle` et non `save`).
+## 🔄 Scénarios d'Exécution (Algorithmes)
+
+### Scénario 1 : Implémentation d'une Feature Métier
+1. **Design** : Définir l'interface du Service (`interface` ou `class` publique).
+2. **Sécurité** : Créer la Policy associée au modèle manipulé via **Action C**.
+3. **Logique** : Implémenter les méthodes du Service via **Action A** et **B**.
+
+---
+
+## ⚙️ Standards & Conventions
+1. **Injection** : Préférer l'injection de dépendance dans le constructeur.
+2. **Typage** : `strict_types=1` obligatoire sur tous les fichiers PHP.
+3. **Nommage** : Verbe + Nom pour les méthodes (ex: `publishArticle`, `archiveUser`).
