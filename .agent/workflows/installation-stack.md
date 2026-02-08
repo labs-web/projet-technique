@@ -1,3 +1,7 @@
+---
+description: Installation Stack 
+---
+
 # Workflow : Installation Stack (`/installation-stack`)
 
 ## 1. Contexte & Flux Global
