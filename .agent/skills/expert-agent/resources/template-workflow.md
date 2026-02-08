@@ -6,49 +6,68 @@ description: [Description courte du workflow]
 
 ## 1. Contexte & Flux Global
 **Objectif** : [Objectif global du workflow]
-**Flux Type** : `[Étape 1]` → `[Étape 2]` → `[Étape 3]`
+**Flux Type** : `[Analyse Optionnelle]` → `[Menu Interactif]` → `[Exécution]`
 
 ## 2. Exécution
 
-### Étape 1 : Diagnostic & Routage
-**1. Analyse de la demande**
-- Analyser le périmètre (Scope).
-- Identifier les actions requises.
+### Étape 1 : Analyse de la Demande (Optionnelle)
+**Si l'utilisateur fournit un message avec la commande**, analyser les mots-clés pour suggérer l'action appropriée.
 
-**2. Décision**
-- **Cas A** : Exécuter **Action A**.
-- **Cas B** : Exécuter **Action B**.
+**Logique de Détection** :
+- Mots-clés **"[mot1]"**, **"[mot2]"** → Suggérer **Action A**
+- Mots-clés **"[mot3]"**, **"[mot4]"** → Suggérer **Action B**
+- Mots-clés **"[mot5]"**, **"[mot6]"** → Suggérer **Action C**
 
 ---
 
-### Étape 2 : Exécution Composite
+### Étape 2 : Affichage du Menu Interactif
 
-#### Étape Action A : [Nom de l'Action A]
-*[Description du but de cette action]*
+**Présenter au développeur le menu suivant** :
 
-**1. Exécution Déléguée (Appel Skill)**
-- **Skill Cible** : `[Nom du Skill]`
-- **Action** : `[Nom de l'Action dans le Skill]`
+> **Actions disponibles (Skill : [nom-du-skill])** :
+>
+> **A.** [Nom de l'Action A]  
+> → [Description courte de l'action A]
+>
+> **B.** [Nom de l'Action B]  
+> → [Description courte de l'action B]
+>
+> **C.** [Nom de l'Action C]  
+> → [Description courte de l'action C]
+>
+> [Si suggestion détectée] **→ Action suggérée : [X]** ← [MARQUÉE]
+>
+> **Quelle action souhaitez-vous exécuter ?** (Tapez A, B, C...)
+
+**STOP** : Attendre la sélection du développeur.
+
+---
+
+### Étape 3 : Exécution de l'Action Choisie
+
+Selon le choix du développeur, exécuter l'action correspondante du skill `[nom-du-skill]`.
+
+#### Si Action A sélectionnée
+- **Skill Cible** : `[nom-du-skill]`
+- **Action** : `[Nom de l'Action A dans le Skill]`
 - **Inputs Fournis** : [Données nécessaires]
+- **STOP** : [Critère de validation]
 
-**2. Validation & Transition**
-- **STOP** : [Critère de validation du résultat]
-- **Proposition** : "Souhaitez-vous passer à l'**Action B** ?"
-
-#### Étape Action B : [Nom de l'Action B]
-*[Description du but de cette action]*
-
-**1. Exécution Déléguée (Appel Skill)**
-- **Skill Cible** : `[Nom du Skill]`
-- **Action** : `[Nom de l'Action dans le Skill]`
+#### Si Action B sélectionnée
+- **Skill Cible** : `[nom-du-skill]`
+- **Action** : `[Nom de l'Action B dans le Skill]`
 - **Inputs Fournis** : [Données nécessaires]
+- **STOP** : [Critère de validation]
 
-**2. Validation & Transition**
-- **STOP** : [Critère de validation du résultat]
-- **Proposition** : "Souhaitez-vous terminer ou passer à l'**Action C** ?"
+#### Si Action C sélectionnée
+- **Skill Cible** : `[nom-du-skill]`
+- **Action** : `[Nom de l'Action C dans le Skill]`
+- **Inputs Fournis** : [Données nécessaires]
+- **STOP** : [Critère de validation]
 
 ---
 
 ## 3. Critères de Qualité
-- [ ] **Pertinence** : Le workflow répond au besoin identifié.
-- [ ] **Conformité** : Les actions respectent les règles du Skill.
+- **Découvrabilité** : Le développeur voit toutes les actions disponibles
+- **Pertinence** : Les suggestions correspondent à l'intention
+- **Conformité** : Les actions respectent les règles du Skill

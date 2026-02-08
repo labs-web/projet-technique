@@ -23,15 +23,37 @@ Un Workflow valide doit respecter la structure suivante :
 - **Flux** : Linéaire et unidirectionnel (Pas de boucles complexes).
 - **Validation Humaine** : Chaque étape critique doit avoir un point de contrôle (STOP).
 
-### Architecture Standard : Orchestration Intelligente
-L'architecture par défaut pour orchestrer un Skill multi-actions (cas fréquent) suit le modèle :
-`[Demande]` → `[Diagnostic Stratégie]` → `[Exécution Composite]` → `[Validation]`
+### Architecture Standard : Menu Interactif avec Auto-Suggestion
+Pour les workflows pédagogiques et interactifs, l'architecture standard est basée sur un menu utilisateur :
+`[Analyse Optionnelle]` → `[Menu Interactif]` → `[Validation Humaine]` → `[Exécution]`
 
-1.  **Diagnostic & Stratégie** : Le Workflow analyse l'intention (Scope) et décide quelles actions activer.
-2.  **Exécution Composite** : Le Workflow appelle séquentiellement ou conditionnellement les actions atomiques du Skill.
-3.  **Synthèse & Validation** : Le Workflow vérifie la cohérence du résultat global.
+### Fonctionnement Détaillé
 
-*Note : Cette structure doit être utilisée par défaut, sauf demande spécifique d'un workflow linéaire simple.*
+1. **Analyse de la Demande (Optionnelle)** : Détecter des mots-clés dans la demande pour suggérer une action.
+2. **Affichage du Menu** : Présenter toutes les actions disponibles avec descriptions courtes.
+3. **Validation Humaine** : STOP pour attendre le choix du développeur (A/B/C/D...).
+4. **Exécution Conditionnelle** : Appeler l'action choisie avec les inputs appropriés.
+
+**Avantages** :
+- **Découvrabilité** : Le développeur voit toutes les actions disponibles
+- **Pédagogique** : Idéal pour l'apprentissage (contexte Lab)
+- **Contrôle** : Validation humaine avant chaque exécution
+- **Simplicité** : Workflow facile à maintenir et à comprendre
+
+**Exemple de Menu** :
+```
+> Actions disponibles (Skill : nom-du-skill) :
+>
+> A. Nom de l'Action A
+> → Description courte de ce que fait l'action
+>
+> B. Nom de l'Action B
+> → Description courte de ce que fait l'action
+>
+> [Si suggestion] → Action suggérée : [X] ← [MARQUÉE]
+>
+> Quelle action souhaitez-vous exécuter ? (Tapez A, B, C...)
+```
 
 ### Principes d'Interaction Workflow/Skill
 - **Rôle du Workflow (Orchestrateur)** :
@@ -49,9 +71,9 @@ L'architecture par défaut pour orchestrer un Skill multi-actions (cas fréquent
 - `// turbo` : Autorise l'exécution automatique d'une commande spécifique.
 
 ### Workflow de Création/Optimisation
-1. **Visualiser** le processus de bout en bout.
 1. **Visualiser** le processus de bout en bout (Penser "Orchestration" et non "Procédure").
-2. **Utiliser** `template-workflow.md` (situé dans `.agent/skills/expert-agent/resources/`) qui implémente le pattern "Diagnostic-Exécution".
-3. **Simplifier** : Supprimer les étapes redondantes.
-4. **Annoter** : Ajouter `// turbo` là où c'est sûr.
-5. **Vérifier** : S'assurer que le workflow ne "bloque" pas l'agent dans une boucle infinie.
+2. **Suivre le Pattern** : Utiliser le modèle "Menu Interactif" défini dans le template.
+3. **Utiliser** `template-workflow.md` (situé dans `.agent/skills/expert-agent/resources/`) comme base.
+4. **Simplifier** : Supprimer les étapes redondantes.
+5. **Annoter** : Ajouter `// turbo` là où c'est sûr.
+6. **Vérifier** : S'assurer que le workflow ne "bloque" pas l'agent dans une boucle infinie.
