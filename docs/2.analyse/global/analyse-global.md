@@ -1,43 +1,40 @@
-# Analyse Globale des Besoins : Projet Technique (Blog)
-
-Ce document recense l'ensemble des fonctionnalités attendues pour le projet, indépendamment de leur planification dans le temps.
+# Analyse Fonctionnelle Globale
 
 ## 1. Acteurs
-*   **Visiteur (Public)** : Utilisateur non authentifié accédant au contenu public.
-*   **Utilisateur (Authentifié)** : Utilisateur connecté ayant un compte (Auteur).
-*   **Administrateur** : Utilisateur disposant de droits étendus (gestion globale).
-*   **Système (API Client)** : Consommateur externe des données via l'API.
+*   **Visiteur** : Utilisateur non connecté, navigue sur la partie publique du site.
+*   **Utilisateur Authentifié (Auteur)** : Utilisateur connecté, peut gérer ses propres contenus (articles).
+*   **Administrateur** : Utilisateur disposant de droits étendus pour gérer l'ensemble du contenu et la configuration du site.
+*   **Système Tiers** : Application externe consommant l'API (ex: application mobile).
 
-## 2. Fonctionnalités par Domaine
+## 2. Fonctionnalités
+### Consultation (Front-Office)
+*   Affichage de la page d'accueil avec les derniers articles.
+*   Consultation de la liste paginée des articles.
+*   Consultation du détail d'un article complet.
+*   Filtrage des articles par catégorie.
+*   Recherche textuelle d'articles (titre/contenu).
 
-### 2.1. Consultation (Front-Office)
-*   **Consulter la page d'accueil** : Visualiser les derniers articles mis en avant.
-*   **Lister les articles** : Parcourir l'ensemble des articles publiés.
-*   **Lire un article** : Afficher le contenu complet d'un article spécifique.
-*   **Filtrer par catégorie** : Afficher uniquement les articles liés à une catégorie sélectionnée.
-*   **Rechercher un article** : Trouver un article via des mots-clés (Titre, Contenu).
-
-### 2.2. Gestion de Contenu (Back-Office)
-*   **Se connecter** : S'authentifier pour accéder à l'espace d'administration.
-*   **Gérer les Articles (CRUD)** :
-    *   Créer un nouvel article (Titre, Contenu, Image, Catégories).
+### Administration (Back-Office)
+*   Authentification sécurisée (Login/Logout).
+*   Gestion des Articles (CRUD) :
+    *   Créer un nouvel article.
     *   Modifier un article existant.
     *   Supprimer un article.
-    *   Lister ses propres articles (ou tous selon rôles).
-*   **Gérer les Catégories (CRUD)** :
-    *   Créer une catégorie.
-    *   Modifier une catégorie.
+    *   Lister les articles administrables.
+*   Gestion des Catégories (CRUD) :
+    *   Créer une nouvelle catégorie.
+    *   Modifier une catégorie existante.
     *   Supprimer une catégorie.
-    *   Lister toutes les catégories.
+    *   Lister les catégories.
 
-### 2.3. Sécurité & Droits
-*   **Protéger l'accès** : Restreindre l'accès au Back-Office aux utilisateurs authentifiés.
-*   **Autoriser la modification** : Un utilisateur ne peut modifier/supprimer que ses propres articles (sauf Admin).
-*   **Gérer les Rôles** : Attribuer des rôles (Admin, Éditeur, Lecteur) aux utilisateurs.
+### Logique Métier & Sécurité
+*   Contrôle d'accès (Autorisation) : Restreindre la modification/suppression d'un article à son créateur (ou admin).
+*   Gestion des Rôles : Distinction des droits entre Admin, Éditeur et Lecteur.
 
-### 2.4. Interface & Expérience (UX)
-*   **Interaction dynamique** : Rechercher et filtrer sans rechargement de page (AJAX/Interactivité).
+### Interface & Expérience Utilisateur
+*   Interactivité sans rechargement de page (AJAX) pour la recherche et le filtrage.
+*   Utilisation de composants dynamiques (Modales, Dropdowns).
 
-### 2.5. API & Interopérabilité
-*   **S'authentifier via Token** : Obtenir un accès sécurisé pour les clients API.
-*   **Consommer les données** : Récupérer la liste et le détail des articles au format JSON.
+### API REST
+*   Exposition des ressources (Articles, Catégories) via une API JSON.
+*   Authentification API via jetons (Sanctum).

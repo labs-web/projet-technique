@@ -2,63 +2,53 @@
 description: [Description courte du workflow]
 ---
 
-# Workflow: [Nom du Workflow]
+# Workflow : [Nom du Workflow] (`/[slug]`)
 
 ## 1. Contexte & Flux Global
 **Objectif** : [Objectif global du workflow]
-**Flux Type** : `[Demande]` → `[Diagnostic Stratégie]` → `[Exécution Composite]` → `[Validation]`
+**Flux Type** : `[Étape 1]` → `[Étape 2]` → `[Étape 3]`
 
 ## 2. Exécution
 
-### Étape 1 : Diagnostic & Stratégie
+### Étape 1 : Diagnostic & Routage
+**1. Analyse de la demande**
+- Analyser le périmètre (Scope).
+- Identifier les actions requises.
 
-**1. Préparation des Données (Orchestration)**
-- Analyser la demande utilisateur pour identifier le périmètre (Scope).
-- Identifier les actions spécifiques du Skill à activer.
-
-**2. Décision (Routage)**
-- Établir le plan d'action (Quelles étapes sont nécessaires ?).
-- *Exemple : Si demande "X" ➔ Activer Étape 2a.*
+**2. Décision**
+- **Cas A** : Exécuter **Action A**.
+- **Cas B** : Exécuter **Action B**.
 
 ---
 
 ### Étape 2 : Exécution Composite
-*Sélectionner les sous-étapes pertinentes ci-dessous selon le diagnostic.*
 
-#### 2a. [Sous-Étape Optionnelle ou Séquentielle 1]
-
-**1. Exécution Déléguée (Appel Skill)**
-- **Skill Cible** : `[nom-du-skill]`
-- **Action** : `[Nom exact de l'action dans le Skill]`
-- **Inputs Fournis** :
-  - `[Input 1]` : [Description/Valeur]
-
-**2. Validation Humaine**
-- **STOP** : [Critère de validation]
-
-#### 2b. [Sous-Étape Optionnelle ou Séquentielle 2]
+#### Étape Action A : [Nom de l'Action A]
+*[Description du but de cette action]*
 
 **1. Exécution Déléguée (Appel Skill)**
-- **Skill Cible** : `[nom-du-skill]`
-- **Action** : `[Nom exact de l'action dans le Skill]`
-- **Inputs Fournis** :
-  - `[Input 1]`
+- **Skill Cible** : `[Nom du Skill]`
+- **Action** : `[Nom de l'Action dans le Skill]`
+- **Inputs Fournis** : [Données nécessaires]
 
-**2. Validation Humaine**
-- **STOP** : [Critère de validation]
+**2. Validation & Transition**
+- **STOP** : [Critère de validation du résultat]
+- **Proposition** : "Souhaitez-vous passer à l'**Action B** ?"
+
+#### Étape Action B : [Nom de l'Action B]
+*[Description du but de cette action]*
+
+**1. Exécution Déléguée (Appel Skill)**
+- **Skill Cible** : `[Nom du Skill]`
+- **Action** : `[Nom de l'Action dans le Skill]`
+- **Inputs Fournis** : [Données nécessaires]
+
+**2. Validation & Transition**
+- **STOP** : [Critère de validation du résultat]
+- **Proposition** : "Souhaitez-vous terminer ou passer à l'**Action C** ?"
 
 ---
 
-### Étape 3 : Synthèse & Clôture
-
-**1. Préparation des Données (Orchestration)**
-- Résumer les actions effectuées.
-- Lister les artefacts produits.
-
-**2. Validation Finale**
-- **STOP** : Confirmer que l'ensemble répond à la demande initiale.
-
 ## 3. Critères de Qualité
-- [ ] **Pertinence** : Le workflow s'adapte à la demande (pas d'étapes inutiles).
-- [ ] **Complétion** : Le résultat final attendu est produit.
-- [ ] **Tracabilité** : Les actions du Skill sont clairement identifiées.
+- [ ] **Pertinence** : Le workflow répond au besoin identifié.
+- [ ] **Conformité** : Les actions respectent les règles du Skill.
