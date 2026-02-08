@@ -4,8 +4,8 @@
 
 ---
 
-## Skill 1 : Expert Configuration Stack (`expert-stack-config`)
-**Fichier** : `.agent/skills/expert-stack-config/SKILL.md`
+## Skill 1 : Expert Configuration Stack (`configurateur-stack`)
+**Fichier** : `.agent/skills/configurateur-stack/SKILL.md`
 
 ### Périmètre
 ✅ **Fait** :
@@ -24,8 +24,8 @@
 
 ---
 
-## Skill 2 : Designer UI Kit (`designer-ui-kit`)
-**Fichier** : `.agent/skills/designer-ui-kit/SKILL.md`
+## Skill 2 : Designer UI Kit (`designer-ui`)
+**Fichier** : `.agent/skills/designer-ui/SKILL.md`
 
 ### Périmètre
 ✅ **Fait** :
@@ -43,8 +43,8 @@
 
 ---
 
-## Skill 3 : Expert Data (`backend-data`)
-**Fichier** : `.agent/skills/backend-data/SKILL.md`
+## Skill 3 : Expert Data (`developpeur-data`)
+**Fichier** : `.agent/skills/developpeur-data/SKILL.md`
 
 ### Périmètre
 ✅ **Fait** :
@@ -63,8 +63,8 @@
 
 ---
 
-## Skill 4 : Expert Métier (`backend-business`)
-**Fichier** : `.agent/skills/backend-business/SKILL.md`
+## Skill 4 : Expert Métier (`developpeur-business`)
+**Fichier** : `.agent/skills/developpeur-business/SKILL.md`
 
 ### Périmètre
 ✅ **Fait** :
@@ -83,8 +83,8 @@
 
 ---
 
-## Skill 5 : Expert HTTP (`backend-http`)
-**Fichier** : `.agent/skills/backend-http/SKILL.md`
+## Skill 5 : Expert HTTP (`developpeur-http`)
+**Fichier** : `.agent/skills/developpeur-http/SKILL.md`
 
 ### Périmètre
 ✅ **Fait** :
@@ -105,8 +105,8 @@
 
 ---
 
-## Skill 6 : Développeur Frontend JS (`dev-frontend-js`)
-**Fichier** : `.agent/skills/dev-frontend-js/SKILL.md`
+## Skill 6 : Développeur Frontend JS (`developpeur-frontend`)
+**Fichier** : `.agent/skills/developpeur-frontend/SKILL.md`
 
 ### Périmètre
 ✅ **Fait** :
@@ -128,5 +128,5 @@
 ## Récapitulatif
 
 **Total Skills définis** : 6
-**Skills critiques** : Le trio `backend-data` / `backend-business` / `backend-http` assure la séparation des préoccupations (3-Tiers).
+**Skills critiques** : Le trio `developpeur-data` / `developpeur-business` / `developpeur-http` assure la séparation des préoccupations (3-Tiers).
 **Flux de production** : `Designer` -> `Data` -> `Business` -> `HTTP` -> `Frontend`.

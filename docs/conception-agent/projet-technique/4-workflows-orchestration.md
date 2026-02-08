@@ -7,27 +7,27 @@ Ce workflow est le cœur du cycle de développement. Il assure une implémentati
 Le flux est strictement séquentiel pour garantir que chaque couche s'appuie sur des fondations stables.
 
 **1. Étape : Design UI**
-*   **Skill Responsable** : `designer-ui-kit`
+*   **Skill Responsable** : `designer-ui`
 *   **Entrée** : Spécifications Fonctionnelles
 *   **Sortie** : Maquettes HTML/CSS statiques dans le dossier `ui-kit/`
 
 **2. Étape : Data Layer**
-*   **Skill Responsable** : `backend-data`
+*   **Skill Responsable** : `developpeur-data`
 *   **Entrée** : Maquettes validées (pour déduire les champs)
 *   **Sortie** : Migrations, Models Eloquent, Factories, Seeders
 
 **3. Étape : Business Logic**
-*   **Skill Responsable** : `backend-business`
+*   **Skill Responsable** : `developpeur-business`
 *   **Entrée** : Models disponibles
 *   **Sortie** : Services (`app/Services`), Policies, Gates
 
 **4. Étape : HTTP Layer**
-*   **Skill Responsable** : `backend-http`
+*   **Skill Responsable** : `developpeur-http`
 *   **Entrée** : Services fonctionnels, définitions des Routes
 *   **Sortie** : Controllers, FormRequests, API Resources, Routes
 
 **5. Étape : Frontend Integration**
-*   **Skill Responsable** : `dev-frontend-js`
+*   **Skill Responsable** : `developpeur-frontend`
 *   **Entrée** : Controllers opérationnels, Maquettes HTML existantes
 *   **Sortie** : Vues Blade finales, Scripts Alpine.js/Vanilla JS
 
@@ -54,7 +54,7 @@ Le flux est strictement séquentiel pour garantir que chaque couche s'appuie sur
 ## 2. Workflow d'Initialisation (`/init-stack`)
 Exécuté une seule fois au début du projet.
 
-*   **Skill** : `expert-stack-config`
+*   **Skill** : `configurateur-stack`
 *   **Action** : Installe Laravel, configure Tailwind, initialise Git.
 *   **Sortie** : Socle technique prêt pour le premier `/impl-feature`.
 
@@ -77,15 +77,15 @@ Ces workflows "légers" permettent d'intervenir sur une couche spécifique sans 
 *   **Objectif** : Modifier le design (CSS), le texte ou l'ergonomie d'une page existante.
 *   **Périmètre** : Couche Présentation uniquement.
 *   **Flux** :
-    1.  **Skill** `designer-ui-kit` : Modifie les fichiers HTML/CSS dans `ui-kit/`. **C'est la source de vérité.**
-    2.  **Skill** `dev-frontend-js` : Répercute les modifications HTML/CSS dans les fichiers `.blade.php`.
+    1.  **Skill** `designer-ui` : Modifie les fichiers HTML/CSS dans `ui-kit/`. **C'est la source de vérité.**
+    2.  **Skill** `developpeur-frontend` : Répercute les modifications HTML/CSS dans les fichiers `.blade.php`.
 *   **Interdit** : Modifier la logique PHP ou la base de données.
 
 ### B. Évolution Métier (`/update-logic`)
 *   **Objectif** : Changer une règle de gestion (ex: limite de publication, calcul de dates).
 *   **Périmètre** : Couche Service.
 *   **Flux** :
-    1.  **Skill** `backend-business` : Modifie le code dans `app/Services/`.
+    1.  **Skill** `developpeur-business` : Modifie le code dans `app/Services/`.
     2.  **Validation** : Vérifie que le changement n'impacte pas l'interface publique des méthodes (signature). Si oui -> déclencher `/update-http`.
 *   **Interdit** : Modifier les Vues ou les Controllers directement.
 
@@ -93,5 +93,5 @@ Ces workflows "légers" permettent d'intervenir sur une couche spécifique sans 
 *   **Objectif** : Changer un code de retour, ajouter un filtre d'URL, modifier une validation d'entrée.
 *   **Périmètre** : Couche HTTP (Entrée/Sortie).
 *   **Flux** :
-    1.  **Skill** `backend-http` : Modifie le Controller, le FormRequest ou la Resource API.
+    1.  **Skill** `developpeur-http` : Modifie le Controller, le FormRequest ou la Resource API.
 *   **Interdit** : Mettre de la logique métier dans le Controller. Tout traitement complexe doit rester dans le Service.

@@ -11,7 +11,7 @@ description: Workflow d'ajustement API/HTTP. Change un code de retour ou une val
 ## 2. Exécution
 
 ### Étape 1 : Modification HTTP
-> **Skill responsable** : `backend-http`
+> **Skill responsable** : `developpeur-http`
 > **Flux Data** : 📥 `[Demande]` → 📤 `[Code Modifié]`
 
 **Instructions** :

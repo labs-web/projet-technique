@@ -11,7 +11,7 @@ description: Workflow d'évolution métier. Change une règle de gestion.
 ## 2. Exécution
 
 ### Étape 1 : Implémentation Métier
-> **Skill responsable** : `backend-business`
+> **Skill responsable** : `developpeur-business`
 > **Flux Data** : 📥 `[Nouvelle Règle]` → 📤 `[Service Modifié]`
 
 **Instructions** :
@@ -24,7 +24,7 @@ description: Workflow d'évolution métier. Change une règle de gestion.
 ---
 
 ### Étape 2 : Vérification d'Impact (Conditionnelle)
-> **Skill responsable** : `backend-http`
+> **Skill responsable** : `developpeur-http`
 > **Flux Data** : 📥 `[Service Modifié]` → 📤 `[Controller Vérifié]`
 
 **Instructions** :

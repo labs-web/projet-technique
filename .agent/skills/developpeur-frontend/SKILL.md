@@ -1,5 +1,5 @@
 ---
-name: dev-frontend-js
+name: developpeur-frontend
 description: Intègre le HTML du ui-kit dans les fichiers Blade, ajoute l'interactivité JS.
 ---
 
@@ -15,7 +15,7 @@ description: Intègre le HTML du ui-kit dans les fichiers Blade, ajoute l'intera
 - **Dynamiser** l'UI selon les données du Backend.
 
 ### ❌ Limites (Ce qu'il ne fait PAS)
-- Ne crée pas le design system (Déléguer à `designer-ui-kit`).
+- Ne crée pas le design system (Déléguer à `designer-ui`).
 - Ne touche pas à la logique Backend (sauf pour afficher les variables).
 
 ## 📥 Entrées / 📤 Sorties

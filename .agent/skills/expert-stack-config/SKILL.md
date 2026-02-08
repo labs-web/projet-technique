@@ -1,9 +1,9 @@
 ---
-name: expert-stack-config
+name: configurateur-stack
 description: Guide et initialise la structure du projet, vérifie et valide les installations techniques (Laravel, Tailwind, Alpine).
 ---
 
-# Skill : expert-stack-config
+# Skill : configurateur-stack
 
 ## 🎯 Objectif & Périmètre
 **Mission** : Guider le développeur dans l'initialisation du stack technique et valider la conformité de l'environnement.

@@ -1,5 +1,5 @@
 ---
-name: backend-data
+name: developpeur-data
 description: Crée les Migrations, Modèles Eloquent, Factories et Seeders, et optimise les requêtes.
 ---
 
@@ -15,8 +15,8 @@ description: Crée les Migrations, Modèles Eloquent, Factories et Seeders, et o
 - **Optimiser** les performances (Index SQL, Foreign Keys).
 
 ### ❌ Limites (Ce qu'il ne fait PAS)
-- N'écrit pas de Services ni de Contrôleurs (Déléguer à `backend-business` / `backend-http`).
-- Ne valide pas les données entrantes HTTP (Déléguer à `backend-http`).
+- N'écrit pas de Services ni de Contrôleurs (Déléguer à `developpeur-business` / `developpeur-http`).
+- Ne valide pas les données entrantes HTTP (Déléguer à `developpeur-http`).
 
 ## 📥 Entrées / 📤 Sorties
 | Direction  | Nom                         | Description / Format                                |

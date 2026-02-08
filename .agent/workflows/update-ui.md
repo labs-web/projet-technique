@@ -11,7 +11,7 @@ description: Workflow de mise à jour de l'interface utilisateur.
 ## 2. Exécution
 
 ### Étape 1 : Modification Design System
-> **Skill responsable** : `designer-ui-kit`
+> **Skill responsable** : `designer-ui`
 > **Flux Data** : 📥 `[Demande]` → 📤 `[HTML/CSS Modifié]`
 
 **Instructions** :
@@ -24,7 +24,7 @@ description: Workflow de mise à jour de l'interface utilisateur.
 ---
 
 ### Étape 2 : Propagation Frontend
-> **Skill responsable** : `dev-frontend-js`
+> **Skill responsable** : `developpeur-frontend`
 > **Flux Data** : 📥 `[HTML Modifié]` → 📤 `[Blade Modifié]`
 
 **Instructions** :

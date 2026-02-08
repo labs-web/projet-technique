@@ -1,5 +1,5 @@
 ---
-name: backend-http
+name: developpeur-http
 description: Déclare les Routes, crée les Contrôleurs, FormRequests et API Resources.
 ---
 
@@ -15,8 +15,8 @@ description: Déclare les Routes, crée les Contrôleurs, FormRequests et API Re
 - **Formater** les sorties JSON via des API Resources.
 
 ### ❌ Limites (Ce qu'il ne fait PAS)
-- N'écrit AUCUNE logique métier dans les contrôleurs (Déléguer à `backend-business`).
-- N'écrit pas de requêtes Eloquent complexes (Déléguer à `backend-business` ou `backend-data`).
+- N'écrit AUCUNE logique métier dans les contrôleurs (Déléguer à `developpeur-business`).
+- N'écrit pas de requêtes Eloquent complexes (Déléguer à `developpeur-business` ou `developpeur-data`).
 
 ## 📥 Entrées / 📤 Sorties
 | Direction  | Nom                       | Description / Format                                 |

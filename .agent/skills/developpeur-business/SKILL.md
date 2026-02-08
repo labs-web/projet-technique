@@ -1,5 +1,5 @@
 ---
-name: backend-business
+name: developpeur-business
 description: Implémente les Services, la logique métier, et définit les Policies/Gates.
 ---
 
@@ -16,7 +16,7 @@ description: Implémente les Services, la logique métier, et définit les Polic
 
 ### ❌ Limites (Ce qu'il ne fait PAS)
 - Ne connait pas HTTP (pas de `Request`, pas de `Response`, pas de `View`).
-- Ne gère pas la validation de format des entrées (Déléguer à `backend-http`).
+- Ne gère pas la validation de format des entrées (Déléguer à `developpeur-http`).
 
 ## 📥 Entrées / 📤 Sorties
 | Direction  | Nom                           | Description / Format                              |

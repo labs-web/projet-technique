@@ -7,7 +7,7 @@
 ## Groupes de Clustering par Casquettes
 
 ### 1. [Expert Configuration Stack]
-*   **Skill Déduit** : `expert-stack-config`
+*   **Skill Déduit** : `configurateur-stack`
 *   **Critère de Décision** : Intervient en amont (setup global) et contrôle la cohérence (Service Layer, Linter, Git, Docs). Assure l'échafaudage du projet.
 *   **Actions Identifiées** :
     *   Initialisation du projet Laravel (v10/11) via Composer/Installer.
@@ -19,7 +19,7 @@
     *   Exécution du linter PSR-12 et mise à jour de la documentation.
 
 ### 2. [Designer UI & Intégrateur HTML/CSS]
-*   **Skill Déduit** : `designer-ui-kit`
+*   **Skill Déduit** : `designer-ui`
 *   **Critère de Décision** : Produit des composants visuels purs (HTML/CSS) isolés de la logique backend. Respecte la contrainte majeure du UI-Kit avant intégration.
 *   **Actions Identifiées** :
     *   Création de l'arborescence `ui-kit/` et `ui-kit/index.html`.
@@ -30,7 +30,7 @@
     *   Validation visuelle (Tests sur navigateur).
 
 ### 3. [Expert Base de Données (Tier 3 : Data Access)]
-*   **Skill Déduit** : `backend-data`
+*   **Skill Déduit** : `developpeur-data`
 *   **Critère de Décision** : Responsable de la persistance et de l'intégrité des données. Ne gère PAS la logique métier ni les requêtes HTTP.
 *   **Actions Identifiées** :
     *   Conception du Schéma (MCD/MLD implicite).
@@ -39,7 +39,7 @@
     *   Création des Factories et Seeders pour les jeux de données.
 
 ### 4. [Développeur Métier (Tier 2 : Business Logic)]
-*   **Skill Déduit** : `backend-business`
+*   **Skill Déduit** : `developpeur-business`
 *   **Critère de Décision** : Encapsule les règles de gestion et le traitement des données. Indépendant du framework HTTP.
 *   **Actions Identifiées** :
     *   Implémentation des Classes de Service (`CategoryService`, `ArticleService`).
@@ -48,7 +48,7 @@
     *   Tests Unitaires des Services (si applicables).
 
 ### 5. [Développeur HTTP & API (Tier 1 : Presentation)]
-*   **Skill Déduit** : `backend-http`
+*   **Skill Déduit** : `developpeur-http`
 *   **Critère de Décision** : Reçoit la requête, valide l'entrée, appelle le Service, et formate la réponse (JSON/View).
 *   **Actions Identifiées** :
     *   Définition des Routes (Web & API).
@@ -58,7 +58,7 @@
     *   Orchestration de la réponse : Appel des Services -> Renvoi de la Vue Blade ou du JSON.
 
 ### 6. [Développeur Frontend (Logique Interactive)]
-*   **Skill Déduit** : `dev-frontend-js`
+*   **Skill Déduit** : `developpeur-frontend`
 *   **Critère de Décision** : Ajoute l'interactivité côté client sur les pages rendues par le serveur. Manipule JS, DOM, Fetch, Alpine.
 *   **Actions Identifiées** :
     *   Intégration des maquettes UI-Kit dans les Vues Blade (layout & components).
@@ -82,4 +82,4 @@ L'architecture 3-Tiers est ici strictement respectée pour le Backend :
 ## Notes
 
 *   Cette séparation force le respect du pattern "Skinny Controller, Fat Service". Le développeur Controller ne fait QUE du "Traffic Cop".
-*   Le `dev-frontend-js` reste le garant de l'intégration finale dans Blade, collaborant étroitement avec le `backend-http` qui fournit les variables.
+*   Le `developpeur-frontend` reste le garant de l'intégration finale dans Blade, collaborant étroitement avec le `developpeur-http` qui fournit les variables.

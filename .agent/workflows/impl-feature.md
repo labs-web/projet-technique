@@ -11,7 +11,7 @@ description: Workflow principal d'implémentation de fonctionnalité. Assure une
 ## 2. Exécution
 
 ### Étape 1 : Design UI
-> **Skill responsable** : `designer-ui-kit`
+> **Skill responsable** : `designer-ui`
 > **Flux Data** : 📥 `[Spécifications]` → 📤 `[Maquettes HTML/CSS]`
 
 **Instructions** :
@@ -25,7 +25,7 @@ description: Workflow principal d'implémentation de fonctionnalité. Assure une
 ---
 
 ### Étape 2 : Data Layer
-> **Skill responsable** : `backend-data`
+> **Skill responsable** : `developpeur-data`
 > **Flux Data** : 📥 `[Maquettes HTML]` → 📤 `[Migrations & Models]`
 
 **Instructions** :
@@ -39,7 +39,7 @@ description: Workflow principal d'implémentation de fonctionnalité. Assure une
 ---
 
 ### Étape 3 : Business Logic
-> **Skill responsable** : `backend-business`
+> **Skill responsable** : `developpeur-business`
 > **Flux Data** : 📥 `[Models]` → 📤 `[Services & Policies]`
 
 **Instructions** :
@@ -52,7 +52,7 @@ description: Workflow principal d'implémentation de fonctionnalité. Assure une
 ---
 
 ### Étape 4 : HTTP Layer
-> **Skill responsable** : `backend-http`
+> **Skill responsable** : `developpeur-http`
 > **Flux Data** : 📥 `[Services]` → 📤 `[Controllers & Routes]`
 
 **Instructions** :
@@ -66,7 +66,7 @@ description: Workflow principal d'implémentation de fonctionnalité. Assure une
 ---
 
 ### Étape 5 : Frontend Integration
-> **Skill responsable** : `dev-frontend-js`
+> **Skill responsable** : `developpeur-frontend`
 > **Flux Data** : 📥 `[Controllers & Maquettes]` → 📤 `[Vues Blade Finales]`
 
 **Instructions** :

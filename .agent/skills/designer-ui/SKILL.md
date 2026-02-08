@@ -1,5 +1,5 @@
 ---
-name: designer-ui-kit
+name: designer-ui
 description: Crée les fichiers HTML/CSS statiques dans le dossier ui-kit/, développe les composants atomiques et moléculaires.
 ---
 
@@ -14,7 +14,7 @@ description: Crée les fichiers HTML/CSS statiques dans le dossier ui-kit/, dév
 - **Valider** le rendu visuel (Tailwind) et la réactivité.
 
 ### ❌ Limites (Ce qu'il ne fait PAS)
-- Ne touche JAMAIS aux fichiers `.blade.php` (Déléguer à `dev-frontend-js`).
+- Ne touche JAMAIS aux fichiers `.blade.php` (Déléguer à `developpeur-frontend`).
 - N'écrit pas de JS complexe (juste des états visuels).
 
 ## 📥 Entrées / 📤 Sorties
