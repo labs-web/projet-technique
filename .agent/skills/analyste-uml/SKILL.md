@@ -89,30 +89,40 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
   4. **Génération** : Créer ou mettre à jour le fichier `.puml` dans le même dossier.
 
 
-### Action E : Générer Diagramme de Cas d'Utilisation Global
-> **Description** : Créer une vue d'ensemble de toutes les fonctionnalités du système sous forme de diagramme PlantUML global.
+### Action E : Générer Diagrammes de Cas d'Utilisation par Contexte
+> **Description** : Créer les diagrammes PlantUML séparés pour chaque contexte applicatif (Public, Admin, API).
 > **Spécifications** : 
 > - Voir `resources/spec-plantuml.md` pour les standards PlantUML et le format des diagrammes.
-> - Voir `resources/spec-cas-utilisation.md` pour les règles de simplification CRUD.
+> - Voir `resources/spec-cas-utilisation.md` pour les règles de simplification CRUD et de séparation des contextes.
 - **Entrées** : `docs/2.analyse/global/fonctionnalite-global.md` (Liste consolidée des fonctionnalités).
-- **Sorties** : `docs/2.analyse/global/usecase-global.puml`.
+- **Sorties** (selon les contextes détectés) : 
+  - `docs/2.analyse/global/usecase-public.puml` *(si contexte application publique/frontend détecté)*
+  - `docs/2.analyse/global/usecase-admin.puml` *(si contexte back-office/administration détecté)*
+  - `docs/2.analyse/global/usecase-api.puml` *(si API REST détectée)*
+  - **Règle** : Créer **uniquement** les fichiers correspondant aux contextes présents dans l'analyse.
 - **❌ Interdictions Spécifiques** :
+  - **INTERDICTION** de créer un fichier `usecase-global.puml` regroupant tous les contextes.
   - Ne pas inclure de détails techniques (classes, base de données).
-  - Ne pas dupliquer les acteurs ou cas d'utilisation déjà présents dans les diagrammes de version.
+  - Ne pas mélanger les contextes dans un même fichier.
 - **✅ Points de Contrôle (Definition of Done)** :
-  - Le diagramme respecte les standards définis dans `spec-plantuml.md`.
-  - Le diagramme utilise `left to right direction`.
-  - Toutes les fonctionnalités du fichier `fonctionnalite-global.md` sont représentées.
-  - La syntaxe PlantUML est valide.
-  - Le diagramme offre une vision cohérente et exhaustive du périmètre fonctionnel complet.
+  - Chaque diagramme respecte les standards définis dans `spec-plantuml.md`.
+  - Chaque diagramme utilise `left to right direction`.
+  - Les fonctionnalités sont correctement réparties par contexte.
+  - La syntaxe PlantUML est valide pour tous les fichiers.
+  - Les relations `extend` sont appliquées pour les variantes de permissions.
+  - Chaque contexte est dans un rectangle distinct avec un nom clair.
 - **📝 Instructions Détaillées** :
   1. **Lecture** : Lire le fichier `docs/2.analyse/global/fonctionnalite-global.md`.
-  2. **Modélisation** :
-     - Identifier tous les **Acteurs** mentionnés dans le document.
-     - Identifier tous les **Cas d'Utilisation** (Fonctionnalités).
-     - Définir les **Relations** (`include`, `extend`) si explicitement mentionnées.
-  3. **Validation** : Vérifier la conformité avec les règles définies dans `resources/spec-plantuml.md`.
-  4. **Génération** : Créer ou mettre à jour le fichier `usecase-global.puml` dans le dossier `docs/2.analyse/global/`.
+  2. **Analyse des Contextes** :
+     - Détecter les **contextes applicatifs** (Public, Admin, API).
+     - Répartir les fonctionnalités par contexte selon les acteurs et la nature des opérations.
+  3. **Modélisation par Contexte** :
+     - Pour chaque contexte, identifier les **Acteurs** concernés.
+     - Pour chaque contexte, identifier les **Cas d'Utilisation**.
+     - Appliquer les **relations `extend`** pour les variantes de permissions (même interface, permissions différentes).
+     - Appliquer les **relations `include`** pour les dépendances obligatoires.
+  4. **Validation** : Vérifier la conformité avec les règles définies dans `resources/spec-plantuml.md` et `resources/spec-cas-utilisation.md`.
+  5. **Génération** : Créer ou mettre à jour les fichiers `.puml` dans le dossier `docs/2.analyse/global/`.
 
 ---
 
