@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+actor "Visiteur" as Guest
+
+rectangle "Blog Public (V1)" {
+  usecase "Consulter la liste des articles" as UC1
+  usecase "Lire un article complet" as UC2
+  usecase "Naviguer par pagination" as UC3
+  usecase "Voir les catégories d'un article" as UC4
+}
+
+Guest --> UC1
+Guest --> UC2
+UC1 ..> UC3 : include
+UC2 ..> UC4 : include
+@enduml

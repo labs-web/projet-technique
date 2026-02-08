@@ -23,16 +23,16 @@ composer create-project laravel/laravel app
 
 Une fois l'installation terminée, vérifier les paramètres suivants dans `app/.env` :
 
-### Base de Données (Optionnel / À configurer selon besoin)
+### Base de Données (Standard Projet)
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=laravel
 DB_USERNAME=root
-DB_PASSWORD=
+DB_PASSWORD=admin
 ```
-*(Si vous n'utilisez pas de BDD pour l'instant, ces valeurs peuvent rester ainsi ou pointer vers SQLite)*
+*(Standard imposé : MySQL. Ne pas utiliser SQLite)*
 
 ---
 

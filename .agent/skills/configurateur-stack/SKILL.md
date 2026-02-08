@@ -51,6 +51,9 @@ description: Guide et initialise la structure du projet, vérifie et valide les 
    - Si manquant, afficher la commande d'installation décrite dans le fichier.
    - **STOP** : Attendre validation formelle.
 4. **Validation** : Projet Laravel présent.
+5. **Configuration** : Vérifier `app/.env`.
+   - Si `DB_CONNECTION` != `mysql`, proposer de le corriger.
+
 
 ---
 
