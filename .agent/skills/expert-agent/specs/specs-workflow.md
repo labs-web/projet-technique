@@ -23,24 +23,39 @@ Un Workflow valide doit respecter la structure suivante :
 - **Flux** : Linéaire et unidirectionnel (Pas de boucles complexes).
 - **Validation Humaine** : Chaque étape critique doit avoir un point de contrôle (STOP).
 
-### Architecture Standard : Menu Interactif avec Auto-Suggestion
-Pour les workflows pédagogiques et interactifs, l'architecture standard est basée sur un menu utilisateur :
-`[Analyse Optionnelle]` → `[Menu Interactif]` → `[Validation Humaine]` → `[Exécution]`
+### Architecture Standard : Menu Interactif avec Routage Conditionnel
+Pour les workflows pédagogiques et interactifs, l'architecture standard est basée sur un routage intelligent :
+`[Analyse de la Demande]` → `[Confirmation Directe OU Menu Complet]` → `[Validation Humaine]` → `[Exécution]`
 
 ### Fonctionnement Détaillé
 
-1. **Analyse de la Demande (Optionnelle)** : Détecter des mots-clés dans la demande pour suggérer une action.
-2. **Affichage du Menu** : Présenter toutes les actions disponibles avec descriptions courtes.
-3. **Validation Humaine** : STOP pour attendre le choix du développeur (A/B/C/D...).
+1. **Analyse de la Demande (Obligatoire)** : Analyser le message de l'utilisateur pour détecter l'action appropriée via mots-clés.
+2. **Routage Conditionnel** :
+   - **Cas 1 : Action Détectée** → Afficher directement la confirmation de l'action détectée (Format : "Action détectée : X - Nom, Voulez-vous procéder ?").
+   - **Cas 2 : Aucune Action Détectée** → Afficher le menu complet avec toutes les options disponibles.
+3. **Validation Humaine** : STOP pour attendre la confirmation/sélection du développeur (Lettre A/B/C/D...).
 4. **Exécution Conditionnelle** : Appeler l'action choisie avec les inputs appropriés.
 
 **Avantages** :
-- **Découvrabilité** : Le développeur voit toutes les actions disponibles
+- **Efficacité** : Réduction des étapes si l'intention est claire (pas de menu superflu)
+- **Découvrabilité** : Menu complet affiché si besoin (commande seule ou demande ambiguë)
 - **Pédagogique** : Idéal pour l'apprentissage (contexte Lab)
-- **Contrôle** : Validation humaine avant chaque exécution
-- **Simplicité** : Workflow facile à maintenir et à comprendre
+- **Contrôle** : Validation humaine TOUJOURS requise avant exécution
+- **Flexibilité** : Le développeur peut toujours choisir une autre option
 
-**Exemple de Menu** :
+**Exemple de Confirmation Directe** (Cas 1) :
+```
+📋 Demande Identifiée
+
+Vous souhaitez créer un nouveau skill.
+
+Action détectée : Action A - Gérer un Skill
+→ Créer ou mettre à jour un skill dans `.agent/skills/`
+
+Voulez-vous procéder avec cette action ? (Tapez A pour confirmer, ou choisissez une autre option B/C...)
+```
+
+**Exemple de Menu Complet** (Cas 2) :
 ```
 > Actions disponibles (Skill : nom-du-skill) :
 >
@@ -49,8 +64,6 @@ Pour les workflows pédagogiques et interactifs, l'architecture standard est bas
 >
 > B. Nom de l'Action B
 > → Description courte de ce que fait l'action
->
-> [Si suggestion] → Action suggérée : [X] ← [MARQUÉE]
 >
 > Quelle action souhaitez-vous exécuter ? (Tapez A, B, C...)
 ```

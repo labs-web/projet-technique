@@ -6,24 +6,45 @@ description: Workflow unifié pour l'analyse fonctionnelle et la modélisation U
 
 ## 1. Contexte & Flux Global
 **Objectif** : Formaliser le besoin métier, structurer les lots (versions), et produire les diagrammes associés via un menu interactif.
-**Flux Type** : `[Analyse de la Demande]` → `[Menu Interactif]` → `[Exécution de l'Action]`
+**Flux Type** : `[Analyse de la Demande]` → `[Confirmation ou Menu]` → `[Exécution de l'Action]`
 
 ## 2. Exécution
 
-### Étape 1 : Analyse de la Demande (Optionnelle)
-**Si l'utilisateur fournit un message avec la commande**, analyser les mots-clés pour suggérer l'action appropriée.
+### Étape 1 : Analyse de la Demande
+
+**Analyser le message de l'utilisateur** pour détecter l'action appropriée.
 
 **Logique de Détection** :
-- Mots-clés **"besoin"**, **"analyse globale"**, **"initialiser"** → Suggérer **Action A**
-- Mots-clés **"planif"**, **"roadmap"**, **"versions"**, **"découpage"** → Suggérer **Action B**
-- Mots-clés **"créer"**, **"version"**, **"v1"**, **"v2"**, **"v3"** → Suggérer **Action C**
-- Mots-clés **"diagramme"**, **"usecase"**, **"puml"**, **"modéliser"** → Suggérer **Action D**
+- Mots-clés **"besoin"**, **"analyse globale"**, **"initialiser"**, **"analyser besoin"** → Détecter **Action A**
+- Mots-clés **"planif"**, **"roadmap"**, **"versions"**, **"découpage"**, **"stratégie"** → Détecter **Action B**
+- Mots-clés **"créer"**, **"version"**, **"v1"**, **"v2"**, **"v3"**, **"initialiser version"** → Détecter **Action C**
+- Mots-clés **"diagramme"**, **"usecase"**, **"puml"**, **"modéliser"**, **"générer"** → Détecter **Action D**
 
 ---
 
-### Étape 2 : Affichage du Menu Interactif
+### Étape 2 : Routage Conditionnel
 
-**Présenter au développeur le menu suivant** :
+#### Cas 1 : Action Détectée avec Confiance
+
+**Si une action a été clairement identifiée à l'Étape 1**, afficher directement la confirmation :
+
+**Format de Confirmation** :
+```
+📋 Demande Identifiée
+
+Vous souhaitez [Description de l'action détectée].
+
+Action détectée : Action [X] - [Nom de l'action]
+→ [Description courte]
+
+Voulez-vous procéder avec cette action ? (Tapez [X] pour confirmer, ou choisissez une autre option A/B/C/D)
+```
+
+**STOP** : Attendre la confirmation du développeur.
+
+#### Cas 2 : Aucune Action Détectée ou Commande Sans Message
+
+**Si aucune action claire n'est détectée** (commande invoquée seule ou message ambigu), afficher le menu complet :
 
 > **Actions disponibles (Skill : analyste-uml)** :
 >
@@ -38,8 +59,6 @@ description: Workflow unifié pour l'analyse fonctionnelle et la modélisation U
 >
 > **D.** Générer Use Case (Par Version)  
 > → Traduire l'analyse textuelle en diagramme PlantUML
->
-> [Si suggestion détectée] **→ Action suggérée : [X]** ← [MARQUÉE]
 >
 > **Quelle action souhaitez-vous exécuter ?** (Tapez A, B, C ou D)
 

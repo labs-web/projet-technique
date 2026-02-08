@@ -6,23 +6,44 @@ description: Workflow unifié pour la maintenance, l'évolution et l'améliorati
 
 ## 1. Contexte & Flux Global
 **Objectif** : Garantir l'intégrité et l'évolution contrôlée de la structure de l'agent (Skills, Rules, Workflows).
-**Flux Type** : `[Analyse Optionnelle]` → `[Menu Interactif]` → `[Exécution]`
+**Flux Type** : `[Analyse de la Demande]` → `[Confirmation ou Menu]` → `[Exécution]`
 
 ## 2. Exécution
 
-### Étape 1 : Analyse de la Demande (Optionnelle)
-**Si l'utilisateur fournit un message avec la commande**, analyser les mots-clés pour suggérer l'action appropriée.
+### Étape 1 : Analyse de la Demande
+
+**Analyser le message de l'utilisateur** pour détecter l'action appropriée.
 
 **Logique de Détection** :
-- Mots-clés **"skill"**, **"compétence"**, **"expert"**, **"créer skill"** → Suggérer **Action A**
-- Mots-clés **"rule"**, **"règle"**, **"mémoire"**, **"contrainte"** → Suggérer **Action B**
-- Mots-clés **"workflow"**, **"processus"**, **"slash"**, **"commande"** → Suggérer **Action C**
+- Mots-clés **"skill"**, **"compétence"**, **"expert"**, **"créer skill"**, **"modifier skill"** → Détecter **Action A**
+- Mots-clés **"rule"**, **"règle"**, **"mémoire"**, **"contrainte"**, **"ajouter règle"** → Détecter **Action B**
+- Mots-clés **"workflow"**, **"processus"**, **"slash"**, **"commande"**, **"modifier workflow"** → Détecter **Action C**
 
 ---
 
-### Étape 2 : Affichage du Menu Interactif
+### Étape 2 : Routage Conditionnel
 
-**Présenter au développeur le menu suivant** :
+#### Cas 1 : Action Détectée avec Confiance
+
+**Si une action a été clairement identifiée à l'Étape 1**, afficher directement la confirmation :
+
+**Format de Confirmation** :
+```
+📋 Demande Identifiée
+
+Vous souhaitez [Description de l'action détectée].
+
+Action détectée : Action [X] - [Nom de l'action]
+→ [Description courte]
+
+Voulez-vous procéder avec cette action ? (Tapez 'oui' pour continuer)
+```
+
+**STOP** : Attendre la confirmation du développeur.
+
+#### Cas 2 : Aucune Action Détectée ou Commande Sans Message
+
+**Si aucune action claire n'est détectée** (commande invoquée seule ou message ambigu), afficher le menu complet :
 
 > **Actions disponibles (Skill : expert-agent)** :
 >
@@ -34,8 +55,6 @@ description: Workflow unifié pour la maintenance, l'évolution et l'améliorati
 >
 > **C.** Gérer un Workflow (Processus)  
 > → Créer ou mettre à jour un workflow dans `.agent/workflows/`
->
-> [Si suggestion détectée] **→ Action suggérée : [X]** ← [MARQUÉE]
 >
 > **Quelle action souhaitez-vous exécuter ?** (Tapez A, B ou C)
 
