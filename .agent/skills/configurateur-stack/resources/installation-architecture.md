@@ -35,58 +35,29 @@ projet-technique/
     └── index.html
 ```
 
-### Commandes de Création
-
-#### Dossiers Laravel
-```bash
-cd app
-mkdir -p app/Services
-mkdir -p app/Policies
-```
-
-#### Dossiers UI Kit
-```bash
-# À la racine du projet
-mkdir -p ui-kit/atoms
-mkdir -p ui-kit/molecules
-```
-
-#### Blade Components
-```bash
-cd app
-mkdir -p resources/views/components
-mkdir -p resources/views/layouts
-```
+### Création de l'architecture
+L'agent doit créer ces dossiers s'ils n'existent pas.
+- `app/app/Services`
+- `app/app/Policies`
+- `ui-kit/atoms`
+- `ui-kit/molecules`
+- `app/resources/views/components`
+- `app/resources/views/layouts`
 
 ---
 
 ## Git & Versionning
 
-### Initialisation
+### Initialisation (MANUEL DÉVELOPPEUR)
+L'agent ne doit **JAMAIS** initialiser le dépôt Git.
+
 ```bash
 git init
 git add .
 git commit -m "Initial commit: Laravel + Tailwind + Alpine"
 ```
 
-### `.gitignore`
 
-Laravel inclut déjà un `.gitignore` complet. Vérifier la présence de :
-
-```
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env
-.env.backup
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-```
 
 ---
 

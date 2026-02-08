@@ -6,13 +6,16 @@ Fournir la commande standard pour initialiser un projet Laravel conformément à
 ---
 
 ## 🔧 Commande d'Installation
-*(À exécuter manuellement dans le terminal du projet)*
+*(ACTION MANUELLE DÉVELOPPEUR)*
+L'agent ne doit **JAMAIS** exécuter cette commande. Elle est fournie pour information.
 
 ```bash
-composer create-project laravel/laravel:^11.0 app
+composer create-project laravel/laravel app
 ```
-- **Version recommandée** : Laravel 11.x
+- **Version** : Dernière version stable (Laravel 11+, 12...)
 - **Dossier cible** : `app/`
+
+> **Note - Erreur SSL** : Si `composer` échoue, vérifiez votre antivirus (analyse SSL) et désactivez-le temporairement.
 
 ---
 
@@ -43,4 +46,4 @@ DB_PASSWORD=
 ## ✅ Checklist de Validation
 - [ ] Dossier `app/` créé
 - [ ] Fichier `artisan` présent à la racine de `app/`
-- [ ] Commande `php artisan --version` retourne Laravel Framework 11.x
+- [ ] Commande `php artisan --version` retourne une version récente du Framework

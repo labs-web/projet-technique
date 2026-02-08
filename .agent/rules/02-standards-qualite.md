@@ -40,6 +40,7 @@ Garantir un niveau de qualité professionnel du code en imposant les standards P
 ### 4. Documentation Markdown
 
 - **Rédiger** toute documentation en **Français**.
+- **IMPERATIF** : Les plans déploiement (`implementation_plan.md`) doivent **TOUJOURS** être rédigés en **Français**.
 - **Privilégier** un format clair, concis et aéré.
 - **Structurer** le contenu avec des titres hiérarchiques (`##`, `###`).
 - **Utiliser** des listes à puces (`-`) ou des listes imbriquées pour organiser l'information.
@@ -61,5 +62,7 @@ Garantir un niveau de qualité professionnel du code en imposant les standards P
 - **INTERDICTION ABSOLUE** d'utiliser des tableaux Markdown (`| col | col |`).
   - **Raison** : Difficulté de lecture, d'édition et problèmes de rendu.
   - **Action obligatoire** : Transformer immédiatement en liste à puces ou liste de définitions.
+- **INTERDICTION** de rédiger le `implementation_plan.md` en anglais.
+  - **Action obligatoire** : Traduire et rédiger en Français.
 
 

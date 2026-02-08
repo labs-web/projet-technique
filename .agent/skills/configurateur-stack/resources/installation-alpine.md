@@ -9,6 +9,12 @@ Ce fichier définit les versions, commandes d'installation et configurations pou
 
 ---
 
+## Critères de Vérification
+1. **package.json** : Présence de `alpinejs` dans `dependencies` ou `devDependencies`.
+2. **app.js** : Présence de `import Alpine from 'alpinejs'`.
+
+---
+
 ## Installation
 
 ### Commande
@@ -32,16 +38,4 @@ Alpine.start()
 
 ---
 
-## Utilisation dans Blade
 
-Alpine.js sera automatiquement disponible dans toutes les vues Blade après l'import ci-dessus.
-
-**Exemple** :
-```html
-<div x-data="{ open: false }">
-    <button @click="open = !open">Toggle</button>
-    <div x-show="open">
-        Contenu visible/invisible
-    </div>
-</div>
-```
