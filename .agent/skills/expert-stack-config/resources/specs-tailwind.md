@@ -1,79 +1,48 @@
-# Spécifications : Tailwind CSS
+# Spécifications : Validation & Update Tailwind CSS + Preline UI
 
-Ce fichier définit les versions, commandes d'installation et configurations pour Tailwind CSS.
-
----
-
-## Version
-- **Tailwind CSS** : `^3.4`
+## 🎯 Objectif
+Vérifier l'installation existante de Tailwind CSS (souvent inclus avec Laravel 11+) et garantir l'intégration de Preline UI.
 
 ---
 
-## Installation
+## 🔍 Étape 1 : Vérification de Tailwind CSS
+### 1.1 Dépendances (package.json)
+Vérifier la présence de `tailwindcss`, `postcss`, `autoprefixer` dans les `devDependencies`.
+*(Laravel 11 inclut déjà ces paquets par défaut)*
 
-### Commande
+### 1.2 Configuration (tailwind.config.js)
+Vérifier si le fichier existe et contient une configuration valide (avec `content` ou `@source`).
+*Note : Si Laravel utilise la syntaxe v4 (alpha/beta), la config peut être directement dans le CSS via `@theme`.*
+
+### 1.3 CSS (resources/css/app.css)
+Vérifier la présence des directives `@tailwind` ou `@import 'tailwindcss'`.
+
+---
+
+## 🚀 Étape 2 : Ajout de Preline UI (Si manquant)
+### 2.1 Installation
 ```bash
-npm install -D tailwindcss@^3.4 postcss autoprefixer
-npx tailwindcss init -p
+npm install preline --save-dev
 ```
 
----
+### 2.2 Configuration (tailwind.config.js / app.css)
+**Si `tailwind.config.js` existe classic (v3)** :
+Ajouter dans `content` : `'node_modules/preline/dist/*.js'`
+Ajouter dans `plugins` : `require('preline/plugin')`
 
-## Configuration `tailwind.config.js`
+**Si syntaxe v4 ou sans config explicite** :
+Vérifier comment ajouter le plugin Preline (peut nécessiter une config JS).
 
+### 2.3 Initialisation (resources/js/app.js)
+Ajouter l'import pour activer l'interactivité :
 ```javascript
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./ui-kit/**/*.html",
-    "./node_modules/preline/dist/*.js",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [
-    require('preline/plugin'),
-  ],
-}
+import 'preline';
 ```
 
 ---
 
-## Fichier CSS Principal
-
-**Chemin** : `app/resources/css/app.css`
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
----
-
-## Preline UI
-
-### Installation
-```bash
-npm install preline
-```
-
-**Note** : Preline est déjà référencé dans la configuration Tailwind ci-dessus.
-
----
-
-## Build Assets
-
-### Mode Développement
-```bash
-cd app
-npm run dev
-```
-
-### Mode Production
-```bash
-cd app
-npm run build
-```
+## ✅ Étape 3 : Validation
+- [ ] `npm install` exécuté.
+- [ ] `npm run dev` compile sans erreur.
+- [ ] Les classes Tailwind fonctionnent dans les vues Blade.
+- [ ] Les composants Preline (dropdowns, modals) sont interactifs.

@@ -1,438 +1,59 @@
-# Projet Technique - Stack Laravel
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-> **Contexte** : Projet pédagogique du Lab Solicode  
-> **Objectif** : Maîtriser la stack technique complète pour le développement web moderne
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
----
+## About Laravel
 
-## Stack Technique
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-### Back-end
-- **Langage** : PHP 8.2+
-- **Framework** : Laravel 10/11
-- **Architecture** : MVC, Service Pattern
-- **API** : Laravel API Resources (RESTful)
-- **Auth Web** : Laravel UI (Tailwind Scaffolding)
-- **Auth API** : Laravel Sanctum (Tokens Mobile)
-- **Permissions** : Laravel Gates/Policies + Spatie Permissions
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-### Front-end
-- **Templating** : Laravel Blade (Components, Layouts)
-- **CSS** : Tailwind CSS v3+
-- **JS** : Alpine.js + AJAX Vanilla (Fetch API)
-- **Components** : Preline UI
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-### Base de Données
-- **SGBD** : MySQL 8.0
-- **ORM** : Eloquent
+## Learning Laravel
 
-### Outils
-- **Serveur** : Nginx
-- **Git** : GitHub Flow
-- **API Test** : Postman / Insomnia
-- **Linter** : Laravel Pint (PSR-12)
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
 
----
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Prérequis Système
+## Laravel Sponsors
 
-Avant de commencer l'installation, assurez-vous d'avoir ces outils installés sur votre machine :
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-- **PHP** : Version 8.2 ou supérieure
-  - Extensions requises : `pdo_mysql`, `mbstring`, `xml`, `ctype`, `json`, `bcmath`, `fileinfo`
-- **Composer** : Gestionnaire de dépendances PHP (dernière version)
-- **MySQL** : Version 8.0 ou supérieure
-- **Node.js** : Version 18+ (pour npm)
-- **npm** : Version 9+ (inclus avec Node.js)
-- **Git** : Pour la gestion de version
+### Premium Partners
 
-### Vérification des Prérequis
+- **[Vehikl](https://vehikl.com)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Redberry](https://redberry.international/laravel-development)**
+- **[Active Logic](https://activelogic.com)**
 
-```bash
-# Vérifier PHP
-php -v
+## Contributing
 
-# Vérifier Composer
-composer --version
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-# Vérifier MySQL
-mysql --version
+## Code of Conduct
 
-# Vérifier Node.js et npm
-node -v
-npm -v
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-# Vérifier Git
-git --version
-```
+## Security Vulnerabilities
 
----
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## Installation du Projet par IA
+## License
 
-Ce projet utilise un workflow modulaire d'installation. Vous pouvez installer **toutes les technologies** en une seule fois ou **sélectionner** celles dont vous avez besoin.
-
-### Option 1 : Installation Complète (Recommandée)
-
-```bash
-# Depuis le dossier racine du projet
-# Cette commande installe tout le stack dans l'ordre optimal
-@[/installation-stack] all
-```
-
-L'installation complète exécutera dans l'ordre :
-1. Laravel (base du projet)
-2. Tailwind CSS (styling)
-3. Alpine.js (interactivité)
-4. MySQL (configuration base de données)
-5. Laravel Pint (qualité de code)
-6. Architecture (structure des dossiers)
-7. Git (versioning)
-
-### Option 2 : Installation Sélective
-
-Vous pouvez installer uniquement les composants souhaités :
-
-```bash
-# Installation de Laravel uniquement
-@[/installation-stack] laravel
-
-# Installation de Laravel + Tailwind + Alpine
-@[/installation-stack] laravel tailwind alpine
-
-# Installation de plusieurs composants
-@[/installation-stack] laravel tailwind alpine mysql pint
-```
-
-**Technologies disponibles** :
-- `laravel` : Installation et configuration Laravel
-- `tailwind` : Tailwind CSS + configuration
-- `alpine` : Alpine.js pour l'interactivité
-- `mysql` : Configuration MySQL
-- `pint` : Laravel Pint (linter PSR-12)
-- `architecture` : Structure des dossiers projet
-- `git` : Initialisation Git
-
----
-
-## Installation Manuelle (Étape par Étape)
-
-Si vous préférez installer manuellement chaque composant :
-
-### 1. Installation Laravel
-
-```bash
-# Se placer dans le dossier app/
-cd app
-
-# Installer les dépendances PHP
-composer install
-
-# Copier le fichier d'environnement
-copy .env.example .env
-
-# Générer la clé d'application
-php artisan key:generate
-```
-
-### 2. Configuration Base de Données
-
-Éditez le fichier `.env` et configurez votre connexion MySQL :
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=nom_de_votre_base
-DB_USERNAME=votre_utilisateur
-DB_PASSWORD=votre_mot_de_passe
-```
-
-Créez la base de données :
-
-```bash
-# Via MySQL CLI
-mysql -u root -p
-CREATE DATABASE nom_de_votre_base CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-exit;
-
-# Exécuter les migrations
-php artisan migrate
-```
-
-### 3. Installation Tailwind CSS
-
-```bash
-# Installer les dépendances npm
-npm install
-
-# Installer Tailwind CSS
-npm install -D tailwindcss postcss autoprefixer
-
-# Initialiser Tailwind
-npx tailwindcss init -p
-```
-
-Configurez `tailwind.config.js` :
-
-```javascript
-export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-```
-
-Ajoutez les directives Tailwind dans `resources/css/app.css` :
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-### 4. Installation Alpine.js
-
-```bash
-npm install alpinejs
-```
-
-Ajoutez Alpine.js dans `resources/js/app.js` :
-
-```javascript
-import Alpine from 'alpinejs';
-window.Alpine = Alpine;
-Alpine.start();
-```
-
-### 5. Installation Preline UI
-
-```bash
-npm install preline
-```
-
-Ajoutez Preline dans `tailwind.config.js` :
-
-```javascript
-export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    'node_modules/preline/dist/*.js',
-  ],
-  plugins: [
-    require('preline/plugin'),
-  ],
-}
-```
-
-### 6. Installation Laravel Pint
-
-```bash
-composer require laravel/pint --dev
-
-# Exécuter Pint
-./vendor/bin/pint
-```
-
----
-
-## Démarrage du Projet
-
-### 1. Compiler les Assets Front-end
-
-```bash
-# Mode développement (avec watch)
-npm run dev
-
-# Mode production (optimisé)
-npm run build
-```
-
-### 2. Démarrer le Serveur Laravel
-
-```bash
-# Serveur de développement Laravel
-php artisan serve
-```
-
-Le projet sera accessible sur : `http://localhost:8000`
-
-### 3. Serveur MySQL
-
-Assurez-vous que votre serveur MySQL est démarré :
-
-```bash
-# Vérifier le statut
-mysql.server status
-
-# Démarrer MySQL (macOS/Linux)
-mysql.server start
-
-# Démarrer MySQL (Windows - XAMPP)
-# Via le panneau de contrôle XAMPP
-```
-
----
-
-## Structure du Projet
-
-```
-app/
-├── app/                    # Code applicatif Laravel
-│   ├── Http/
-│   │   ├── Controllers/    # Contrôleurs
-│   │   ├── Requests/       # Form Requests (Validation)
-│   │   └── Resources/      # API Resources
-│   ├── Models/             # Modèles Eloquent
-│   ├── Services/           # Logique métier (Service Pattern)
-│   └── Policies/           # Policies d'autorisation
-├── database/
-│   ├── migrations/         # Migrations de base de données
-│   ├── seeders/            # Seeders
-│   └── factories/          # Factories
-├── resources/
-│   ├── views/              # Vues Blade
-│   ├── css/                # Fichiers CSS (Tailwind)
-│   └── js/                 # Fichiers JavaScript (Alpine.js)
-├── routes/
-│   ├── api.php             # Routes API
-│   └── web.php             # Routes Web
-└── public/                 # Assets compilés
-```
-
----
-
-## Commandes Utiles
-
-### Laravel
-
-```bash
-# Créer un contrôleur
-php artisan make:controller NomController
-
-# Créer un modèle avec migration
-php artisan make:model NomModele -m
-
-# Créer une migration
-php artisan make:migration create_nom_table
-
-# Créer un seeder
-php artisan make:seeder NomSeeder
-
-# Exécuter les seeders
-php artisan db:seed
-
-# Rafraîchir la BDD (drop + migrate + seed)
-php artisan migrate:fresh --seed
-
-# Créer une FormRequest
-php artisan make:request NomRequest
-
-# Créer une Policy
-php artisan make:policy NomPolicy
-```
-
-### NPM
-
-```bash
-# Installer les dépendances
-npm install
-
-# Mode développement avec watch
-npm run dev
-
-# Build de production
-npm run build
-
-# Nettoyer le cache npm
-npm cache clean --force
-```
-
-### Laravel Pint
-
-```bash
-# Analyser et corriger le code
-./vendor/bin/pint
-
-# Analyser sans corriger
-./vendor/bin/pint --test
-```
-
----
-
-## Standards de Qualité
-
-### Code PHP
-- **Standard** : PSR-12
-- **Typage** : Strict (`declare(strict_types=1);`)
-- **Langue** : Code en anglais, commentaires en français
-
-### Base de Données
-- **Nommage** : Snake case (anglais) : `user_id`, `created_at`
-- **ORM** : Eloquent uniquement
-
-### Sécurité
-- Utiliser l'ORM Eloquent ou PDO bindings pour les requêtes SQL
-- Utiliser `{{ }}` dans Blade pour échapper automatiquement
-- Hacher les mots de passe avec `Hash::make()`
-- Protéger les endpoints API avec `auth:sanctum`
-- Valider toutes les entrées utilisateur via FormRequests
-
-### Git
-- **Commits** : Rédigés en français
-- **Workflow** : GitHub Flow
-- **Branches** : `feature/nom-feature`, `fix/nom-bug`
-
----
-
-## Troubleshooting
-
-### Erreur "Class not found"
-
-```bash
-# Regénérer l'autoload de Composer
-composer dump-autoload
-```
-
-### Erreur de permissions (Linux/macOS)
-
-```bash
-# Donner les permissions au dossier storage et bootstrap/cache
-chmod -R 775 storage bootstrap/cache
-```
-
-### Erreur npm
-
-```bash
-# Supprimer node_modules et réinstaller
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### Erreur MySQL Connection
-
-- Vérifiez que MySQL est démarré
-- Vérifiez les credentials dans `.env`
-- Vérifiez que la base de données existe
-
----
-
-## Documentation
-
-- [Laravel Documentation](https://laravel.com/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Alpine.js Documentation](https://alpinejs.dev)
-- [Preline UI Documentation](https://preline.co)
-
----
-
-## Licence
-
-Ce projet est développé dans un cadre pédagogique (Lab Solicode).  
-Le framework Laravel est sous licence [MIT](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

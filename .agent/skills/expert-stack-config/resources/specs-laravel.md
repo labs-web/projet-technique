@@ -1,107 +1,46 @@
-# Spécifications : Laravel Backend
+# Spécifications : Installation Manuelle de Laravel
 
-Ce fichier définit les versions, commandes d'installation et configurations pour Laravel.
-
----
-
-## Version
-- **Laravel** : `^11.0`
-- **PHP** : `8.2+`
+## 🎯 Objectif
+Fournir la commande standard pour initialiser un projet Laravel conformément à la stack technique du projet.
 
 ---
 
-## Installation
+## 🔧 Commande d'Installation
+*(À exécuter manuellement dans le terminal du projet)*
 
-### Commande
 ```bash
-composer create-project laravel/laravel app
+composer create-project laravel/laravel:^11.0 app
 ```
-
-**Note** : Cela créera l'application Laravel dans le dossier `app/` au lieu de la racine du projet.
+- **Version recommandée** : Laravel 11.x
+- **Dossier cible** : `app/`
 
 ---
 
-## Configuration `.env`
+## ⚙️ Configuration Initiale (.env)
 
+Une fois l'installation terminée, vérifier les paramètres suivants dans `app/.env` :
+
+### Base de Données (Optionnel / À configurer selon besoin)
 ```env
-APP_NAME="Projet Technique"
-APP_ENV=local
-APP_KEY=
-APP_DEBUG=true
-APP_TIMEZONE=UTC
-APP_URL=http://localhost
-
-LOG_CHANNEL=stack
-LOG_DEPRECATIONS_CHANNEL=null
-LOG_LEVEL=debug
-
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=projet_technique
+DB_DATABASE=laravel
 DB_USERNAME=root
-DB_PASSWORD=admin
-
-BROADCAST_CONNECTION=log
-CACHE_STORE=file
-FILESYSTEM_DISK=local
-QUEUE_CONNECTION=database
-SESSION_DRIVER=database
-SESSION_LIFETIME=120
+DB_PASSWORD=
 ```
+*(Si vous n'utilisez pas de BDD pour l'instant, ces valeurs peuvent rester ainsi ou pointer vers SQLite)*
 
 ---
 
-## Dépendances Supplémentaires
-
-### Laravel UI avec Tailwind
-```bash
-composer require laravel/ui
-php artisan ui tailwind --auth
-```
-
-### Sanctum pour API
-```bash
-composer require laravel/sanctum
-php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
-```
-
-### Spatie Permissions
-```bash
-composer require spatie/laravel-permission
-php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
-php artisan migrate
-```
+## 🔒 Post-Installation
+1. **Générer la clé d'application** : `php artisan key:generate`
+2. **Vérifier les permissions** : `storage/` et `bootstrap/cache/` doivent être accessibles en écriture.
+3. **Lancer le serveur de développement** : `php artisan serve`
 
 ---
 
-## Post-Installation
-
-### Générer la clé d'application
-```bash
-cd app
-php artisan key:generate
-```
-
-### Installer les dépendances
-```bash
-cd app
-composer install
-```
-
-### Lancer les migrations
-```bash
-cd app
-php artisan migrate
-```
-
----
-
-## Serveur de Développement
-
-```bash
-cd app
-php artisan serve
-```
-
-**URL par défaut** : `http://localhost:8000`
+## ✅ Checklist de Validation
+- [ ] Dossier `app/` créé
+- [ ] Fichier `artisan` présent à la racine de `app/`
+- [ ] Commande `php artisan --version` retourne Laravel Framework 11.x
