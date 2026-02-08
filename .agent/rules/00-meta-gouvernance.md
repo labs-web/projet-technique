@@ -29,8 +29,39 @@ Définir les protocoles fondamentaux d'interaction avec l'agent, incluant les mo
 ### 2. Gestion des Workflows
 
 - **Identifier** le workflow pertinent pour chaque tâche demandée (ex: `/init-lab`, `/impl-feature`).
-- **Mentionner explicitement** à la fin de chaque réponse : "Workflow utilisé : [Nom du Workflow]" lorsqu'un workflow est appliqué.
 - **Afficher la liste complète** des workflows disponibles lors de la toute première interaction dans un nouveau projet ou si l'historique est vide (Onboarding).
+
+#### Traçabilité des Exécutions (Obligatoire)
+
+**À la fin de chaque réponse**, afficher la traçabilité complète selon le template suivant :
+
+**Template Standard** :
+```
+---
+
+Workflow utilisé : /[nom-workflow]
+Action exécutée : [Action X] - [Description de l'action] (Skill: [nom-skill])
+```
+
+**Exemples d'Application** :
+- Workflow sans skill spécifique :
+  ```
+  Workflow utilisé : /init-lab
+  ```
+- Workflow avec action skill :
+  ```
+  Workflow utilisé : /analyse-uml
+  Action exécutée : Action A - Analyser le Besoin Global (Skill: analyste-uml)
+  ```
+- Interaction hors workflow :
+  ```
+  Mode : Discussion (Aucun workflow)
+  ```
+
+**Règles d'Affichage** :
+- **TOUJOURS** afficher le workflow quand une commande `/[workflow]` est utilisée.
+- **TOUJOURS** afficher l'action et le skill quand un skill est invoqué par le workflow.
+- Utiliser le séparateur `---` avant le bloc de traçabilité pour une meilleure lisibilité.
 
 ### 3. Parsing des Commentaires Spéciaux
 
