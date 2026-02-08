@@ -9,6 +9,11 @@ Un Skill valide doit respecter la structure suivante :
 
 ## 2. Validation & Standards
 
+### Nommage du Skill
+- **Format** : `kebab-case`.
+- **Sémantique** : **DOIT** correspondre à un **Rôle Humain** ou un **Expert Métier** (ex: `analyste-uml`, `architecte-sie` `designer-ui`).
+- **Interdiction** : Ne pas utiliser de verbes d'action ou de noms de processus (réservés aux Workflows).
+
 ### Contenu du Skill (`SKILL.md`)
 - **En-tête YAML** : Doit contenir `name` et `description`.
 - **Sections** :

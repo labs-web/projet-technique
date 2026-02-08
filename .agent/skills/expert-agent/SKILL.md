@@ -25,6 +25,7 @@ description: Expert unifié de la gestion, création et maintenance des composan
 - **❌ Interdictions Spécifiques** :
   - Ne jamais créer de skill sans définir ses "Actions Atomiques" (nouveau format).
 - **✅ Points de Contrôle** :
+  - **Nommage** : Le nom est un **Rôle Humain** (ex: `analyste-uml`).
   - Le fichier respecte la structure `template-skill.md`.
   - Le dossier du skill est créé en `kebab-case`.
 - **📝 Instructions Détaillées** :
@@ -57,7 +58,10 @@ description: Expert unifié de la gestion, création et maintenance des composan
 - **Entrées** : `Nom`, `Étapes`, `Mode (Create/Update)`
 - **Sorties** : Fichier `.md` dans `.agent/workflows/`
 - **❌ Interdictions Spécifiques** :
+  - Ne pas utiliser de nom de rôle pour un workflow.
   - Ne pas créer de workflow sans étapes de validation explicites.
+- **✅ Points de Contrôle** :
+  - **Nommage** : Le nom décrit une **Phase/Tâche** (ex: `analyse-uml`).
 - **📝 Instructions Détaillées** :
   1. **Lire** la spec : `specs/specs-workflow.md`.
   2. **Si Création** :
