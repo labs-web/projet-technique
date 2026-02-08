@@ -26,18 +26,6 @@ description: Workflow d'ajustement API/HTTP. Change un code de retour ou une val
 
 ---
 
-### Étape 2 : Post-Mortem & Amélioration Continue
-
-**1. Préparation des Données (Orchestration)**
-- Analyser le déroulement pour détecter des frictions.
-
-**2. Exécution Déléguée (Appel Skill)**
-- **Skill Cible** : (Interaction Directe)
-- **Action** : `Feedback`
-
-**3. Validation Humaine**
-- **STOP** : Si nécessaire, lancer `/refine-skill`.
-
 ## 3. Critères de Qualité
 - [ ] **Standard** : Respect des codes HTTP (200, 201, 422...).
 - [ ] **Validation** : Aucune donnée ne rentre sans validation (FormRequest).

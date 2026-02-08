@@ -70,17 +70,6 @@ Ce workflow est interactif.
 
 ---
 
-### Étape 4 : Post-Mortem & Amélioration Continue
-
-**1. Préparation des Données (Orchestration)**
-- Analyser le déroulement pour détecter des frictions.
-
-**2. Exécution Déléguée (Appel Skill)**
-- **Skill Cible** : (Interaction Directe)
-- **Action** : `Feedback`
-
-**3. Validation Humaine**
-- **STOP** : Lancer `/refine-skill` si nécessaire.
 
 ## 3. Critères de Qualité
 - [ ] **Sécurité** : Aucune commande destructive sans validation explicite.

@@ -43,18 +43,6 @@ description: Workflow d'évolution métier. Change une règle de gestion.
 
 ---
 
-### Étape 3 : Post-Mortem & Amélioration Continue
-
-**1. Préparation des Données (Orchestration)**
-- Analyser l'exécution.
-
-**2. Exécution Déléguée (Appel Skill)**
-- **Skill Cible** : (Interaction Directe)
-- **Action** : `Feedback`
-
-**3. Validation Humaine**
-- **STOP** : Vérifier si des améliorations sont possibles sur les skills.
-
 ## 3. Critères de Qualité
 - [ ] **Isolation** : La logique ne doit pas fuir dans le contrôleur.
 - [ ] **Types** : Le typage strict est respecté.

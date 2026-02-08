@@ -97,19 +97,6 @@ description: Workflow principal d'implémentation de fonctionnalité. Assure une
 
 ---
 
-### Étape 6 : Post-Mortem & Amélioration Continue
-
-**1. Préparation des Données (Orchestration)**
-- Analyser le déroulement du workflow (points de friction, erreurs).
-
-**2. Exécution Déléguée (Appel Skill)**
-- **Skill Cible** : (Interaction Directe)
-- **Action** : `Review`
-- **Inputs Fournis** :
-  - `Feedback` : Retours sur l'exécution.
-
-**3. Validation Humaine**
-- **STOP** : Si des améliorations sont identifiées, lancer le workflow `/refine-skill`.
 
 ## 3. Critères de Qualité
 - [ ] **Linéarité** : Le flux suit strictement l'ordre Design -> Data -> Business -> Http -> Front.
