@@ -1,25 +1,17 @@
 # Spécifications : Analyse Globale
 
-## 📌 Usage
-Utilisée lors de l'**Action A : Analyser le Besoin Global** pour transformer l'expression de besoins brute en une liste structurée de fonctionnalités.
-
 ## 🎯 Objectif
-Déterminer les **fonctionnalités de l'application** afin de construire le **Diagramme de Cas d'Utilisation**.
+Définir le **format et les règles** pour transformer une expression de besoins brute en une liste structurée de fonctionnalités métier.
 
-## 📤 Livrable
-**Fichier** : `fonctionnalite-global.md`  
-**Emplacement** : `docs/2.analyse/global/fonctionnalite-global.md`
+## 📤 Nature du Livrable
+Un document Markdown listant les acteurs et fonctionnalités de l'application, sans aucun élément de conception technique.
 
-## 📝 Contenu du Livrable
+## 📝 Format et Structure
 
-### Structure du Fichier
-
-Le fichier doit contenir **UNIQUEMENT** les fonctionnalités métier, **SANS conception** (classes, tables, architecture).
-
-#### Sections Obligatoires
+### Sections Obligatoires
 
 1. **Introduction**
-   - Contexte du projet (1-2 phrases)
+   - Contexte du projet (1-2 phrases maximum)
    - Objectif global de l'application
 
 2. **Acteurs**
@@ -49,7 +41,7 @@ Le fichier doit contenir **UNIQUEMENT** les fonctionnalités métier, **SANS con
      - Modifier ses articles
      ```
 
-## ⚠️ Règles d'Or
+## ⚠️ Règles et Contraintes
 
 ### Interdictions Strictes
 - **INTERDICTION** d'inclure des éléments de conception :
@@ -57,30 +49,14 @@ Le fichier doit contenir **UNIQUEMENT** les fonctionnalités métier, **SANS con
   - Tables de base de données
   - Architecture technique
   - Diagrammes de classes
-- **INTERDICTION** d'inventer des besoins non exprimés dans `besoin.md`
-- **INTERDICTION** de créer la liste des versions si elle n'est pas présente dans `besoin.md`
+- **INTERDICTION** d'inventer des besoins non exprimés dans le document source
+- **INTERDICTION** d'anticiper ou inventer un découpage en versions
 
-### Principes Directeurs
-- **Chaque Action lit le besoin directement** : Ne pas dupliquer des informations si elles seront lues à nouveau par une action suivante
+### Principes de Qualité
+- **Exhaustivité** : Toutes les fonctionnalités du besoin doivent être extraites
+- **Clarté** : Utiliser systématiquement le format "Verbe d'action + Objet métier"
 - **Séparation des Préoccupations** : 
   - L'analyse globale = **QUOI** (fonctionnalités)
-  - La planification (Action B) = **QUAND** / **COMMENT** (découpage en versions)
-- **Source de Vérité** : Le fichier `besoin.md` est la seule source d'information
+  - La planification = **QUAND** / **COMMENT** (découpage en versions)
+- **Source de Vérité** : Le document source est la seule référence autorisée
 
-
-## 🔄 Processus d'Extraction
-
-1. **Lecture** : Analyser `docs/1.besoin/besoin.md`
-2. **Identification** :
-   - Extraire les acteurs (Qui ?)
-   - Extraire les fonctionnalités (Quoi ?)
-   - Format : Verbe d'action + Objet métier
-3. **Détection Versions** :
-   - Rechercher les sections "Roadmap", "Versions", "Lotissement"
-   - Si présentes, extraire **uniquement** les métadonnées (Nom + Description courte)
-4. **Consolidation** :
-   - Créer le fichier `fonctionnalite-global.md`
-   - Structurer selon le template ci-dessus
-5. **Validation** :
-   - Vérifier l'exhaustivité par rapport à `besoin.md`
-   - Vérifier l'absence d'éléments de conception

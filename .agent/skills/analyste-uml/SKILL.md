@@ -20,13 +20,20 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 
 ### Action A : Analyser le Besoin Global
 > **Description** : Transformer une expression de besoin brute en une liste structurée de fonctionnalités.
-> **Spécification** : Voir `resources/spec-analyse-global.md` pour le format détaillé du livrable.
+> **Spécification** : Voir `resources/spec-analyse-global.md` pour les règles et le format du livrable.
 - **Entrées** : `docs/1.besoin/besoin.md` (Expression de besoins initiale).
 - **Sorties** : `docs/2.analyse/global/fonctionnalite-global.md` (Liste consolidée des fonctionnalités).
+- **❌ Interdictions Spécifiques** :
+  - Ne pas inventer de besoins non exprimés ou implicites sans validation.
+  - Ne pas inclure d'éléments de conception (classes, tables, architecture).
 - **✅ Points de Contrôle (Definition of Done)** :
   - La liste des fonctionnalités est exhaustive par rapport au document source.
-  - Le fichier respecte la structure définie dans `spec-analyse-global.md`.
-  - Aucun élément de conception (classes, tables, architecture) n'est présent.
+  - Le fichier respecte le format défini dans `spec-analyse-global.md`.
+  - Aucun élément de conception n'est présent.
+- **📝 Instructions Détaillées** :
+  1. **Lecture** : Lire attentivement `docs/1.besoin/besoin.md`.
+  2. **Extraction** : Identifier les acteurs et les fonctionnalités (Format : Verbe d'action + Objet métier).
+  3. **Validation** : Vérifier la conformité avec les règles définies dans `resources/spec-analyse-global.md`.
 
 ### Action B : Planifier les Versions (Stratégie)
 > **Description** : Définir la roadmap et le découpage en versions dans un fichier dédié.
