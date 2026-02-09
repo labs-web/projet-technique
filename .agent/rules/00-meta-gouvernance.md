@@ -70,11 +70,15 @@ Action exécutée : [Action X] - [Description de l'action] (Skill: [nom-skill])
 - **Ignorer** les commentaires préfixés `TODO :` (ou `todo :`), réservés au développeur.
 - **Appliquer** cette règle à tous les langages de programmation et de balisage.
 
+### 4. Réflexe Maintenance & Qualité (Obligatoire)
+
+- **Appliquer strictement** le protocole défini dans `90-reflexe-maintenance.md` ("Réflexe Anti-Excuse").
+- **SURVEILLER** activement les feedbacks développeur de type "Erreur", "Oubli", "Faux".
+- **PROPOSER** systématiquement une correction structurelle (`/raffinement-agent`) pour toute erreur logique ou lacune identifiée.
+
 ## Interdictions
 
 - **INTERDICTION** de modifier, créer ou supprimer des fichiers en Mode Discussion (`>`).
 - **INTERDICTION** d'exécuter des commandes système en Mode Discussion (`>`).
 - **INTERDICTION** de modifier le code source du projet en Mode Évolution Agent (`>>`). Seul le dossier `.agent/` est autorisé.
 - **INTERDICTION** de traiter spontanément les commentaires `TODO :` sans directive explicite `ia :`.
-
-
