@@ -24,7 +24,19 @@ Un document Markdown listant les acteurs et fonctionnalités de l'application, s
      - Administrateur
      ```
 
-3. **Fonctionnalités**
+3. **Règles de Gestion (Business Rules)**
+   - Contraintes métier, règles de calcul, permissions globales
+   - Format : Liste catégorisée ou simple liste à puces
+   - Exemple :
+     ```markdown
+     ### Permissions
+     - Un article ne peut être supprimé que par son auteur ou un administrateur.
+     
+     ### Contraintes
+     - Un article doit avoir au moins une catégorie.
+     ```
+
+4. **Fonctionnalités**
    - Liste exhaustive des fonctionnalités
    - Format : **Verbe d'action + Objet métier**
    - Regroupement par acteur ou par domaine fonctionnel
@@ -51,6 +63,8 @@ Un document Markdown listant les acteurs et fonctionnalités de l'application, s
   - Diagrammes de classes
 - **INTERDICTION** d'inventer des besoins non exprimés dans le document source
 - **INTERDICTION** d'anticiper ou inventer un découpage en versions
+- **INTERDICTION** d'utiliser des termes vagues comme "Accéder au Back-Office".
+  - **Correction** : Identifier les écrans réels (ex: "Visualiser les statistiques", "Accéder au Menu Principal").
 
 ### Principes de Qualité
 - **Exhaustivité** : Toutes les fonctionnalités du besoin doivent être extraites

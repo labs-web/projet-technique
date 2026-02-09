@@ -64,7 +64,14 @@ Voulez-vous procéder avec cette action ? (Tapez 'oui' pour continuer)
 
 ### Étape 3 : Exécution de l'Action Choisie
 
-Selon le choix du développeur, exécuter l'action correspondante du skill `expert-agent`.
+**⚠️ Règle de Sécurité (Validation Bloquante)**
+Avant de créer ou modifier un fichier (Action d'écriture), l'agent **DOIT IMPÉRATIVEMENT** :
+1. **Générer** le contenu proposé (Fichier complet ou Diff).
+2. **Afficher** ce contenu dans un bloc de code.
+3. **Demander** : "Validez-vous ce contenu ?"
+4. **STOP** : Attendre la validation explicite du développeur.
+
+Une fois validé, exécuter l'action correspondante du skill `expert-agent`.
 
 #### Si Action A sélectionnée (Gérer Skill)
 - **Skill Cible** : `expert-agent`
