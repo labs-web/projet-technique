@@ -48,120 +48,45 @@ Utilisé pour définir les règles de modélisation des **Diagrammes de Cas d'Ut
 
 ---
 
-## 🔗 Règles de Relations : Extension de Comportement
+## 🔗 Règles de Gestion des Permissions (UML Classique)
 
-### Relation `extend` : Variantes de Permissions sur une Même Interface
+### Principe Fondamental
+**NE PAS créer des cas d'utilisation différents uniquement pour refléter des différences de droits d'accès.**
 
-**Contexte** : Lorsque plusieurs acteurs avec des **rôles différents** accèdent à la **même page/interface** mais avec des **permissions différentes**, il faut modéliser un cas d'utilisation de base et ses variantes.
+### Approche Recommandée
+1. **Un seul cas d'utilisation partagé** : Utiliser un verbe générique (ex: `Gérer les articles`).
+2. **Multiples Acteurs** : Relier tous les acteurs concernés (Auteur, Éditeur) à ce même cas d'utilisation.
+3. **Documentation Textuelle** : Préciser les périmètres (Scope) et permissions exactes dans la fiche descriptive du cas d'utilisation (fichier `.md`).
 
-**Principe** : Utiliser la relation `<<extend>>` pour représenter les variantes de comportement d'un cas d'utilisation de base.
+### ⚠️ Interdiction "Matrice de Droits"
+- **INTERDICTION** d'utiliser `<<extend>>` pour créer des variantes de droits (ex: `Gérer ses articles` vs `Gérer tous les articles`).
+- **INTERDICTION** de multiplier les bulles pour chaque nuance de permission.
+- **Raison** : Le diagramme de cas d'utilisation doit montrer **ce que** le système fait, pas **la logique interne** de contrôle d'accès.
 
-**Règle de Détection** :
-- ✅ **Appliquer `extend`** si :
-  - Plusieurs cas d'utilisation accèdent à la même interface/page
-  - Les acteurs ont des **permissions différentes** (Auteur vs Éditeur vs Admin)
-  - Le comportement de base est partagé, mais il existe des variantes selon les rôles
-
-- ❌ **Ne PAS appliquer `extend`** si :
-  - Les cas d'utilisation concernent des pages/interfaces complètement différentes
-  - Il n'y a qu'un seul acteur pour la fonctionnalité
-
-**Structure UML** :
-```puml
-' Cas d'utilisation de base (comportement générique)
-usecase "Gestion des articles" as UC_Base
-
-' Variantes selon les rôles (extensions)
-usecase "Gérer ses articles" as UC_Author
-usecase "Gérer tous les articles" as UC_Editor
-
-' Relations d'extension
-UC_Author <.. UC_Base : <<extend>>
-UC_Editor <.. UC_Base : <<extend>>
-
-' Acteurs accèdent aux variantes
-Author -- UC_Author
-Editor -- UC_Editor
-```
-
-**⚠️ Important** :
-- Le **cas d'utilisation de base** représente la fonctionnalité générique (ex: "Gestion des articles")
-- Les **extensions** représentent les variantes selon les permissions (ex: "Gérer ses articles", "Gérer tous les articles")
-- Les **acteurs** sont liés aux **variantes**, pas au cas de base
-
-**Application** :
-- **Cas d'utilisation de base** : `Gestion des articles` (interface commune)
-- **Extensions** :
-  - `Gérer ses articles` (Auteur : permission limitée à ses propres articles)
-  - `Gérer tous les articles` (Éditeur : permission sur tous les articles)
-
-### Exemple Complet
-
+### Exemple Correct
 ```puml
 actor "Auteur" as Author
 actor "Éditeur" as Editor
 
 rectangle "Blog" {
-  ' Cas de base (générique)
-  usecase "Gestion des articles" as UC_Base
-  usecase "Gestion des catégories" as UC_Cat_Base
-  
-  ' Extensions (variantes de permissions)
-  usecase "Gérer ses articles" as UC_Author
-  usecase "Gérer tous les articles" as UC_Editor
-  usecase "Gérer les catégories de ses articles" as UC_Author_Cat
-  usecase "Gérer toutes les catégories" as UC_Editor_Cat
+  usecase "Gérer les articles" as UC_Manage_Articles
+  usecase "Gérer les catégories" as UC_Manage_Cats
 }
 
-' Relations d'extension
-UC_Author <.. UC_Base : <<extend>>
-UC_Editor <.. UC_Base : <<extend>>
-UC_Author_Cat <.. UC_Cat_Base : <<extend>>
-UC_Editor_Cat <.. UC_Cat_Base : <<extend>>
+' L'auteur peut gérer (ses) articles
+Author -- UC_Manage_Articles
 
-' Associations acteurs-variantes
-Author -- UC_Author
-Author -- UC_Author_Cat
-Editor -- UC_Editor
-Editor -- UC_Editor_Cat
+' L'éditeur peut gérer (tous) les articles et les catégories
+Editor -- UC_Manage_Articles
+Editor -- UC_Manage_Cats
 ```
+
+**Dans la description textuelle (`analyse.md`)** :
+- **Gérer les articles** :
+  - *Auteur* : Peut créer, modifier et supprimer uniquement **ses propres** articles.
+  - *Éditeur* : Peut modifier et supprimer **tous** les articles.
 
 ---
-
-## 💡 Exemples
-
-### Exemple 1 : Sans Simplification (< 10 cas)
-```puml
-actor "Auteur" as Author
-rectangle "Blog" {
-  usecase "Créer un article" as UC1
-  usecase "Modifier son article" as UC2
-  usecase "Supprimer son article" as UC3
-  usecase "Consulter les articles" as UC4
-}
-Author -- UC1
-Author -- UC2
-Author -- UC3
-Author -- UC4
-```
-
-### Exemple 2 : Avec Simplification (> 10 cas)
-```puml
-actor "Auteur" as Author
-actor "Éditeur" as Editor
-rectangle "Blog" {
-  usecase "Gérer ses articles" as UC1
-  usecase "Gérer les catégories" as UC2
-  usecase "Consulter les articles" as UC3
-}
-Author -- UC1
-Author -- UC3
-Editor -- UC2
-Editor -- UC3
-```
-
-**Note** : Ici, "Gérer ses articles" et "Gérer les catégories" sont des **cas d'utilisation simples**, pas des packages.
-
 ---
 
 ## 🏗️ Règles d'Organisation : Séparation des Contextes
