@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Client API" as ApiClient
+
+rectangle "API REST" {
+  usecase "S'authentifier (Token)" as UC_Get_Token
+  usecase "Consommer les données publiques" as UC_Get_Public_Data
+  
+  ' Note: Les actions d'écriture API (Créer/Modifier article via API) 
+  ' ne sont pas explicitement détaillées dans l'analyse globale pour l'instant
+  ' mais sont implicites si l'API est complète.
+  ' On reste sur ce qui est explicite dans fonctionnalite-global.md
+}
+
+ApiClient -- UC_Get_Token
+ApiClient -- UC_Get_Public_Data
+
+@enduml

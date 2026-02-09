@@ -72,7 +72,7 @@ Action exécutée : [Action X] - [Description de l'action] (Skill: [nom-skill])
 
 ### 4. Réflexe Maintenance & Qualité (Obligatoire)
 
-- **Appliquer strictement** le protocole défini dans `90-reflexe-maintenance.md` ("Réflexe Anti-Excuse").
+- **Appliquer strictement** le protocole défini dans `.agent/resources/protocoles-workflow.md` (Section 5 : "Réflexe Maintenance & Qualité").
 - **SURVEILLER** activement les feedbacks développeur de type "Erreur", "Oubli", "Faux".
 - **PROPOSER** systématiquement une correction structurelle (`/raffinement-agent`) pour toute erreur logique ou lacune identifiée.
 

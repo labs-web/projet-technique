@@ -9,11 +9,12 @@ Standardiser l'exécution des workflows qui servent d'interface (wrapper) à un 
 
 ### 1. Structure d'un Workflow "Skill Wrapper"
 
-Un workflow de type wrapper doit suivre structurellement 3 phases distinctes :
+Un workflow de type wrapper doit suivre structurellement 4 phases distinctes :
 
-1. **Détection Intelligente** : Analyser la demande par rapport aux capacités du Skill.
-2. **Menu Dynamique / Confirmation** : Proposer les actions réelles du Skill.
-3. **Exécution Déléguée** : Utiliser le Skill comme source de vérité pour l'exécution.
+1.  **Détection Intelligente** : Analyser la demande par rapport aux capacités du Skill.
+2.  **Menu Dynamique / Confirmation** : Proposer les actions réelles du Skill.
+3.  **Exécution Déléguée** : Utiliser le Skill comme source de vérité pour l'exécution.
+4.  **Réflexe Maintenance** : Analyser les corrections pour améliorer l'agent.
 
 ### 2. Phase de Détection (Intelligence Sémantique)
 
@@ -59,7 +60,30 @@ Voulez-vous procéder avec cette action ? (Tapez [X] pour confirmer)
 **OBLIGATION** de référer à l'Action spécifique dans le `SKILL.md`.
 
 **Algorithme d'Exécution** :
-1. **Lire** l'Action dans `SKILL.md`.
-2. **Identifier** et demander les **Inputs** requis.
-3. **Appliquer** les **Instructions** de l'Action.
-4. **Vérifier** les **Points de Contrôle (Definition of Done)**.
+1.  **Lire** l'Action dans `SKILL.md`.
+2.  **Identifier** et demander les **Inputs** requis.
+3.  **Appliquer** les **Instructions** de l'Action.
+4.  **Vérifier** les **Points de Contrôle (Definition of Done)**.
+
+### 5. Réflexe Maintenance & Qualité (Anti-Excuse)
+
+**Objectif** : Transformer chaque correction utilisateur en une mise à jour pérenne.
+
+**Déclencheurs (Triggers)** :
+Ce réflexe s'active **OBLIGATOIREMENT** dans les cas suivants :
+1.  **Correction Factuelle** : Le développeur corrige une information fausse.
+2.  **Critique de Logique** : Le développeur signale une erreur de raisonnement.
+3.  **Rappel à l'Ordre** : Le développeur mentionne une règle non respectée.
+
+**Protocole de Réponse** :
+-   ❌ **Ne PAS dire** : "Désolé pour l'erreur, voici la correction..." (L'erreur reviendra la prochaine fois).
+-   ✅ **Dire IMPÉRATIVEMENT** : "Je comprends l'erreur. Pour éviter que cela ne se reproduise, je propose de mettre à jour le Skill [Nom] via `/raffinement-agent` avec cette nouvelle règle : [Description]."
+
+**Algorithme de Décision** :
+1.  **Détection** : L'utilisateur corrige une information ou un comportement.
+2.  **Analyse** : Est-ce une erreur ponctuelle ou une lacune dans mes instructions (Skills/Rules) ?
+    *   *Si c'est une lacune* ➔ **ACTIVER LE RÉFLEXE**.
+3.  **Action** :
+    *   Ne **PAS** s'excuser platement.
+    *   **Proposer** immédiatement l'activation du workflow `/raffinement-agent`.
+    *   **Identifier** précisément le fichier source à modifier (`SKILL.md`, `specs`, etc.).

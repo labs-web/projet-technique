@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Utilisateur Connecté (Auteur)" as Author
+actor "Administrateur" as Admin
+
+rectangle "Back-Office (Espace Connecté)" {
+  usecase "Visualiser le Tableau de Bord (Stats)" as UC_Dashboard
+  usecase "Se déconnecter" as UC_Logout
+  usecase "Gérer son profil" as UC_Manage_Profile
+  
+  usecase "Gérer les articles" as UC_Manage_Articles
+  usecase "Gérer les catégories" as UC_Manage_Categories
+  usecase "Gérer les utilisateurs" as UC_Manage_Users
+}
+
+' L'administrateur est aussi un auteur (Généralisation) - Hérite des droits de base
+Admin --|> Author
+
+' Permissions Auteur (Scope: Ses propres articles)
+Author -- UC_Dashboard
+Author -- UC_Logout
+Author -- UC_Manage_Profile
+Author -- UC_Manage_Articles
+
+' Permissions Admin (Scope: Tous les articles)
+Admin -- UC_Manage_Categories
+Admin -- UC_Manage_Users
+' Admin hérite de l'accès à UC_Manage_Articles via Author, 
+' ou on peut le lier explicitement si Admin a des droits exclusifs sur ce même UC
+Admin -- UC_Manage_Articles
+
+@enduml

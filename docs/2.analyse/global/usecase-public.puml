@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Visiteur" as Visitor
+actor "Client API" as ApiClient
+
+rectangle "Front-Office (Public)" {
+  usecase "Consulter les articles" as UC_View_Articles
+  usecase "Lire un article" as UC_Read_Article
+  usecase "Filtrer les articles" as UC_Filter_Articles
+  usecase "Rechercher un article" as UC_Search_Article
+  usecase "S'inscrire" as UC_Register
+  usecase "Se connecter (Login)" as UC_Login
+  
+  UC_Read_Article .> UC_View_Articles : <<extend>>
+  UC_Filter_Articles .> UC_View_Articles : <<extend>>
+  UC_Search_Article .> UC_View_Articles : <<extend>>
+}
+
+rectangle "API Publique" {
+  usecase "Consommer les données publiques" as UC_Api_Public
+}
+
+Visitor -- UC_View_Articles
+Visitor -- UC_Register
+Visitor -- UC_Login
+
+ApiClient -- UC_Api_Public
+
+@enduml
