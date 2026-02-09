@@ -10,7 +10,7 @@ Un Workflow valide doit respecter la structure suivante :
 
 ### Nommage du Workflow
 - **Format** : `kebab-case`.
-- **Sémantique** : **DOIT** décrire une **Phase**, une **Tâche** ou une **Action** (ex: `analyse-uml`, `init-projet`, `maintenance-agent`).
+- **Sémantique** : **DOIT** décrire une **Phase**, une **Tâche** ou une **Action** (ex: `analyse-uml`, `init-projet`, `raffinement-agent`).
 - **Interdiction** : Ne pas utiliser de noms de rôles (réservés aux Skills).
 
 ### Contenu du Workflow
@@ -86,7 +86,7 @@ Voulez-vous procéder avec cette action ? (Tapez A pour confirmer, ou choisissez
 ### Workflow de Création/Optimisation
 1. **Visualiser** le processus de bout en bout (Penser "Orchestration" et non "Procédure").
 2. **Suivre le Pattern** : Utiliser le modèle "Menu Interactif" défini dans le template.
-3. **Utiliser** `template-workflow.md` (situé dans `.agent/skills/expert-agent/resources/`) comme base.
+3. **Utiliser** le template approprié : `template-workflow-creation.md` (Standard) ou `template-workflow-execution.md` (Skill-Exec).
 4. **Simplifier** : Supprimer les étapes redondantes.
 5. **Annoter** : Ajouter `// turbo` là où c'est sûr.
 6. **Vérifier** : S'assurer que le workflow ne "bloque" pas l'agent dans une boucle infinie.

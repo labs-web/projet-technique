@@ -1,19 +1,19 @@
 ---
-description: Workflow unifié pour l'analyse fonctionnelle et la modélisation UML (Use Cases).
+description: [Description courte du workflow d'exécution skill]
 ---
 
-# Workflow : Analyse Fonctionnelle & UML (`/analyse-uml`)
+# Workflow : [Nom du Workflow] (`/[slug]`)
 
-**Objectif** : Formaliser le besoin et produire les diagrammes UML via le skill `analyste-uml`.
+**Objectif** : [Objectif global : Exécuter les actions du skill X]
 **Protocole** : Suivre le standard [`.agent/resources/protocoles-workflow.md`](.agent/resources/protocoles-workflow.md).
 
 ## Exécution
 
 ### 1. Détection & Menu
-- **Analyser** la demande via `.agent/skills/analyste-uml/SKILL.md`.
+- **Analyser** la demande via `.agent/skills/[nom-skill]/SKILL.md`.
 - **Afficher** le *Template A* (Confirmation) ou *Template B* (Menu) selon le protocole.
 - **STOP** : Attendre validation du développeur.
 
 ### 2. Exécution Déléguée
 - **Source** : Exécuter strictement l'Action choisie depuis le fichier Skill.
-- **Trace** : Ajouter `Action exécutée : [Nom] (Skill: analyste-uml)` en fin de réponse.
+- **Trace** : Ajouter `Action exécutée : [Nom de l'action] (Skill: [nom-skill])` en fin de réponse.

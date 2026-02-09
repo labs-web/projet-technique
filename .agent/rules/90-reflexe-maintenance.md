@@ -16,9 +16,9 @@ Ce réflexe s'active automatiquement dans les cas suivants :
 - **Question** : L'erreur est-elle due à une instruction manquante, ambiguë ou obsolète dans le fichier `SKILL.md` ?
 - **Critère** : Si modifier le prompt du Skill (SKILL.md) permet d'éviter l'erreur à 100% dans le futur ➔ **Candidat à la maintenance**.
 
-### 2. Action : Activation du Workflow `/maintenance-agent`
+### 2. Action : Activation du Workflow `/raffinement-agent`
 Si la maintenance est justifiée, l'agent doit :
-1. **Proposer** immédiatement l'exécution du workflow `/maintenance-agent`.
+1. **Proposer** immédiatement l'exécution du workflow `/raffinement-agent`.
 2. **Formuler** la modification à apporter (ex: "Ajouter la contrainte X dans la section Instructions").
 
 ## Exemple d'Application
@@ -27,4 +27,4 @@ Si la maintenance est justifiée, l'agent doit :
 > **Réflexe** :
 > 1. Détection : Non-respect des règles du projet (Stack Technique).
 > 2. Analyse : Le Skill manque peut-être de précision sur l'interdiction du CSS brut.
-> 3. Action : Proposer `/maintenance-agent` pour ajouter "INTERDICTION : CSS brut" dans `designer-ui/SKILL.md`.
+> 3. Action : Proposer `/raffinement-agent` pour ajouter "INTERDICTION : CSS brut" dans `designer-ui/SKILL.md`.

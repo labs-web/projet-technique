@@ -60,20 +60,37 @@ description: Expert unifié de la gestion, création et maintenance des composan
      - Vérifier que la règle ne contredit pas une règle globale (`meta-gouvernance`).
 
 ### Action C : Manage Workflow (Gérer Processus)
-> **Description** : Créer ou mettre à jour un workflow en respectant `specs-workflow.md`.
-- **Entrées** : `Nom`, `Étapes`, `Mode (Create/Update)`
+> **Description** : Créer ou mettre à jour un workflow en choisissant le template approprié selon le type.
+
+#### Types de Workflows
+1. **Workflow de Création (Standard)** : Séquence d'étapes pour construire ou initialiser un élément (ex: `/init-lab`, `/impl-feature`).
+   - **Template** : `resources/template-workflow-creation.md`
+2. **Workflow d'Exécution (Skill)** : Interface d'exécution pour les actions d'un Skill spécifique (ex: `/analyse-uml`, `/hub-agent`).
+   - **Template** : `resources/template-workflow-execution.md`
+
+- **Entrées** : `Nom`, `Type (Creation/Execution)`, `Source (Skill lié ou Étapes)`, `Mode (Create/Update)`
 - **Sorties** : Fichier `.md` dans `.agent/workflows/`
+
 - **❌ Interdictions Spécifiques** :
-  - Ne pas utiliser de nom de rôle pour un workflow.
-  - Ne pas créer de workflow sans étapes de validation explicites.
+  - Ne jamais mélanger la logique de définition d'un Skill dans un workflow.
+  - Le workflow d'exécution ne doit contenir **AUCUNE logique métier**, il délègue tout au Skill via le protocole.
+
 - **✅ Points de Contrôle** :
   - **Nommage** : Le nom décrit une **Phase/Tâche** (ex: `analyse-uml`).
+  - **Cohérence** :
+    - Si type **Exécution** : Le fichier doit suivre strictement le protocole de délégation standard.
+    - Si type **Création** : Les étapes doivent être claires et séquentielles.
+
 - **📝 Instructions Détaillées** :
   1. **Lire** la spec : `specs/specs-workflow.md`.
   2. **Si Création** :
-     - Copier `resources/template-workflow.md`.
-     - Définir les étapes séquentielles claires.
-     - Ajouter les annotations `// turbo` là où l'auto-exécution est sûre.
+     - Identifier le type de workflow requis.
+     - **Copier** le template correspondant (`creation` ou `execution`).
+     - **Adapter** :
+       - Pour **Création** : Définir les étapes séquentielles.
+       - Pour **Exécution** : Configurer la détection (mots-clés) et lier au Skill cible.
+  3. **Si Mise à jour** :
+     - Vérifier la conformité avec le type déclaré.
 
 ---
 

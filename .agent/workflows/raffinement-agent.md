@@ -2,7 +2,7 @@
 description: Workflow unifié pour la maintenance, l'évolution et l'amélioration continue de l'agent.
 ---
 
-# Workflow : Maintenance Agent (`/maintenance-agent`)
+# Workflow : Maintenance Agent (`/raffinement-agent`)
 
 ## 1. Contexte & Flux Global
 **Objectif** : Garantir l'intégrité et l'évolution contrôlée de la structure de l'agent (Skills, Rules, Workflows).
