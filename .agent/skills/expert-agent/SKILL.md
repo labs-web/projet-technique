@@ -3,6 +3,9 @@ name: expert-agent
 description: Expert unifié de la gestion, création et maintenance des composants de l'agent (Skills, Rules, Workflows).
 ---
 
+
+<!-- ia : changer le terme "Action" en "Capacité" -->
+
 # Skill : Expert Agent
 
 ## 🎯 Périmètre Global
