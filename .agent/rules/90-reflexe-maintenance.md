@@ -1,30 +1,47 @@
-# Réflexe de Maintenance Continue
+---
+trigger: always_on
+---
+
+# Réflexe de Maintenance Continue (`/raffinement-agent`)
 
 ## Objectif
-Assurer l'amélioration continue des compétences (Skills) de l'agent en transformant les erreurs d'exécution et les retours du développeur en opportunités de mise à jour automatiques ou semi-automatiques.
+**Transformer chaque correction utilisateur en une mise à jour pérenne.**
+L'agent ne doit pas se contenter de s'excuser ("Désolé, je corrige"), mais doit immédiatement proposer de fixer l'erreur à la source (Skill, Rule, Workflow) pour ne plus jamais la reproduire.
 
-## Déclencheurs
-Ce réflexe s'active automatiquement dans les cas suivants :
-1. **Anomalie d'Exécution** : Un Skill produit un résultat incorrect, incomplet ou hallucinatoire de manière répétée.
-2. **Critique Explicite** : Le développeur signale une erreur de logique ou un manquement aux standards ("Tu as oublié X", "Le code n'est pas Y").
+## Déclencheurs (Triggers)
+Ce réflexe s'active **OBLIGATOIREMENT** dans les cas suivants :
 
-## Protocole de Décision
+1. **Correction Factuelle** : Le développeur corrige une information fausse (ex: "Le back-office est pour tous les connectés, pas juste les admins").
+2. **Critique de Logique** : Le développeur signale une erreur de raisonnement (ex: "Tu as oublié le cas X").
+3. **Rappel à l'Ordre** : Le développeur mentionne une règle non respectée (ex: "Pas de CSS brut !").
 
-À chaque déclencheur, l'agent évalue la nécessité d'une intervention structurelle :
+## Protocole de Réponse (Anti-Excuse)
 
-### 1. Analyse de la Cause Racine
-- **Question** : L'erreur est-elle due à une instruction manquante, ambiguë ou obsolète dans le fichier `SKILL.md` ?
-- **Critère** : Si modifier le prompt du Skill (SKILL.md) permet d'éviter l'erreur à 100% dans le futur ➔ **Candidat à la maintenance**.
+❌ **Réponse Classique (À ÉVITER)** :
+> "Désolé pour l'erreur, voici la correction..." (L'erreur reviendra la prochaine fois)
 
-### 2. Action : Activation du Workflow `/raffinement-agent`
-Si la maintenance est justifiée, l'agent doit :
-1. **Proposer** immédiatement l'exécution du workflow `/raffinement-agent`.
-2. **Formuler** la modification à apporter (ex: "Ajouter la contrainte X dans la section Instructions").
+✅ **Réponse Attendue (Réflexe Maintenance)** :
+> "Je comprends l'erreur. Pour éviter que cela ne se reproduise, je propose de mettre à jour le Skill [Nom] via `/raffinement-agent` avec cette nouvelle règle : [Description]."
+
+## Algorithme de Décision
+
+1. **Détection** : L'utilisateur corrige une information ou un comportement.
+2. **Analyse** : Est-ce une erreur ponctuelle ou une lacune dans mes instructions (Skills/Rules) ?
+   - *Si c'est une lacune* ➔ **ACTIVER LE RÉFLEXE**.
+3. **Action** :
+   - Ne **PAS** s'excuser platement.
+   - **Proposer** immédiatement l'activation du workflow `/raffinement-agent`.
+   - **Identifier** précisément le fichier source à modifier (`SKILL.md`, `specs`, etc.).
 
 ## Exemple d'Application
 
-> **Cas** : Le skill `designer-ui` génère du CSS brut alors que le projet utilise Tailwind.
-> **Réflexe** :
-> 1. Détection : Non-respect des règles du projet (Stack Technique).
-> 2. Analyse : Le Skill manque peut-être de précision sur l'interdiction du CSS brut.
-> 3. Action : Proposer `/raffinement-agent` pour ajouter "INTERDICTION : CSS brut" dans `designer-ui/SKILL.md`.
+> **Cas** : L'utilisateur dit "Le back-office c'est pour tout le monde, pas que les admins".
+>
+> **Réponse Agent** :
+> "C'est noté. Cette définition structurelle doit être corrigée à la source.
+>
+> **Proposition de Maintenance (`/raffinement-agent`)** :
+> - **Cible** : `analyste-uml/resources/spec-cas-utilisation.md`
+> - **Action** : Redéfinir "Back-Office" = "Espace Connecté (Tous Rôles)".
+>
+> Voulez-vous que j'applique cette correction structurelle maintenant ?"

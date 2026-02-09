@@ -1,5 +1,5 @@
 ---
-trigger: always_on
+trigger: always_on # SEUL LE champ 'trigger' est autorisé ici. Pas de description.
 ---
 
 # [XX-Nom de la Catégorie de Règles]

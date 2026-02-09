@@ -166,56 +166,50 @@ Editor -- UC3
 
 ## 🏗️ Règles d'Organisation : Séparation des Contextes
 
-### Séparation Partie Publique et Partie Administration
+### Séparation Front-Office et Back-Office
 
-**Contexte** : Lorsque l'application possède **deux contextes métier distincts** (Frontend Public et Back-office Administration), le diagramme doit refléter cette séparation architecturale.
+**Définition Stricte** :
+- **Front-Office (Public)** : Espace accessible aux **Visiteurs non connectés**.
+  - *Fonctions* : Consultation (mode lecture), Inscription, Connexion.
+- **Back-Office (Privé/Admin)** : Espace accessible uniquement après **Authentification**.
+  - *Fonctions* : Dashboard, Gestion de profil, Gestion de contenu (Auteur/Éditeur), Administration système (Admin).
 
-**Principe** : Créer **deux rectangles séparés** pour représenter les deux parties de l'application.
+**Principe** : Tout acteur connecté (Utilisateur, Auteur, Admin) exerce ses fonctions de gestion dans le **Back-Office**. Le Front-Office est réservé à l'acquisition d'audience et l'entrée dans le système.
 
 **Règle de Détection** :
-- ✅ **Créer deux rectangles** si :
-  - L'application a une **partie publique** (accessible aux visiteurs/utilisateurs)
-  - L'application a une **partie administration** (back-office, tableau de bord admin)
-  - Les deux parties ont des **interfaces distinctes** (URLs différentes, menus différents)
-
-- ❌ **Garder un seul rectangle** si :
-  - L'application n'a qu'une seule interface
-  - Les fonctionnalités admin sont intégrées dans l'interface publique
+- ✅ **Rectangle "Front-Office / Public"** : Contient uniquement les cas d'utilisation accessibles sans login ( + Login/Register).
+- ✅ **Rectangle "Back-office / Espace Connecté"** : Contient TOUS les cas d'utilisation nécessitant une session active.
 
 **Structure UML** :
 ```puml
-' Partie Publique (Frontend)
-rectangle "Application Publique - Blog" {
+' Partie Publique (Front-Office)
+rectangle "Front-Office (Public)" {
   usecase "Consulter les articles" as UC_Public1
-  usecase "S'inscrire" as UC_Public2
-  usecase "Gérer ses articles" as UC_Public3
+  usecase "S'inscrire (Register)" as UC_Public2
+  usecase "Se connecter (Login)" as UC_Public3
 }
 
-' Partie Administration (Back-office)
-rectangle "Back-office Administration" {
-  usecase "Gérer les utilisateurs" as UC_Admin1
-  usecase "Gérer les rôles" as UC_Admin2
-  usecase "Tableau de bord" as UC_Admin3
+' Partie Privée (Back-Office)
+rectangle "Back-Office (Espace Connecté)" {
+  usecase "Gérer son profil" as UC_User
+  usecase "Gérer ses articles" as UC_Author
+  usecase "Gérer le système" as UC_Admin
 }
 ```
 
 **⚠️ Important** :
-- Les **rectangles** représentent les **contextes d'exécution** (frontend vs back-office)
-- Certains cas d'utilisation peuvent être **partagés** entre les deux contextes
-- Les **acteurs** peuvent accéder à un ou plusieurs contextes selon leurs permissions
+- L'action de "Se connecter" est la porte d'entrée : elle est dans le Front-Office mais mène au Back-Office.
+- Les fonctionnalités "métier" (créer un article, modifier son profil) sont **toujours** dans le Back-Office.
 
 **Application typique** :
-- **Rectangle "Application Publique"** :
-  - Consultation des contenus
-  - Inscription/Connexion
-  - Gestion de contenu (Auteur/Éditeur)
-  - Profil utilisateur
+- **Front-Office** :
+  - Home, Articles, Catégories (Lecture seule)
+  - Login / Register
 
-- **Rectangle "Back-office Administration"** :
-  - Gestion des utilisateurs
-  - Gestion des rôles et permissions
-  - Tableau de bord statistiques
-  - Configuration système
+- **Back-Office** :
+  - **Utilisateur Standard** : Mon Profil, Mes Favoris
+  - **Auteur/Éditeur** : Mes Articles, Gestion des Médias
+  - **Admin** : Gestion Users, Settings, Logs
 
 ### Exemple Complet
 
@@ -225,28 +219,24 @@ actor "Auteur" as Author
 actor "Administrateur" as Admin
 
 ' Partie Publique
-rectangle "Application Publique - Blog" {
-  usecase "Consulter les articles" as UC1
-  usecase "S'inscrire" as UC2
-  usecase "Se connecter" as UC3
-  usecase "Gérer ses articles" as UC4
+rectangle "Front-Office" {
+  usecase "Consulter" as UC1
+  usecase "Se connecter" as UC2
 }
 
-' Partie Administration
-rectangle "Back-office Administration" {
-  usecase "Accéder au dashboard" as UC_A1
-  usecase "Gérer les utilisateurs" as UC_A2
-  usecase "Gérer les rôles" as UC_A3
+' Partie Privée
+rectangle "Back-Office" {
+  usecase "Gérer ses articles" as UC3
+  usecase "Administrer le site" as UC4
 }
 
 ' Relations
 Guest -- UC1
 Guest -- UC2
-Guest -- UC3
-Author -- UC4
-Admin -- UC_A1
-Admin -- UC_A2
-Admin -- UC_A3
+
+' Les acteurs connectés interagissent principalement avec le Back-Office
+Author -- UC3
+Admin -- UC4
 ```
 
 **⚠️ Principe Important : Un Contexte = Un Fichier**
