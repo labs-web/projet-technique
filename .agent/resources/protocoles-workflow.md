@@ -1,6 +1,3 @@
----
-trigger: always_on
----
 
 # Protocoles d'Exécution des Workflows (Skill Wrappers)
 
