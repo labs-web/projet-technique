@@ -1,49 +1,62 @@
-# Analyse Fonctionnelle Globale : Le Laboratoire (Blog)
+# Analyse Fonctionnelle Globale
 
-## Introduction
-Ce document recense l'ensemble des fonctionnalités du projet "Le Laboratoire", une plateforme de blog destinée à l'apprentissage technique progressif.
+## 1. Acteurs
+- **Visiteur** : Utilisateur non authentifié accédant à la partie publique du site.
+- **Administrateur** : Super-utilisateur ayant accès à toutes les fonctionnalités de gestion.
+- **Auteur** : Utilisateur authentifié pouvant gérer ses propres articles.
+- **Système Externe** : Application tierce consommant l'API (Mobile, SPA).
 
-## Acteurs
-- **Visiteur** : Utilisateur non connecté accédant au contenu public.
-- **Utilisateur Connecté (Auteur/Éditeur)** : Utilisateur authentifié pouvant gérer ses propres contenus.
-- **Administrateur** : Utilisateur disposant de droits étendus pour la gestion système et modération.
-- **Client API** : Application tierce consommant les données via l'interface programmatique.
+## 2. Fonctionnalités par Domaine
 
-## Règles de Gestion (Business Rules)
+### 2.1. Gestion Publique (Front-Office)
+- **Consulter la liste des articles**
+    - *Acteur* : Visiteur
+    - *Priorité* : P1 (V1)
+    - *Règle* : Affichage paginé, tri par défaut (plus récent).
+- **Consulter le détail d'un article**
+    - *Acteur* : Visiteur
+    - *Priorité* : P1 (V1)
+    - *Règle* : Affichage du contenu complet, image, catégorie et auteur.
+- **Rechercher des articles**
+    - *Acteur* : Visiteur
+    - *Priorité* : P2 (V4/V5)
+    - *Règle* : Recherche interactive (AJAX) sur le titre et le contenu.
+- **Filtrer par catégorie**
+    - *Acteur* : Visiteur
+    - *Priorité* : P2 (V4/V5)
+    - *Règle* : Filtrage interactif (AJAX) sans rechargement de page.
 
-### Contraintes et Relations
-- **Multi-Catégories** : Un article peut être associé à plusieurs catégories (Relation N-N).
-- **Auteur Unique** : Un article est rédigé par un seul auteur (Relation 1-N).
-- **Terminologie** : Utilisation stricte du terme "Category" (et non Tag ou Label).
+### 2.2. Administration (Back-Office)
+- **Gérer les catégories (CRUD)**
+    - *Acteur* : Administrateur
+    - *Priorité* : P1 (V2)
+    - *Règle* : Création, Lecture, Modification, Suppression. Nom et Slug uniques.
+- **Gérer les articles (CRUD)**
+    - *Acteur* : Administrateur, Auteur
+    - *Priorité* : P1 (V2)
+    - *Règle* : Création, Lecture, Modification, Suppression.
+- **Gérer ses propres articles**
+    - *Acteur* : Auteur
+    - *Priorité* : P2 (V3)
+    - *Règle* : Un auteur ne peut modifier/supprimer que les articles dont il est le créateur (Policy).
 
-### Permissions et Sécurité
-- **Accès Public** : La lecture des articles (Liste et Détail) est accessible sans authentification.
-- **Authentification Requise** : Toute opération d'écriture (Création, Modification, Suppression) nécessite une connexion.
-- **Propriété (Policy)** : Seul l'auteur d'un article peut le modifier ou le supprimer (sauf autorisation Admin).
-- **Rôles Hérarchiques** : Distinction des droits selon les rôles (Admin > Éditeur > Lecteur).
-- **Protection API** : Les accès API sont sécurisés par tokens (Sanctum).
+### 2.3. Sécurité & Permissions
+- **Authentification**
+    - *Acteur* : Administrateur, Auteur
+    - *Priorité* : P1 (V2)
+    - *Règle* : Accès sécurisé au Back-Office.
+- **Gestion des Rôles (RBAC)**
+    - *Acteur* : Administrateur
+    - *Priorité* : P3 (V6)
+    - *Règle* : Attribution des rôles (Admin, Éditeur, Lecteur).
 
-## Fonctionnalités par Acteur
+### 2.4. API REST
+- **Exposer les articles**
+    - *Acteur* : Système Externe
+    - *Priorité* : P3 (V7)
+    - *Règle* : Endpoints sécurisés via Sanctum. Format JSON.
 
-### 👤 Visiteur
-- **Consulter les articles** : Afficher la liste des articles publiés sur la page d'accueil.
-- **Lire un article** : Accéder au détail complet d'un article (Titre, Contenu, Auteur, Date, Catégories).
-- **Filtrer les articles** : Trier ou restreindre la liste des articles par catégorie.
-- **Rechercher un article** : Effectuer une recherche textuelle instantanée sur les titres ou contenus.
-
-### ✍️ Utilisateur Connecté (Auteur)
-- **S'authentifier** : Se connecter à l'application (Login/Logout).
-- **Gérer son profil** : Modifier ses informations personnelles.
-- **Créer un article** : Rédiger et publier un nouvel article associé à son compte.
-- **Modifier ses articles** : Éditer le contenu d'un article dont il est l'auteur (selon règle de propriété).
-- **Supprimer ses articles** : Retirer un article dont il est l'auteur.
-
-### 🛡️ Administrateur
-- **Gérer les catégories** : Créer, modifier et supprimer les catégories.
-- **Gérer tous les articles** : Modération et édition de n'importe quel article, quel que soit l'auteur.
-- **Gérer les utilisateurs** : Créer, modifier, supprimer des utilisateurs et gérer leurs rôles.
-- **Visualiser le Tableau de Bord** : Afficher la page d'accueil d'administration contenant les statistiques globales (Nombre total d'articles, Nombre total d'inscrits) et le menu de navigation principal.
-
-### 🤖 Client API
-- **Consommer les données publiques** : Récupérer la liste et le détail des articles au format JSON.
-- **S'authentifier via Token** : Obtenir un jeton d'accès sécurisé pour les requêtes protégées.
+## 3. Règles de Gestion Transverses
+- **RG-01 (Architecture)** : Séparation claire entre Front-Office (Lecture) et Back-Office (Gestion).
+- **RG-02 (UX)** : L'interactivité (Recherche/Filtre) doit être fluide (instantanée).
+- **RG-03 (Sécurité)** : Les données sensibles ou actions destructives nécessitent une authentification forte.

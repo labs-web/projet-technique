@@ -11,19 +11,12 @@ skinparam packageBackgroundColor white
 skinparam packageBorderColor black
 skinparam arrowColor black
 
-actor "Client API" as ApiClient
+actor "Système Externe" as System
 
 rectangle "API REST" {
-  usecase "S'authentifier (Token)" as UC_Get_Token
-  usecase "Consommer les données publiques" as UC_Get_Public_Data
-  
-  ' Note: Les actions d'écriture API (Créer/Modifier article via API) 
-  ' ne sont pas explicitement détaillées dans l'analyse globale pour l'instant
-  ' mais sont implicites si l'API est complète.
-  ' On reste sur ce qui est explicite dans fonctionnalite-global.md
+  usecase "Consulter les articles" as UC_API_Articles
 }
 
-ApiClient -- UC_Get_Token
-ApiClient -- UC_Get_Public_Data
+System -- UC_API_Articles
 
 @enduml

@@ -11,30 +11,26 @@ skinparam packageBackgroundColor white
 skinparam packageBorderColor black
 skinparam arrowColor black
 
-actor "Visiteur" as Visitor
-actor "Client API" as ApiClient
+actor "Visiteur" as Guest
+actor "Administrateur" as Admin
+actor "Auteur" as Author
 
 rectangle "Front-Office (Public)" {
-  usecase "Consulter les articles" as UC_View_Articles
-  usecase "Lire un article" as UC_Read_Article
-  usecase "Filtrer les articles" as UC_Filter_Articles
-  usecase "Rechercher un article" as UC_Search_Article
-  usecase "S'inscrire" as UC_Register
-  usecase "Se connecter (Login)" as UC_Login
-  
-  UC_Read_Article .> UC_View_Articles : <<extend>>
-  UC_Filter_Articles .> UC_View_Articles : <<extend>>
-  UC_Search_Article .> UC_View_Articles : <<extend>>
+  usecase "Consulter la liste des articles" as UC_List_Articles
+  usecase "Consulter le détail d'un article" as UC_Show_Article
+  usecase "Rechercher des articles" as UC_Search_Articles
+  usecase "Filtrer par catégorie" as UC_Filter_Category
+  usecase "Se connecter" as UC_Login
 }
 
-rectangle "API Publique" {
-  usecase "Consommer les données publiques" as UC_Api_Public
-}
+Guest -- UC_List_Articles
+Guest -- UC_Show_Article
+Guest -- UC_Search_Articles
+Guest -- UC_Filter_Category
+Guest -- UC_Login
 
-Visitor -- UC_View_Articles
-Visitor -- UC_Register
-Visitor -- UC_Login
-
-ApiClient -- UC_Api_Public
+' Généralisation : Les utilisateurs authentifiés peuvent aussi naviguer
+Admin --|> Guest
+Author --|> Guest
 
 @enduml
