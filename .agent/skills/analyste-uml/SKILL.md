@@ -39,8 +39,10 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 
 ### Action B : Planifier les Versions (Stratégie)
 > **Description** : Définir la roadmap et le découpage en versions dans un fichier dédié.
-- **Entrées** : `docs/1.besoin/besoin.md` (Contexte).
-- - **Entrées** : `docs/2.analyse/global/fonctionnalite-global.md` (Contexte).
+> **Spécification** : Voir `resources/spec-planification-version.md` pour les règles et le format du livrable.
+- **Entrées** : 
+  - `docs/1.besoin/besoin.md` (Contexte).
+  - `docs/2.analyse/global/fonctionnalite-global.md` (Contexte).
 - **Sorties** : `docs/2.analyse/global/planification-version.md` (Nouveau fichier contenant la Roadmap/Lotissement).
 - **❌ Interdictions Spécifiques** :
   - **INTERDICTION** de créer des dossiers ou des fichiers de version (`vX`). Action purement rédactionnelle/stratégique.
