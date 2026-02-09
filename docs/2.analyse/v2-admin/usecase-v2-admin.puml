@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Administrateur" as Admin
+
+rectangle "Back-Office (V2 - Admin)" {
+  usecase "S'authentifier (Login/Logout)" as UC_Auth
+  
+  package "Gestion des Catégories" {
+    usecase "Créer une catégorie" as UC_CreateCat
+    usecase "Modifier une catégorie" as UC_EditCat
+    usecase "Supprimer une catégorie" as UC_DeleteCat
+    usecase "Lister les catégories" as UC_ListCat
+  }
+
+  package "Gestion des Articles" {
+    usecase "Créer un article" as UC_CreatePost
+    usecase "Modifier un article" as UC_EditPost
+    usecase "Supprimer un article" as UC_DeletePost
+    usecase "Lister les articles" as UC_ListPost
+  }
+}
+
+Admin -- UC_Auth
+Admin -- UC_CreateCat
+Admin -- UC_EditCat
+Admin -- UC_DeleteCat
+Admin -- UC_ListCat
+Admin -- UC_CreatePost
+Admin -- UC_EditPost
+Admin -- UC_DeletePost
+Admin -- UC_ListPost
+
+@enduml

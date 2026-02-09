@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Visiteur" as Guest
+
+rectangle "Système Blog (V1 - Public)" {
+  usecase "Consulter la liste des articles" as UC_List
+  usecase "Consulter le détail d'un article" as UC_Detail
+}
+
+Guest -- UC_List
+Guest -- UC_Detail
+
+@enduml

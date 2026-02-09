@@ -1,22 +1,21 @@
 # Analyse Fonctionnelle - V7 : API REST
 
-## Description
-Ouverture des données du blog vers l'extérieur. Création d'une interface de programmation (API) permettant à des applications tierces (Mobile, SPA, Partenaires) de consommer et gérer le contenu.
+## 1. Introduction
+Ouverture des données de l'application via une API RESTful standardisée et sécurisée, destinée à être consommée par des clients externes (ex: Application Mobile).
 
-## Fonctionnalités API
+## 2. Acteurs
+- **Système Externe** : Client API (Postman, App Mobile, SPA externe).
 
-### 1. Accès Public (Lecture)
-**En tant que** : Développeur tiers / App cliente
-**Je veux** : Récupérer la liste des articles et leur détail au format JSON.
-**Afin de** : Les afficher dans mon application.
+## 3. Règles de Gestion (Business Rules)
+### Standardisation
+- **Format** : Toutes les réponses doivent être au format JSON standard (`data`, `meta`).
+- **Codes HTTP** : Utilisation stricte des codes de statut HTTP appropriés (200, 201, 401, 403, 404).
 
-- Endpoints standardisés, documentés.
-- Pagination des résultats pour la performance.
+### Sécurité
+- **Token** : Authentification requise via Bearer Token (Laravel Sanctum).
 
-### 2. Accès Privé (Écriture)
-**En tant que** : Application authentifiée
-**Je veux** : Publier ou modifier des articles via l'API.
-**Afin de** : Gérer le blog depuis une application mobile Admin.
-
-- Authentification par Token sécurisé.
-- Respect strict des mêmes règles métier que le Web (Rôles, Permissions).
+## 4. Fonctionnalités
+### Système Externe
+- **Authentification API** (Obtention du Token)
+- **Consulter la liste des articles (API)**
+- **Consulter le détail d'un article (API)**

@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Administrateur" as Admin
+
+rectangle "Back-Office (V6 - Spatie RBAC)" {
+  package "Gestion des Rôles" {
+    usecase "Créer un Rôle" as UC_CreateRole
+    usecase "Assigner des permissions au Rôle" as UC_AssignPerm
+  }
+  
+  usecase "Assigner Rôle à Utilisateur" as UC_AssignRoleUser
+}
+
+Admin -- UC_CreateRole
+Admin -- UC_AssignPerm
+Admin -- UC_AssignRoleUser
+
+@enduml

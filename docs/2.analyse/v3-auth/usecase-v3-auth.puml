@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Auteur" as Author
+
+rectangle "Back-Office (V3 - Auth Policies)" {
+  usecase "Gérer ses propres articles" as UC_ManageOwn
+  usecase "Modifier un article (Policy check)" as UC_EditOwn
+  usecase "Supprimer un article (Policy check)" as UC_DeleteOwn
+}
+
+Author -- UC_ManageOwn
+UC_ManageOwn ..> UC_EditOwn : <<include>>
+UC_ManageOwn ..> UC_DeleteOwn : <<include>>
+
+note right of UC_ManageOwn
+  L'auteur ne voit et n'agit
+  que sur ses créations.
+end note
+
+@enduml

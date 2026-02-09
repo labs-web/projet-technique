@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Système Externe" as ClientAPI
+
+rectangle "API REST (V7)" {
+  usecase "S'authentifier (Obtenir Token)" as UC_AuthToken
+  usecase "Consulter les articles (JSON)" as UC_GetPosts
+  usecase "Consulter un article (JSON)" as UC_GetPost
+}
+
+ClientAPI -- UC_AuthToken
+ClientAPI -- UC_GetPosts
+ClientAPI -- UC_GetPost
+
+@enduml

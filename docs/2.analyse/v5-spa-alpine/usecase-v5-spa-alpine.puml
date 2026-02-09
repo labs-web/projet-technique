@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Visiteur" as Guest
+
+rectangle "Front-Office (V5 - Alpine.js)" {
+  usecase "Interagir avec l'interface (Modales/Dropdowns)" as UC_Interactive
+  usecase "Voir détail article (Modale)" as UC_Modal
+}
+
+Guest -- UC_Interactive
+UC_Interactive ..> UC_Modal : <<include>>
+
+@enduml

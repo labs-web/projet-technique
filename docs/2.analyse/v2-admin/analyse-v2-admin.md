@@ -1,37 +1,30 @@
-# Analyse Fonctionnelle - V2 : Back-Office Admin
+# Analyse Fonctionnelle - V2 : Administration (CRUD)
 
-## Description
-Création d'un espace sécurisé permettant aux administrateurs et auteurs de gérer le contenu du blog. L'accès est restreint aux utilisateurs authentifiés.
+## 1. Introduction
+Cette version ajoute la couche administrative sécurisée. Elle permet aux administrateurs de gérer le contenu (articles et catégories) via une interface Back-Office dédiée.
 
-## Fonctionnalités Attendues
+## 2. Acteurs
+- **Administrateur** : Super-utilisateur ayant accès à toutes les fonctionnalités de gestion.
 
-### 1. Authentification
-**En tant que** : Utilisateur
-**Je veux** : Me connecter avec email et mot de passe.
-**Afin de** : Accéder à l'interface de gestion.
+## 3. Règles de Gestion (Business Rules)
+### Sécurité
+- **Accès** : L'accès au Back-Office (/admin) requiert une authentification préalable.
+- **Unicité** : Le nom et le slug d'une catégorie doivent être uniques.
 
-- Formulaire de connexion sécurisé.
-- Protection de toutes les pages d'administration.
+### Données
+- **Articles** : Un article doit être lié à une catégorie existante.
+- **Catégories** : La suppression d'une catégorie ne doit pas être possible si elle contient des articles (ou doit gérer le détachement).
 
-### 2. Gestion des Catégories
-**En tant que** : Administrateur
-**Je veux** : Créer, modifier et supprimer des catégories.
-**Afin de** : Organiser les articles.
-
-- **Liste** : Tableau des catégories existantes.
-- **Création** : Formulaire simple (Nom). Le "Slug" doit être généré automatiquement ou saisi.
-- **Édition** : Modification du nom.
-- **Suppression** : Possible uniquement si cela ne "casse" pas des articles (ou gestion propre du détachement).
-
-### 3. Gestion des Articles (CRUD)
-**En tant que** : Auteur
-**Je veux** : Rédiger et publier des articles.
-**Afin de** : Alimenter le blog.
-
-- **Liste** : Tableau de bord de mes articles (Titre, Date, Statut).
-- **Création / Édition** :
-  - Saisie du Titre.
-  - Saisie du Contenu (zone de texte large).
-  - Choix des Catégories (multi-sélection).
-  - *Règle* : L'auteur est automatiquement l'utilisateur connecté.
-- **Suppression** : Retirer un article.
+## 4. Fonctionnalités
+### Administrateur
+- **Authentification sécurisée (Login/Logout)**
+- **Gérer les Catégories**
+  - Créer une catégorie
+  - Lister les catégories
+  - Modifier une catégorie
+  - Supprimer une catégorie
+- **Gérer les Articles**
+  - Créer un article
+  - Lister les articles
+  - Modifier un article
+  - Supprimer un article

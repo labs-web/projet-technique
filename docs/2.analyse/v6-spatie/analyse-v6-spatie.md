@@ -1,27 +1,22 @@
-# Analyse Fonctionnelle - V6 : Rôles & Permissions (Spatie)
+# Analyse Fonctionnelle - V6 : Permissions Avancées (Spatie)
 
-## Description
-Introduction d'une hiérarchie stricte entre les utilisateurs pour professionnaliser la gestion du blog. Nous distinguons désormais clairement les "Administrateurs" des simples "Éditeurs".
+## 1. Introduction
+Implémentation d'un système complet de gestion des rôles et des permissions (RBAC) via le package `spatie/laravel-permission`, permettant une gestion dynamique des droits depuis le Back-Office.
 
-## Rôles & Responsabilités
+## 2. Acteurs
+- **Administrateur** : Gestionnaire des droits.
+- **Système** : Middleware de vérification.
 
-### 1. Administrateur (`Admin`)
-**En tant que** : Super-User
-**Je veux** : Avoir un contrôle total sur le système.
-**Afin de** : Modérer le contenu et gérer l'équipe.
+## 3. Règles de Gestion (Business Rules)
+### RBAC (Role-Based Access Control)
+- **Persistance** : Rôles et Permissions stockés en base de données.
+- **Dynamisme** : Possibilité d'ajouter/retirer une permission à un rôle sans redéployer le code.
 
-- **Permissions** :
-  - Peut gérer TOUS les articles (Créer, Modifier, Supprimer n'importe lequel).
-  - Peut gérer les Catégories (Créer, Modifier, Supprimer).
-  - Peut voir/gérer les autres utilisateurs (Admin Dashboard).
+## 4. Fonctionnalités
+### Administrateur
+- **Gérer les Rôles** (Créer, Editer, Assigner des permissions)
+- **Gérer les Permissions** (Créer, Lister)
+- **Assigner un rôle à un utilisateur**
 
-### 2. Éditeur (`Editor`)
-**En tant que** : Contributeur contenu
-**Je veux** : Gérer mes propres publications.
-**Afin de** : Participer au blog sans risquer de casser le travail des autres.
-
-- **Permissions** :
-  - Peut créer des articles.
-  - Peut modifier/supprimer UNIQUEMENT SES articles.
-  - **Interdit** : Ne peut PAS toucher aux catégories.
-  - **Interdit** : Ne peut PAS toucher aux articles des autres.
+### Système
+- **Middleware de vérification des permissions en base de données**

@@ -20,7 +20,7 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 
 ### Action A : Analyser le Besoin Global
 > **Description** : Transformer une expression de besoin brute en une liste structurée de fonctionnalités.
-> **Spécification** : Voir `resources/spec-analyse-global.md` pour les règles et le format du livrable.
+> **Spécification** : Voir `resources/spec-analyse.md` pour les règles et le format du livrable.
 - **Entrées** : `docs/1.besoin/besoin.md` (Expression de besoins initiale).
 - **Sorties** : `docs/2.analyse/global/fonctionnalite-global.md` (Liste consolidée des fonctionnalités).
 - **❌ Interdictions Spécifiques** :
@@ -28,14 +28,14 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
   - Ne pas inclure d'éléments de conception (classes, tables, architecture).
 - **✅ Points de Contrôle (Definition of Done)** :
   - La liste des fonctionnalités est exhaustive par rapport au document source.
-  - Le fichier respecte le format défini dans `spec-analyse-global.md`.
+  - Le fichier respecte le format défini dans `spec-analyse.md`.
   - Aucun élément de conception n'est présent.
 - **📝 Instructions Détaillées** :
   1. **Lecture** : Lire attentivement `docs/1.besoin/besoin.md`.
   2. **Extraction** : 
      - Identifier les **Acteurs** et les **Fonctionnalités** (Format : Verbe d'action + Objet métier).
      - Identifier les **Règles de Gestion** (Permissions, Contraintes, Scopes) associées.
-  3. **Validation** : Vérifier la conformité avec les règles définies dans `resources/spec-analyse-global.md`.
+  3. **Validation** : Vérifier la conformité avec les règles définies dans `resources/spec-analyse.md`.
 
 ### Action B : Planifier les Versions (Stratégie)
 > **Description** : Définir la roadmap et le découpage en versions dans un fichier dédié.
@@ -53,8 +53,9 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
   1. **Stratégie** : Définir le contenu de chaque version (V1, V2...) en se basant sur `analyse-global.md`.
   2. **Rédaction** : Créer le fichier `docs/2.analyse/global/planification-version.md` et y rédiger la roadmap.
 
-### Action C : Initialiser une Version
+### Action C : Analyser une Version
 > **Description** : Créer concrètement l'arborescence et le fichier d'analyse pour une ou plusieurs versions validées.
+> **Spécification** : Voir `resources/spec-analyse.md` pour les règles et le format du livrable.
 - **Entrées** : 
     - `docs/2.analyse/global/analyse-global.md` (Quoi - Fonctionnalités).
     - `docs/2.analyse/global/planification-version.md` (Quand/Où - Roadmap).
