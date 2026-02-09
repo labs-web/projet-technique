@@ -5,31 +5,34 @@ Utilisé pour définir les règles de modélisation des **Diagrammes de Cas d'Ut
 
 ---
 
-## 📝 Règles de Simplification
+## 📝 Règles de Simplification & Précision
 
-### Règle CRUD : Regroupement par "Gestion"
+### 1. Règle CRUD : Regroupement par "Gestion" (Simplification)
 
 **Contexte** : Lorsqu'une entité métier dispose de plusieurs opérations CRUD (Créer, Lire, Modifier, Supprimer), le diagramme peut rapidement devenir surchargé.
 
 **Principe** : Si le nombre total de cas d'utilisation **dépasse 10**, il est recommandé de regrouper les opérations CRUD sous un cas d'utilisation générique **"Gérer [Entité]"**.
 
 **Application** :
-- **Au lieu de** :
-  - `Créer un article`
-  - `Modifier un article`
-  - `Supprimer un article`
+- **Au lieu de** : `Créer un article`, `Modifier un article`, `Supprimer un article`
+- **Utiliser** : `Gérer les articles`
+
+### 2. Règle de Précision : Interdiction des Termes "Fourre-Tout"
+
+**Principe** : Un cas d'utilisation doit correspondre à une **intention métier explicite**. Les termes vagues qui masquent la complexité ou le besoin réel sont interdits.
+
+- ❌ **INTERDIT (Trop Vague)** :
+  - "Gérer le système"
+  - "Gérer toutes les entités"
+  - "Administration globale"
   
-- **Utiliser** :
-  - `Gérer les articles` (cas d'utilisation **unique**, pas un package)
+- ✅ **OBLIGATOIRE (Concret)** :
+  - "Configurer le site" (Settings)
+  - "Consulter les logs techniques"
+  - "Modérer les commentaires"
+  - "Gérer les utilisateurs"
 
-**⚠️ Important** :
-- **"Gérer [Entité]"** est un **cas d'utilisation simple** (`usecase`), PAS un package.
-- **Ne PAS créer** de package "Gestion Catégories" contenant plusieurs cas d'utilisation.
-- **Créer directement** le cas d'utilisation : `usecase "Gérer les catégories" as UC_X`
-
-**Limites de la Simplification** :
-- **Ne pas appliquer** si les opérations ont des acteurs différents ou des règles de gestion distinctes.
-- **Ne pas simplifier** l'opération de **Lecture/Consultation** (elle reste explicite : `Consulter les articles`).
+**Pourquoi ?** : "Gérer le système" n'aide pas à comprendre ce que l'admin doit *pouvoir faire*. On ne peut pas coder "Gérer le système". On code "Une page de settings", "Un viewer de logs".
 
 ---
 
