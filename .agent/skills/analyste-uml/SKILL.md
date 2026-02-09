@@ -32,7 +32,9 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
   - Aucun élément de conception n'est présent.
 - **📝 Instructions Détaillées** :
   1. **Lecture** : Lire attentivement `docs/1.besoin/besoin.md`.
-  2. **Extraction** : Identifier les acteurs et les fonctionnalités (Format : Verbe d'action + Objet métier).
+  2. **Extraction** : 
+     - Identifier les **Acteurs** et les **Fonctionnalités** (Format : Verbe d'action + Objet métier).
+     - Identifier les **Règles de Gestion** (Permissions, Contraintes, Scopes) associées.
   3. **Validation** : Vérifier la conformité avec les règles définies dans `resources/spec-analyse-global.md`.
 
 ### Action B : Planifier les Versions (Stratégie)

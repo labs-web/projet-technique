@@ -1,0 +1,32 @@
+@startuml usecase-front_office
+left to right direction
+skinparam packageStyle rectangle
+
+' Schéma de couleurs : noir sur blanc uniquement
+skinparam actorBackgroundColor white
+skinparam actorBorderColor black
+skinparam usecaseBackgroundColor white
+skinparam usecaseBorderColor black
+skinparam packageBackgroundColor white
+skinparam packageBorderColor black
+skinparam arrowColor black
+
+actor "Visiteur" as Guest
+
+rectangle "Front-Office (Public)" {
+  usecase "Consulter la page d'accueil" as UC_Home
+  usecase "Consulter les articles" as UC_List
+  usecase "Consulter le détail d'un article" as UC_Detail
+  usecase "Rechercher des articles" as UC_Search
+  usecase "S'inscrire (Register)" as UC_Register
+  usecase "Se connecter (Login)" as UC_Login
+}
+
+Guest -- UC_Home
+Guest -- UC_List
+Guest -- UC_Detail
+Guest -- UC_Search
+Guest -- UC_Register
+Guest -- UC_Login
+
+@enduml

@@ -57,3 +57,31 @@ Le Projet Technique est un environnement d'apprentissage permettant de valider l
 - Consulter les catégories via API REST
 - S'authentifier via token
 - Accéder aux ressources sécurisées
+
+---
+
+## Règles de Gestion (Business Rules)
+
+Ces règles définissent les contraintes métiers et les permissions spécifiques à chaque acteur.
+
+### RG-01 : Gestion des Catégories
+- **Création/Modification/Suppression** : Réservé exclusivement aux acteurs **Éditeur** et **Administrateur**.
+- **Utilisation** : L'acteur **Auteur** peut seulement *sélectionner* une catégorie existante lors de la création/modification d'un article. Il ne peut pas en créer de nouvelles.
+
+### RG-02 : Propriété des Articles (Scope)
+- **Auteur** :
+  - Droit de modification/suppression **uniquement sur ses propres articles** (`user_id` de l'article = `id` de l'auteur).
+  - Interdiction formelle de modifier les articles d'autres auteurs.
+- **Éditeur** :
+  - Droit de modification/suppression sur **tous les articles**, quel que soit l'auteur.
+  - Peut modérer, corriger ou censurer n'importe quel contenu.
+
+### RG-03 : Visibilité et Statuts
+- **Brouillon** : Un article en cours de rédaction n'est visible que par son **Auteur** et les **Éditeurs** dans le Back-Office. Il n'apparaît pas sur le Front-Office.
+- **Publié** : Un article publié est visible par **tous** (Visiteurs inclus) sur le Front-Office.
+
+### RG-04 : Administration Système
+- Seul l'**Administrateur** a le pouvoir de :
+  - Créer ou supprimer des comptes utilisateurs.
+  - Changer le rôle d'un utilisateur (promouvoir un Auteur en Éditeur).
+  - Accéder aux logs techniques.
