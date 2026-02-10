@@ -1,35 +1,35 @@
 # Conception Technique - V1 : Lecture Publique (MVP)
 
 
-<!-- ia : tous les modidication doit être modifier dans le SKILL : concepteur-uml en utilisant le skill : exert-agent, je ne vuex pas mdifier le fichier actuel mais je veux mettre à jur les SKILLs -->
 
 
 
 
-<!-- ia : il faut ajouter les parties : Front-end ( Js, alpine), Http (routes, controleurs), Métier (services, règles de gestion), Data (modèles, migrations, seeders) -->
 
-<!-- ia : dans la couche : Front-end, il faut donner une analyse et conception des atomes, molécules, et , pages  à utiliser s'il existe déja dans "ui-kit" our à développer ce travail doit être réalsier par le SKILL : designer-ui ( designer-ui doit contien une action : conception-page qui fait la conception d'une page en atom et molécule et page) -->
+
+
+
 
 ## Objectif
 Implémenter la couche visuelle publique permettant aux visiteurs de consulter les articles et leur détail. Cette version pose les bases de l'architecture MVC.
 
 
-<!-- ia : je pense il faut déterminer les pages, l'architecture des pages avant de partler des views Laravel -->
+
 ## 1. Présentation (Front-End & IHM)
 
 
-<!-- ia : il faut ajouter dans la capacité : conception-technique, SKILL : concepteur-uml : pour la partie public et la partie admin: il faut créer deux layout, un layout public et un layout admin -->
+
 ### Vues (Blade Components)
 - `resources/views/layouts/app.blade.php`: Layout principal (Header, Footer, Slot).
 
-<!-- ia : je ne veux pas utiliser les composant Laravel, je veux utiliser les partial -->
+
 
 - `resources/views/components/navbar.blade.php`: Barre de navigation publique.
-<!-- ia : fait attention, il exist deux partie : Partie public et parties admin, donc pour Post : il existe deux index -->
-<!-- ia: dans le diagramme de classe nous avons : Article, Category, User, donc il faut créer les vues pour ces entités on peut peut par chagner les nom des classes, "Post"   -->
+
+
 - `resources/views/posts/index.blade.php`: Liste paginée des articles (Grille de cartes).
 - `resources/views/posts/show.blade.php`: Page de détail d'un article.
-<!-- ia : il faut ajouter les partials pour l'affichage des articles -->
+
 - `resources/views/components/post-card.blade.php`: Composant réutilisable pour afficher un résumé d'article.
 
 ### Interactions

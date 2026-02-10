@@ -58,22 +58,20 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
   3. **Sauvegarde** : Produire le fichier dans le dossier de version `docs/3.conception/vX-[nom]/`.
 
 ### Action C1 : Rédiger la Conception Technique
-> **Description** : Produire le document de conception technique détaillé par couches (Front/Contrôleur/Métier/Data).
+> **Description** : Produire le document de conception technique détaillé par couches (Front/Http/Métier/Data).
 - **Capacités Utilisées** :
-  - `capacités/capacité-conception-technique.md`
+  - `capacités/capacité-conception-technique.md` (Contient la Structure, les Interdictions et le Processus détaillé).
+  - **Skill Externe** : `designer-ui` (Action D : Conception & Analyse Page).
 - **Entrées** :
   - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Analyse fonctionnelle).
-  - `docs/3.conception/vX-[nom]/classes-vX-[nom].mermaid` (Modèle de données validé).
+  - `docs/3.conception/global/classes-global.mermaid` (Modèle de données global).
 - **Sorties** : `docs/3.conception/vX-[nom]/conception-technique-vX-[nom].md`
-- **❌ Interdictions Spécifiques** :
-  - Ne pas faire de diagrammes ici, utiliser du texte structuré et des tableaux (Markdown).
-- **✅ Points de Contrôle** :
-  - Les 4 couches (Front, Présentation, Métier, Data) sont traitées.
-  - La cohérence avec le diagramme de classes est vérifiée.
 - **📝 Instructions d'Orchestration** :
-  1. **Structure** : Créer le fichier Markdown selon la `capacité-conception-technique`.
-  2. **Rédaction** : Remplir chaque section en traduisant le besoin fonctionnel en choix techniques précis (Noms de classes, Routes, Méthodes).
-  3. **Revue** : Vérifier que toutes les exigences de l'analyse sont couvertes techniquement.
+  1. **Structure & Règles** : Suivre scrupuleusement le plan et les interdictions définis dans `capacité-conception-technique.md`.
+  2. **Conception UI (Délégation)** : Invoquer l'**Action D** du Skill `designer-ui` pour obtenir la décomposition des pages et l'inventaire (Atoms/Molécules).
+  3. **Intégration** : Intégrer le résultat de l'analyse UI (Gap Analysis) dans la section Front-end.
+  4. **Rédaction** : Remplir les autres couches (Http/Métier/Data) en traduisant le besoin fonctionnel.
+  5. **Revue** : Vérifier que toutes les exigences de l'analyse sont couvertes techniquement.
 
 ---
 
@@ -90,4 +88,9 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
 
 ## ⚙️ Standards & Conventions
 1. **Notation** : PascalCase pour les Classes (`UserProfile`), snake_case pour la BDD (`user_profiles`).
-2. **Outil** : Utiliser Mermaid Live Editor pour prévisualiser si besoin, mais le code source reste dans les fichiers.
+2. **Nommage Cohérent** : Le nom de l'entité doit se retrouver partout (ex: Entité `Article` -> `ArticleController`, `ArticlePolicy`, `CreateArticleRequest`). Ne pas utiliser `Post` si l'entité est `Article`.
+3. **Séparation Public/Admin** :
+   - Layouts distincts : `layouts/public` vs `layouts/admin`.
+   - Contrôleurs distincts : `Http/Controllers/Public/` vs `Http/Controllers/Admin/`.
+   - Vues distinctes : `views/public/` vs `views/admin/`.
+4. **Outil** : Utiliser Mermaid Live Editor pour prévisualiser si besoin, mais le code source reste dans les fichiers.

@@ -15,6 +15,8 @@ description: Crée les fichiers HTML/CSS statiques dans le dossier ui-kit/, dév
 
 ---
 
+
+
 ## ⚡ Actions (Capacités Atomiques)
 
 ### Action A : Créer Styleguide (Tokens)
@@ -48,6 +50,25 @@ description: Crée les fichiers HTML/CSS statiques dans le dossier ui-kit/, dév
 - **✅ Points de Contrôle (Definition of Done)** :
   - L'alignement et l'espacement sont cohérents.
   - Le rendu est testé sur plusieurs largeurs d'écran.
+
+### Action D : Conception & Analyse Page
+> **Description** : Analyser une demande de page pour la décomposer en Atomes, Molécules et Layouts avant tout développement.
+- **Capacités Utilisées** :
+  - `capacités/conception-ui.md`
+- **Entrées** :
+  - Maquette, Wireframe ou Description fonctionnelle.
+  - Manifestes UI Kit (`ui-kit/*-manifest.yaml`).
+- **Sorties** : Plan de conception de la page (Inventaire des composants).
+- **✅ Points de Contrôle** :
+  - La structure de la page est définie (Layout utilisé).
+  - Tous les composants nécessaires sont listés.
+  - Distinction claire entre ce qui existe déjà (validé par Manifestes) et ce qu'il faut créer.
+- **📝 Instructions d'Orchestration** :
+  1. **Lecture** : Charger la capacité `capacités/conception-ui.md`.
+  2. **Analyse** : Appliquer le processus de décomposition (Layout -> Molécules -> Atomes).
+  3. **Vérification** : Consulter les fichiers `*-manifest.yaml` pour le Gap Analysis.
+  4. **Restitution** : Produire le plan d'action (Liste des Actions B et C à lancer).
+
 
 ---
 
