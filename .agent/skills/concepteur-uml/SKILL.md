@@ -26,7 +26,7 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
   - `capacités/capacité-diagramme-classes.md`
 - **Entrées** :
   - `docs/2.analyse/global/fonctionnalite-global.md` (Vision d'ensemble).
-  - `docs/3.conception/rules-business.md` (Règles de gestion transverses).
+  - `docs/2.analyse/global/rules-business.md` (Règles de gestion transverses).
 - **Sorties** : `docs/3.conception/global/classes-global.mermaid`
 - **❌ Interdictions Spécifiques** :
   - Ne pas détailler les méthodes techniques (CRUD standard), rester sur le domaine métier.
@@ -46,7 +46,7 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
 - **Entrées** :
   - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Spécifications de la version).
   - `docs/2.analyse/global/fonctionnalite-global.md` (Contexte).
-  - `docs/3.conception/rules-business.md`.
+  - `docs/2.analyse/global/rules-business.md`.
 - **Sorties** : `docs/3.conception/vX-[nom]/classes-vX-[nom].mermaid`
 - **❌ Interdictions Spécifiques** :
   - Ne pas redéfinir les entités hors scope, utiliser des références si besoin.

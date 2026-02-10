@@ -22,19 +22,22 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 > **Description** : Transformer une expression de besoin brute en une liste structurée de fonctionnalités.
 > **Capacité** : Voir `resources/capacité-analyse.md` pour les règles et le format du livrable.
 - **Entrées** : `docs/1.besoin/besoin.md` (Expression de besoins initiale).
-- **Sorties** : `docs/2.analyse/global/fonctionnalite-global.md` (Liste consolidée des fonctionnalités).
+- **Sorties** : 
+  - `docs/2.analyse/global/fonctionnalite-global.md` (Liste consolidée des fonctionnalités).
+  - `docs/2.analyse/global/rules-business.md` (Règles de gestion transverses).
 - **❌ Interdictions Spécifiques** :
   - Ne pas inventer de besoins non exprimés ou implicites sans validation.
   - Ne pas inclure d'éléments de conception (classes, tables, architecture).
 - **✅ Points de Contrôle (Definition of Done)** :
   - La liste des fonctionnalités est exhaustive par rapport au document source.
   - Le fichier respecte le format défini dans `capacité-analyse.md`.
+  - Le fichier `rules-business.md` est créé/mis à jour dans le dossier global.
   - Aucun élément de conception n'est présent.
 - **📝 Instructions Détaillées** :
   1. **Lecture** : Lire attentivement `docs/1.besoin/besoin.md`.
   2. **Extraction** : 
      - Identifier les **Acteurs** et les **Fonctionnalités** (Format : Verbe d'action + Objet métier).
-     - Identifier les **Règles de Gestion** (Permissions, Contraintes, Scopes) associées.
+     - Identifier les **Règles de Gestion** (Permissions, Contraintes, Scopes) et les lister dans `docs/2.analyse/global/rules-business.md`.
   3. **Validation** : Vérifier la conformité avec les règles définies dans `resources/spec-analyse.md`.
 
 ### Action B : Planifier les Versions (Stratégie)
