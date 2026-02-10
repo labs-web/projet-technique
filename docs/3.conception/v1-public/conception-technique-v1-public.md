@@ -1,131 +1,121 @@
-# Conception Technique - V1 : Lecture Publique  
+# Conception Technique - V1 : Lecture Publique
 
 
-## 0. Contexte
-Cette première version (MVP) implémente la consultation publique des articles pour les visiteurs non authentifiés. Elle pose les fondations de l'architecture Front (Layouts, Composants) et Back (Modèles, Contrôleurs).
+## 1. Couche Front-end (Vues & Layouts)
 
----
+### Architecture des Vues
+L'interface publique sera structurée autour d'un layout principal et de vues dédiées à la consultation des articles.
 
-## 1. Couche Front-end (Présentation & UI)
+#### Layout Global
+- **Fichier** : `resources/views/layouts/public.blade.php`
+- **Responsabilité** : Structure HTML de base, en-tête (Logo, Navigation), pied de page.
+- **Slots** : 
+  - `$slot` : Contenu principal.
+  - `$header` : Titre de la page (optionnel).
 
-### 1.1 Architecture & Design System (Analyse UI)
-Cette section intègre le **Gap Analysis** issu de l'étape de conception UI (`designer-ui`).
+#### Pages (Vues Principales)
+1.  **Liste des Articles (Accueil)**
+    - **Fichier** : `resources/views/public/articles/index.blade.php`
+    - **Route** : `/`
+    - **Données** : Collection paginée d'articles (`$articles`).
+    - **Composants** : Boucle sur les articles utilisant le partial `article-card`.
 
-**Layout Global**
-- **PublicLayout** (`layouts/public.blade.php`) :
-  - **Header** : Logo, Navigation (Home, Login).
-  - **Main Content** : Slot principal.
-  - **Footer** : Copyright, Liens légaux.
+2.  **Détail d'un Article**
+    - **Fichier** : `resources/views/public/articles/show.blade.php`
+    - **Route** : `/articles/{slug}`
+    - **Données** : Instance unique d'article (`$article`).
+    - **Affichage** : Titre, Image de couverture, Méta-données (Auteur, Date, Catégorie), Contenu complet.
 
-**Inventaire des Composants (Atomic Design)**
-| Type         | Nom           | Description                                        | Statut  |
-| :----------- | :------------ | :------------------------------------------------- | :------ |
-| **Atom**     | `Button`      | Bouton principal / secondaire (Tailwind).          | À créer |
-| **Atom**     | `Badge`       | Étiquette pour la catégorie (Pill shape).          | À créer |
-| **Atom**     | `Avatar`      | Image de l'auteur (Cercle).                        | À créer |
-| **Atom**     | `Container`   | Conteneur centré responsive (`max-w-7xl mx-auto`). | À créer |
-| **Molecule** | `Navbar`      | Barre de navigation responsive.                    | À créer |
-| **Molecule** | `Footer`      | Pied de page simple.                               | À créer |
-| **Molecule** | `ArticleCard` | Carte article (Image, Titre, Extrait, Meta).       | À créer |
-| **Molecule** | `Pagination`  | Contrôles de pagination (Tailwind).                | À créer |
-
-### 1.2 Vues & Organisation Blade
-L'organisation des fichiers suit la séparation stricte **Public/Admin**.
-
-- `resources/views/layouts/public.blade.php` : Squelette HTML principal.
-- `resources/views/public/articles/index.blade.php` : Liste des articles (Grille responsive).
-- `resources/views/public/articles/show.blade.php` : Détail d'un article.
-- `resources/views/partials/article-card.blade.php` : Composant réutilisable pour la liste.
-
-### 1.3 Interactivité (JS / Alpine)
-- **Menu Mobile** : Géré par Alpine.js (`x-data="{ open: false }"`) dans la `Navbar`.
-- **Images** : Lazy loading natif (`loading="lazy"`).
+#### Partials (Composants Réutilisables)
+- **Carte Article** : `resources/views/partials/article-card.blade.php`
+  - Affichage résumé d'un article dans une liste (Image, Titre, Extrait, Lien "Lire la suite").
+- **Navbar Public** : `resources/views/partials/public-navbar.blade.php`
+- **Footer Public** : `resources/views/partials/public-footer.blade.php`
 
 ---
 
 ## 2. Couche HTTP (Contrôleurs, Routes)
 
-### 2.1 Routes (`routes/web.php`)
-Définition des accès publics.
+### Routes (`routes/web.php`)
+Définition des routes publiques sans authentification requise.
 
-```php
-use App\Http\Controllers\Public\ArticleController;
+| Verbe | URI                | Nom de la route         | Action Contrôleur                |
+| :---- | :----------------- | :---------------------- | :------------------------------- |
+| GET   | `/`                | `public.articles.index` | `Public\ArticleController@index` |
+| GET   | `/articles/{slug}` | `public.articles.show`  | `Public\ArticleController@show`  |
 
-Route::name('public.')->group(function () {
-    // Liste des articles (Page d'accueil par défaut pour le MVP)
-    Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
-    
-    // Détail d'un article
-    Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
-});
-```
+### Contrôleurs
 
-### 2.2 Contrôleurs
-Namespace : `App\Http\Controllers\Public`
+#### `App\Http\Controllers\Public\ArticleController`
+Contrôleur invokable ou resource (only index, show) dédié à l'affichage public.
 
-**ArticleController**
-- `index(Request $request)` :
-  - Récupère les articles paginés (ex: 9 par page).
-  - Trie par `created_at` DESC.
-  - Retourne la vue `public.articles.index`.
-- `show(string $slug)` :
-  - Cherche l'article par slug (ou 404).
-  - Charge les relations (Auteur, Catégorie).
-  - Retourne la vue `public.articles.show`.
+- **Méthode `index()`** :
+  - **rôle** : Récupérer les articles publiés, paginés, triés par date décroissante.
+  - **Retour** : `return view('public.articles.index', compact('articles'));`
 
-### 2.3 Ressources API (Anticipation)
-*Non requis pour la V1 (Blade uniquement), mais structure prête pour V7.*
+- **Méthode `show(Article $article)`** :
+  - **rôle** : Afficher un article spécifique.
+  - **Binding** : Utilisation du Route Model Binding implicite sur le champ `slug`.
+  - **Retour** : `return view('public.articles.show', compact('article'));`
+
+### Validation
+Pas de validation de formulaire complexe pour cette version (lecture seule). Le Route Model Binding gère la validation d'existence (404 si non trouvé).
 
 ---
 
-## 3. Couche Métier (Logique & Services)
+## 3. Couche Métier (Logique & Scopes)
 
-### 3.1 Règles de Gestion
-- **Scope de Publication** : Seuls les articles avec `is_published = true` et `published_at <= now()` doivent être visibles.
-- **Tri** : Ordre chronologique inverse par défaut.
+La logique métier pour cette version se concentre sur la récupération et le filtrage des données.
 
-### 3.2 Modèles & Eloquent
-**Article** (`app/Models/Article.php`)
+### Modèle `Article`
+- **Scopes Locaux** :
+  - `scopePublished($query)` : Filtre `where('is_published', true)`.
+  - `scopeRecent($query)` : Tri `orderBy('created_at', 'desc')`.
 - **Relations** :
-  - `belongsTo(User::class, 'user_id')` (Auteur).
-  - `belongsTo(Category::class)` (Catégorie).
-- **Scopes** :
-  - `scopePublished($query)` : Filtre les articles publics.
-  - `scopeRecent($query)` : Trie par date récente.
-- **Casts** :
-  - `is_published` => `boolean`.
-  - `published_at` => `datetime`.
+  - `author()` : BelongsTo `User`.
+  - `category()` : BelongsTo `Category`.
+- **Accesseurs** :
+  - `getExcerptAttribute()` : Génération dynamique d'un extrait du contenu.
+
+### Modèle `User`
+- **Relations** :
+  - `articles()` : HasMany `Article`.
+
+### Modèle `Category`
+- **Relations** :
+  - `articles()` : HasMany `Article`.
 
 ---
 
 ## 4. Couche Data (Persistance)
 
-### 4.1 Schéma de Base de Données (Migrations)
+Implémentation physique du schéma de données défini dans le diagramme de classes global.
 
-**Table `users` (Auteurs)**
-- Standard Laravel (+ `role` enum: 'admin', 'author', 'user').
+### Migrations
 
-**Table `categories`**
-- `id` (PK)
-- `name` (String, Unique)
-- `slug` (String, Unique, Index)
-- `created_at`, `updated_at`
+1.  **Table `users`** (Standard Laravel + modifications si nécessaire)
+    - `id`, `name`, `email`, `password`, `role` (enum/string), `timestamps`.
 
-**Table `articles`**
-- `id` (PK)
-- `user_id` (FK -> users.id, cascade)
-- `category_id` (FK -> categories.id, set null)
-- `title` (String)
-- `slug` (String, Unique, Index)
-- `excerpt` (Text, Nullable)
-- `content` (LongText)
-- `image` (String, Path, Nullable)
-- `is_published` (Boolean, Default false)
-- `published_at` (DateTime, Nullable)
-- `created_at`, `updated_at`
+2.  **Table `categories`**
+    - `id` (PK)
+    - `name` (String)
+    - `slug` (String, Unique)
+    - `created_at`, `updated_at`
 
-### 4.2 Seeders (`database/seeders`)
-Stratégie de peuplement pour le développement.
-1. **UserSeeder** : Créer 1 Admin, 1 Auteur.
-2. **CategorySeeder** : Créer 5 catégories (Tech, Design, Laravel...).
-3. **ArticleSeeder** : Créer 50 articles factices (Faker), répartis, avec images (placeholders).
+3.  **Table `articles`**
+    - `id` (PK)
+    - `user_id` (FK -> users.id, nullable ou cascade)
+    - `category_id` (FK -> categories.id, nullable)
+    - `title` (String)
+    - `slug` (String, Unique)
+    - `content` (Text/LongText)
+    - `image` (String, path vers l'image)
+    - `is_published` (Boolean, default false)
+    - `created_at`, `updated_at`
+
+### Seeders & Factories
+Stratégie de peuplement pour le développement et la démo.
+
+- **`UserSeeder`** : Création d'un admin et de quelques auteurs de test.
+- **`CategorySeeder`** : Création de catégories thématiques (ex: Tech, News, Tutorial).
+- **`ArticleSeeder`** : Génération de 20-50 articles factices liés à des auteurs et catégories aléatoires via Factory.
