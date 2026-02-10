@@ -32,6 +32,7 @@ description: Expert unifié de la gestion, création et maintenance des composan
   - Le dossier du skill est créé en `kebab-case`.
   - **Capacités génériques** : Les fichiers dans `resources/` doivent être **indépendants des livrables** (voir `capacités-skill.md` section "Capacités dans resources/").
   - **Cohérence Skill ↔ Workflow** : Si le skill possède un workflow d'exécution (menu interactif), les actions du skill doivent correspondre exactement aux actions du workflow.
+  - **Déport des Contraintes** : Les instructions complexes, templates spécifiques et règles détaillées DOIVENT être dans un fichier de capacité (`capacités/capacité-[nom].md`) et non dans le SKILL.md.
 - **📝 Instructions Détaillées** :
   1. **Lire** la capacité : `capacités/capacités-skill.md`.
   2. **Si Création** :
@@ -115,7 +116,10 @@ description: Expert unifié de la gestion, création et maintenance des composan
 ## ⚙️ Standards & Conventions
 1. **Architecture** : `.agent/` est le seul domaine d'intervention.
 2. **Nomenclature** : Tout en `kebab-case` (dossiers et fichiers).
-3. **Relation Skill ↔ Workflow** :
+3. **Séparation des Préoccupations (SoC)** :
+   - **SKILL.md** : Orchestration, Entrées/Sorties, Algorithmes de haut niveau.
+   - **capacités/*.md** : Règles métier détaillées, Logic complexe, Templates, Protocoles techniques.
+4. **Relation Skill ↔ Workflow** :
    - **Principe** : Chaque skill dispose d'un workflow d'exécution qui expose ses actions via un menu interactif.
    - **Synchronisation Obligatoire** : Toute modification (ajout, suppression, renommage) d'une action dans un skill **DOIT** être répercutée dans le workflow associé.
    - **Menu Interactif** : Le workflow doit présenter les actions disponibles de manière claire et permettre au développeur de choisir l'action à exécuter.

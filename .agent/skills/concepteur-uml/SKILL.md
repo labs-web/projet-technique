@@ -61,17 +61,15 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
 > **Description** : Produire le document de conception technique détaillé par couches (Front/Http/Métier/Data).
 - **Capacités Utilisées** :
   - `capacités/capacité-conception-technique.md` (Contient la Structure, les Interdictions et le Processus détaillé).
-  - **Skill Externe** : `designer-ui` (Action D : Conception & Analyse Page).
 - **Entrées** :
   - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Analyse fonctionnelle).
   - `docs/3.conception/global/classes-global.mermaid` (Modèle de données global).
 - **Sorties** : `docs/3.conception/vX-[nom]/conception-technique-vX-[nom].md`
 - **📝 Instructions d'Orchestration** :
   1. **Structure & Règles** : Suivre scrupuleusement le plan et les interdictions définis dans `capacité-conception-technique.md`.
-  2. **Conception UI (Délégation)** : Invoquer l'**Action D** du Skill `designer-ui` pour obtenir la décomposition des pages et l'inventaire (Atoms/Molécules).
-  3. **Intégration** : Intégrer le résultat de l'analyse UI (Gap Analysis) dans la section Front-end.
-  4. **Rédaction** : Remplir les autres couches (Http/Métier/Data) en traduisant le besoin fonctionnel.
-  5. **Revue** : Vérifier que toutes les exigences de l'analyse sont couvertes techniquement.
+  2. **Architecture Front-end** : Définir l'arborescence des Vues (`views/**/*.blade.php`), les Layouts et les Partials nécessaires pour couvrir le besoin.
+  3. **Rédaction Technique** : Remplir les autres couches (Http/Métier/Data) en traduisant le besoin fonctionnel en spécifications techniques (Contrôleurs, Modèles, Migrations).
+  4. **Revue** : Vérifier que toutes les exigences fonctionnelles sont couvertes par une implémentation technique.
 
 ---
 

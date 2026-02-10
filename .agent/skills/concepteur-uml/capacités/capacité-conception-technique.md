@@ -5,24 +5,20 @@ Rédiger un document de conception technique détaillé pour une version donnée
 
 ## Processus & Orchestration
 
-### 1. Pré-requis : Conception UI (Délégation)
-Avant de définir les Vues, il est impératif d'avoir une vision claire des composants graphiques.
-- **Action** : Déléguer l'analyse UI au skill `designer-ui` (Action D).
-- **Intégration** : Le résultat (Inventaire Atoms/Molecules, Gap Analysis) doit être intégré dans la section "Couche Présentation" du document technique.
-
-### 2. Rédaction Technique
-Traduire chaque besoin fonctionnel en spécifications techniques précises pour chaque couche.
+### 1. Organisation Technique des Vues
+Avant d'entamer la couche HTTP, définir l'architecture des fichiers de présentation.
+- **Identifier** les Layouts nécessaires (Public, Admin, Auth).
+- **Lister** les Vues principales (Pages).
+- **Extraire** les Partials évidents (Composants réutilisables).
 
 ## Structure du Document (Template)
 
-### 1. Couche Front-end (Présentation & UI)
-> **Objectif** : Définir l'architecture visuelle et l'interactivité.
-- **Architecture Pages** : Décomposition en **Atoms** et **Molecules** (issue de `designer-ui`).
-- **Composants** : Liste explicite des composants à utiliser (existants) ou à créer.
-- **Vues & Layouts** :
-  - Distinction nette **Public** vs **Admin**.
-  - Identification des **Partials** (`@include`) pour les blocs réutilisables.
-- **Interactivité** : Spécifications JS / Alpine.js.
+### 1. Couche Front-end (Vues & Layouts)
+> **Objectif** : Structurer l'affichage sans conception graphique détaillée.
+- **Arborescence** : Liste des fichiers Blade à créer (ex: `resources/views/public/posts/index.blade.php`).
+- **Layouts** : Structure globale (Header, Footer, Slot).
+- **Partials** : Blocs réutilisables identifiés (`@include`).
+- **Interactivité** : Besoins JS / Alpine simples.
 
 ### 2. Couche HTTP (Contrôleurs, Routes, API)
 > **Objectif** : Gérer les entrées/sorties et la validation.
