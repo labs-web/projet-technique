@@ -14,41 +14,33 @@ description: [Description courte de l'action principale]
 
 ---
 
-## ⚡ Actions (Capacités Atomiques)
-*Liste des fonctions que ce skill sait exécuter. C'est ici que se trouve le détail technique.*
+## ⚡ Actions (Orchestration)
 
 ### Action A : [Nom de l'Action]
 > **Description** : [Ce que ça fait concrètement]
-- **Entrées** : `[Fichier]`, `[Information]`
-- **Sorties** : `[Résultat attendu]`
+- **Capacités Utilisées** :
+  - `capacités/capacité-[technique-1].md`
+  - `capacités/capacité-[technique-2].md`
+- **Entrées** : `[Entrée 1]`, `[Entrée 2]`
+- **Sorties** : `[Fichier Sortie]`
 - **❌ Interdictions Spécifiques** :
-  - [Interdiction liée uniquement à cette action]
-- **✅ Points de Contrôle (Definition of Done)** :
-  - [Critère de validation spécifique]
-- **📝 Instructions Détaillées** :
-  1. [Étape 1 du travail]
-  2. [Étape 2 du travail]
-  3. ...
+  - [Interdiction de haut niveau]
+- **✅ Points de Contrôle** :
+  - [Critère de validation globale]
+- **📝 Instructions d'Orchestration** :
+  1. **[Étape 1]** : Utiliser `capacité-[technique-1]` pour [faire X].
+  2. **[Étape 2]** : Utiliser `capacité-[technique-2]` pour [faire Y].
 
-### Action B : [Nom de l'Action]
-...
+---
+
+## 🛠️ Capacités (Savoir-Faire Technique)
+*Documentation des fichiers situés dans le dossier `capacités/`*
+
+### 1. `capacité-[technique-1].md`
+- **Rôle** : [Description technique précise]
+- **Règles Clés** : [Règle technique 1], [Règle technique 2]
 
 ---
 
 ## 🔄 Scénarios d'Exécution (Algorithmes)
-*Orchestration des Actions définies ci-dessus. Optionnel si le skill est une simple boîte à outils.*
-
-### Scénario 1 : [Nom du Flux Principal] (Défaut)
-1. **Étape 1** : Exécuter l'**Action A** (`[Paramètres]`).
-2. **Étape 2** : Si `[Condition]`, exécuter l'**Action B**.
-   - *Note : Ne pas redétailler le comment de l'Action B, se référer à sa définition.*
-
-### Scénario 2 : [Flux Alternatif / Maintenance]
-1. ...
-
----
-
-## ⚙️ Standards & Conventions
-1. **Source de Vérité** : Respecter [Fichier/Règle].
-2. **Conventions** : [Format, Langue, etc.].
-3. **Ressources** : Utiliser les templates situés dans `resources/`.
+...

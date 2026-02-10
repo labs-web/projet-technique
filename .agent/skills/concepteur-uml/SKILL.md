@@ -3,7 +3,7 @@ name: concepteur-uml
 description: Expert en modélisation technique et conception (Diagrammes de Classes et de BDD avec Mermaid).
 ---
 
-<!-- ia : Refactoring de la structure du fichier SKILL.md pour suivre le template en utiisant le skill : expert-agent -->
+
 
 # Skill : Concepteur UML
 
@@ -19,42 +19,44 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
 
 ## ⚡ Actions (Capacités Atomiques)
 
-### Action A : Modéliser le Domaine (Class Diagram)
-> **Description** : Créer un diagramme de classes représentant les entités, leurs attributs, méthodes et relations.
+### Action A1 : Modéliser le Domaine (Global)
+> **Description** : Créer le diagramme de classes global de l'application (Vision Cible).
+- **Capacités Utilisées** :
+  - `capacités/capacité-mermaid.md`
+  - `capacités/capacité-diagramme-classes.md`
 - **Entrées** :
-  - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Besoin analysé).
-  - `docs/3.conception/rules-business.md` (Règles de gestion, optionnel).
+  - `docs/2.analyse/global/fonctionnalite-global.md` (Vision d'ensemble).
+  - `docs/3.conception/rules-business.md` (Règles de gestion transverses).
+- **Sorties** : `docs/3.conception/global/classes-global.mermaid`
+- **❌ Interdictions Spécifiques** :
+  - Ne pas détailler les méthodes techniques (CRUD standard), rester sur le domaine métier.
+- **✅ Points de Contrôle** :
+  - Toutes les entités majeures sont présentes.
+  - Héritage et abstractions sont identifiés.
+- **📝 Instructions d'Orchestration** :
+  1. **Analyse** : Identifier les entités "Cœur de métier" depuis l'analyse globale.
+  2. **Modélisation** : Appliquer `capacité-diagramme-classes` pour lier les grands ensembles.
+  3. **Sauvegarde** : Produire le fichier dans `docs/3.conception/global/`.
+
+### Action A2 : Modéliser le Domaine (Focus Version)
+> **Description** : Créer le diagramme de classes spécifique aux entités impactées par une version.
+- **Capacités Utilisées** :
+  - `capacités/capacité-mermaid.md`
+  - `capacités/capacité-diagramme-classes.md`
+- **Entrées** :
+  - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Spécifications de la version).
+  - `docs/2.analyse/global/fonctionnalite-global.md` (Contexte).
+  - `docs/3.conception/rules-business.md`.
 - **Sorties** : `docs/3.conception/vX-[nom]/classes-vX-[nom].mermaid`
 - **❌ Interdictions Spécifiques** :
-  - Ne pas utiliser de types spécifiques au langage (ex: `List<String>`) mais des standards UML (`String[]` ou `0..*`).
-- **✅ Points de Contrôle (Definition of Done)** :
-  - Toutes les entités du besoin sont représentées.
-  - Les cardinalités sont précises.
-  - Les relations (Rea, Aggregation, Composition, Heritage) sont correctes.
-- **📝 Instructions Détaillées** :
-  1. **Analyse** : Identifier les noms (Classes) et les verbes (Méthodes) dans l'analyse.
-  2. **Structure** : Créer le dossier `docs/3.conception/vX-[nom]/` si inexistant.
-  3. **Rédaction** :
-     - Définir les classes et attributs.
-     - Ajouter les types de données génériques.
-     - Établir les relations.
-     - Sauvegarder dans le fichier `.mermaid`.
+  - Ne pas redéfinir les entités hors scope, utiliser des références si besoin.
+- **✅ Points de Contrôle** :
+  - Seules les entités modifiées/créées par la version sont détaillées.
+- **📝 Instructions d'Orchestration** :
+  1. **Analyse** : Identifier le delta fonctionnel de la version.
+  2. **Modélisation** : Détailler les attributs et méthodes spécifiques à cette itération.
+  3. **Sauvegarde** : Produire le fichier dans le dossier de version `docs/3.conception/vX-[nom]/`.
 
-### Action B : Modéliser la BDD (ER Diagram)
-> **Description** : Traduire le modèle de classes en schéma relationnel de base de données physique.
-- **Entrées** : `docs/3.conception/vX-[nom]/classes-vX-[nom].mermaid`.
-- **Sorties** : `docs/3.conception/vX-[nom]/bdd-vX-[nom].mermaid`
-- **❌ Interdictions Spécifiques** :
-  - Ne pas oublier les clés étrangères (FK).
-  - Ne pas utiliser de types non supportés par le SGBD cible (MySQL/MariaDB).
-- **✅ Points de Contrôle (Definition of Done)** :
-  - Les tables sont normalisées (3NF).
-  - La convention de nommage Snake Case est respectée (`user_id`, `created_at`).
-- **📝 Instructions Détaillées** :
-  1. **Transformation** : Convertir Clsases -> Tables, Attributs -> Colonnes.
-  2. **Typage** : Assigner les types SQL (INT, VARCHAR, TIMESTAMP...).
-  3. **Relations** : Matérialiser les relations par des Clés Étrangères (FK).
-  4. **Table Pivot** : Créer les tables de jointure pour les relations Many-to-Many.
 
 ---
 
