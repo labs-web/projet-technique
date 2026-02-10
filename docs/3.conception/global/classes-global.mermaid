@@ -1,0 +1,32 @@
+classDiagram
+    %% Conception Globale - Domaine Métier
+    %% Basé sur l'analyse fonctionnelle globale
+
+    class User {
+        +Integer id
+        +String name
+        +String email
+        +String password
+        +String role
+    }
+
+    class Article {
+        +Integer id
+        +String title
+        +String slug
+        +String content
+        +String image
+        +Boolean is_published
+        +DateTime created_at
+        +DateTime updated_at
+    }
+
+    class Category {
+        +Integer id
+        +String name
+        +String slug
+    }
+
+    %% Relations
+    User "1" --> "0..*" Article : writes
+    Category "1" --> "0..*" Article : categorizes

@@ -57,6 +57,23 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
   2. **Modélisation** : Détailler les attributs et méthodes spécifiques à cette itération.
   3. **Sauvegarde** : Produire le fichier dans le dossier de version `docs/3.conception/vX-[nom]/`.
 
+### Action C1 : Rédiger la Conception Technique
+> **Description** : Produire le document de conception technique détaillé par couches (Front/Contrôleur/Métier/Data).
+- **Capacités Utilisées** :
+  - `capacités/capacité-conception-technique.md`
+- **Entrées** :
+  - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Analyse fonctionnelle).
+  - `docs/3.conception/vX-[nom]/classes-vX-[nom].mermaid` (Modèle de données validé).
+- **Sorties** : `docs/3.conception/vX-[nom]/conception-technique-vX-[nom].md`
+- **❌ Interdictions Spécifiques** :
+  - Ne pas faire de diagrammes ici, utiliser du texte structuré et des tableaux (Markdown).
+- **✅ Points de Contrôle** :
+  - Les 4 couches (Front, Présentation, Métier, Data) sont traitées.
+  - La cohérence avec le diagramme de classes est vérifiée.
+- **📝 Instructions d'Orchestration** :
+  1. **Structure** : Créer le fichier Markdown selon la `capacité-conception-technique`.
+  2. **Rédaction** : Remplir chaque section en traduisant le besoin fonctionnel en choix techniques précis (Noms de classes, Routes, Méthodes).
+  3. **Revue** : Vérifier que toutes les exigences de l'analyse sont couvertes techniquement.
 
 ---
 
@@ -64,9 +81,10 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
 
 ### Scénario 1 : Conception Complète d'une Version
 1. **Initialisation** : Lire l'analyse fonctionnelle de la version.
-2. **Architecture** : Exécuter l'**Action A** pour valider la structure objet.
-3. **Persistance** : Exécuter l'**Action B** pour préparer le schéma de base de données.
-4. **Validation** : Vérifier la cohérence entre Classes et BDD.
+2. **Modélisation** : Exécuter l'**Action A2** (Diagramme Classes).
+3. **Persistance** : Exécuter l'**Action B** (ERD/BDD via SQL/Schema si nécessaire, *Action à définir plus tard*).
+4. **Spécification** : Exécuter l'**Action C1** pour rédiger le guide technique de développement.
+5. **Validation** : Vérifier la cohérence globale.
 
 ---
 
