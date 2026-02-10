@@ -4,8 +4,6 @@ description: Expert unifié de la gestion, création et maintenance des composan
 ---
 
 
-<!-- ia : changer le terme "Action" en "Capacité" -->
-
 # Skill : Expert Agent
 
 ## 🎯 Périmètre Global
@@ -14,7 +12,7 @@ description: Expert unifié de la gestion, création et maintenance des composan
 ### 🚫 Interdictions Globales (Règles d'Or)
 1. **Isolation** : Ne JAMAIS modifier le code source du projet utilisateur (hors dossier `.agent/`).
 2. **Langue** : Tout le contenu généré (Descriptions, Instructions) doit être impérativement en **Français**.
-3. **Source de Vérité** : Les fichiers dans `specs/` (Standards) sont la loi absolue.
+3. **Source de Vérité** : Les fichiers dans `capacités/` (Standards) sont la loi absolue.
 4. **Templates** : Interdiction de créer un fichier "from scratch" ; toujours instancier le template correspondant dans `resources/`.
 
 ---
@@ -22,7 +20,7 @@ description: Expert unifié de la gestion, création et maintenance des composan
 ## ⚡ Actions (Capacités Atomiques)
 
 ### Action A : Manage Skill (Gérer Compétence)
-> **Description** : Créer ou mettre à jour un fichier Skill en respectant `specs-skill.md`.
+> **Description** : Créer ou mettre à jour un fichier Skill en respectant `capacités-skill.md`.
 - **Entrées** : `Nom`, `Besoin`, `Mode (Create/Update)`
 - **Sorties** : Fichier `.md` dans `.agent/skills/[nom]/SKILL.md`
 - **❌ Interdictions Spécifiques** :
@@ -32,10 +30,10 @@ description: Expert unifié de la gestion, création et maintenance des composan
   - **Nommage** : Le nom est un **Rôle Humain** (ex: `analyste-uml`).
   - Le fichier respecte la structure `template-skill.md`.
   - Le dossier du skill est créé en `kebab-case`.
-  - **Spécifications génériques** : Les fichiers dans `resources/` doivent être **indépendants des livrables** (voir `specs-skill.md` section "Spécifications dans resources/").
+  - **Capacités génériques** : Les fichiers dans `resources/` doivent être **indépendants des livrables** (voir `capacités-skill.md` section "Capacités dans resources/").
   - **Cohérence Skill ↔ Workflow** : Si le skill possède un workflow d'exécution (menu interactif), les actions du skill doivent correspondre exactement aux actions du workflow.
 - **📝 Instructions Détaillées** :
-  1. **Lire** la spec : `specs/specs-skill.md`.
+  1. **Lire** la capacité : `capacités/capacités-skill.md`.
   2. **Si Création** :
      - Vérifier l'unicité du nom.
      - Copier `resources/template-skill.md`.
@@ -46,13 +44,13 @@ description: Expert unifié de la gestion, création et maintenance des composan
   4. **Validation** : Vérifier que toutes les rubriques obligatoires sont présentes.
 
 ### Action B : Manage Rule (Gérer Règle)
-> **Description** : Créer ou mettre à jour une règle ou une mémoire en respectant `specs-rule.md`.
+> **Description** : Créer ou mettre à jour une règle ou une mémoire en respectant `capacités-rule.md`.
 - **Entrées** : `Nom`, `Contenu`, `Mode (Create/Update)`
 - **Sorties** : Fichier `.md` dans `.agent/rules/`
 - **✅ Points de Contrôle** :
   - Le header YAML contient bien `trigger` et `description`.
 - **📝 Instructions Détaillées** :
-  1. **Lire** la spec : `specs/specs-rule.md`.
+  1. **Lire** la capacité : `capacités/capacités-rule.md`.
   2. **Si Création** :
      - Copier `resources/template-rule.md`.
      - Adapter le déclencheur (trigger) selon le besoin (always_on, sur demande, etc.).
@@ -82,7 +80,7 @@ description: Expert unifié de la gestion, création et maintenance des composan
     - Si type **Création** : Les étapes doivent être claires et séquentielles.
 
 - **📝 Instructions Détaillées** :
-  1. **Lire** la spec : `specs/specs-workflow.md`.
+  1. **Lire** la capacité : `capacités/capacités-workflow.md`.
   2. **Si Création** :
      - Identifier le type de workflow requis.
      - **Copier** le template correspondant (`creation` ou `execution`).

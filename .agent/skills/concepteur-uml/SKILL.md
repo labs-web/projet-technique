@@ -3,6 +3,8 @@ name: concepteur-uml
 description: Expert en modélisation technique et conception (Diagrammes de Classes et de BDD avec Mermaid).
 ---
 
+<!-- ia : Refactoring de la structure du fichier SKILL.md pour suivre le template en utiisant le skill : expert-agent -->
+
 # Skill : Concepteur UML
 
 ## 🎯 Périmètre Global

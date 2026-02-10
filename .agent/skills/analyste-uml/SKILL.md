@@ -20,7 +20,7 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 
 ### Action A : Analyser le Besoin Global
 > **Description** : Transformer une expression de besoin brute en une liste structurée de fonctionnalités.
-> **Spécification** : Voir `resources/spec-analyse.md` pour les règles et le format du livrable.
+> **Capacité** : Voir `resources/capacité-analyse.md` pour les règles et le format du livrable.
 - **Entrées** : `docs/1.besoin/besoin.md` (Expression de besoins initiale).
 - **Sorties** : `docs/2.analyse/global/fonctionnalite-global.md` (Liste consolidée des fonctionnalités).
 - **❌ Interdictions Spécifiques** :
@@ -28,7 +28,7 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
   - Ne pas inclure d'éléments de conception (classes, tables, architecture).
 - **✅ Points de Contrôle (Definition of Done)** :
   - La liste des fonctionnalités est exhaustive par rapport au document source.
-  - Le fichier respecte le format défini dans `spec-analyse.md`.
+  - Le fichier respecte le format défini dans `capacité-analyse.md`.
   - Aucun élément de conception n'est présent.
 - **📝 Instructions Détaillées** :
   1. **Lecture** : Lire attentivement `docs/1.besoin/besoin.md`.
@@ -39,7 +39,7 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 
 ### Action B : Planifier les Versions (Stratégie)
 > **Description** : Définir la roadmap et le découpage en versions dans un fichier dédié.
-> **Spécification** : Voir `resources/spec-planification-version.md` pour les règles et le format du livrable.
+> **Capacité** : Voir `resources/capacité-planification-version.md` pour les règles et le format du livrable.
 - **Entrées** : 
   - `docs/1.besoin/besoin.md` (Contexte).
   - `docs/2.analyse/global/fonctionnalite-global.md` (Contexte).
@@ -55,7 +55,7 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 
 ### Action C : Analyser une Version
 > **Description** : Créer concrètement l'arborescence et le fichier d'analyse pour une ou plusieurs versions validées.
-> **Spécification** : Voir `resources/spec-analyse.md` pour les règles et le format du livrable.
+> **Capacité** : Voir `resources/capacité-analyse.md` pour les règles et le format du livrable.
 - **Entrées** : 
     - `docs/2.analyse/global/analyse-global.md` (Quoi - Fonctionnalités).
     - `docs/2.analyse/global/planification-version.md` (Quand/Où - Roadmap).
@@ -73,9 +73,9 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 
 ### Action D : Générer Use Case (Par Version)
 > **Description** : Traduire l'analyse textuelle d'une version en diagramme visuel PlantUML.
-> **Spécifications** : 
-> - Voir `resources/spec-plantuml.md` pour les standards PlantUML et le format des diagrammes.
-> - Voir `resources/spec-cas-utilisation.md` pour les règles de simplification CRUD.
+> **Capacités** : 
+> - Voir `resources/capacité-plantuml.md` pour les standards PlantUML et le format des diagrammes.
+> - Voir `resources/capacité-cas-utilisation.md` pour les règles de simplification CRUD.
 - **Entrées** : `docs/2.analyse/vX-[nom-version]/analyse-vX-[nom-version].md`.
 - **Sorties** : `docs/2.analyse/vX-[nom-version]/usecase-vX-[nom-version].puml`.
 - **❌ Interdictions Spécifiques** :
@@ -97,9 +97,9 @@ description: Expert en modélisation de l'analyse fonctionnelle (Analyse des bes
 
 ### Action E : Générer Diagrammes de Cas d'Utilisation par Contexte
 > **Description** : Créer les diagrammes PlantUML séparés pour chaque contexte applicatif (Public, Admin, API).
-> **Spécifications** : 
-> - Voir `resources/spec-plantuml.md` pour les standards PlantUML et le format des diagrammes.
-> - Voir `resources/spec-cas-utilisation.md` pour les règles de simplification CRUD et de séparation des contextes.
+> **Capacités** : 
+> - Voir `resources/capacité-plantuml.md` pour les standards PlantUML et le format des diagrammes.
+> - Voir `resources/capacité-cas-utilisation.md` pour les règles de simplification CRUD et de séparation des contextes.
 - **Entrées** : `docs/2.analyse/global/fonctionnalite-global.md` (Liste consolidée des fonctionnalités).
 - **Sorties** (selon les contextes détectés) : 
   - `docs/2.analyse/global/usecase-public.puml` *(si contexte application publique/frontend détecté)*
