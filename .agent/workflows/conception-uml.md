@@ -2,6 +2,11 @@
 description: Workflow de création de diagrammes de conception (Classes/DB).
 ---
 
+
+
+<!-- ia : Refactoring de la structure du fichier de worflow suivre le template en utiisant le skill : expert-agent -->
+
+
 # Workflow : Conception UML
 
 ## 1. Contexte & Flux Global
