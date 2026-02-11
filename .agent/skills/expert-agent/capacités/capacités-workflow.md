@@ -1,4 +1,4 @@
-# Spécifications : Gestion des Workflows
+# Capacité : Gestion des Workflows
 
 ## 1. Structure Obligatoire
 

@@ -80,7 +80,7 @@ Une fois validé, exécuter l'action correspondante du skill `expert-agent`.
   - Demander au développeur : "Nom du skill ?"
   - Demander au développeur : "Mode ? (Create/Update)"
   - Demander au développeur : "Besoin/Description ?"
-- **STOP** : Vérifier que le fichier `SKILL.md` respecte `specs/specs-skill.md`
+- **STOP** : Vérifier que le fichier `SKILL.md` respecte `capacités/capacités-skill.md`
 
 #### Si Action B sélectionnée (Gérer Rule)
 - **Skill Cible** : `expert-agent`
@@ -89,7 +89,7 @@ Une fois validé, exécuter l'action correspondante du skill `expert-agent`.
   - Demander au développeur : "Nom de la règle ?"
   - Demander au développeur : "Mode ? (Create/Update)"
   - Demander au développeur : "Contenu de la règle ?"
-- **STOP** : Vérifier que le fichier respecte `specs/specs-rule.md`
+- **STOP** : Vérifier que le fichier respecte `capacités/capacités-rule.md`
 
 #### Si Action C sélectionnée (Gérer Workflow)
 - **Skill Cible** : `expert-agent`
@@ -98,12 +98,12 @@ Une fois validé, exécuter l'action correspondante du skill `expert-agent`.
   - Demander au développeur : "Nom du workflow ?"
   - Demander au développeur : "Mode ? (Create/Update)"
   - Demander au développeur : "Étapes du processus ?"
-- **STOP** : Vérifier que le fichier respecte `specs/specs-workflow.md`
+- **STOP** : Vérifier que le fichier respecte `capacités/capacités-workflow.md`
 
 ---
 
 ## 3. Critères de Qualité
 - **Découvrabilité** : Le développeur voit toutes les capacités de maintenance
 - **Unicité** : Pas de doublons fonctionnels
-- **Conformité** : Respect strict des templates et standards (`specs/`)
+- **Conformité** : Respect strict des templates et standards (`capacités/`)
 - **Isolation** : Seuls les fichiers de configuration de l'agent sont touchés

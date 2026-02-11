@@ -1,4 +1,4 @@
-# Spécifications : Gestion des Skills
+# Capacité : Gestion des Skills
 
 ## 1. Structure Obligatoire
 
@@ -27,18 +27,19 @@ Un Skill valide doit respecter la structure suivante :
 - **RÈGLE CRITIQUE** : Tout artefact généré par l'agent, et en particulier le plan d'implémentation (`implementation_plan.md`), **DOIT ÊTRE RÉDIGÉ EN FRANÇAIS**.
 - **Templates** : Utiliser `template-skill.md` (situé dans `.agent/skills/expert-agent/resources/`) comme base.
 
-### Spécifications dans resources/
-- **PRINCIPE DE GÉNÉRICITÉ** : Les fichiers de spécification dans le dossier `resources/` d'un skill **DOIVENT être génériques** et **indépendants des livrables spécifiques**.
+### Capacités (Savoir-Faire) dans `capacités/`
+- **PRINCIPE** : Les fichiers de savoir-faire (Procédures, Standards, Checklists) doivent être stockés dans le dossier `capacités/`.
+- **Indépendance** : Ces fichiers **DOIVENT être génériques** et **indépendants des livrables spécifiques**.
 - **Interdiction de Couplage** : 
-  - ❌ **NE PAS** nommer les specs d'après les livrables (ex: `spec-analyse.md`, `spec-use-case-v1.md`)
-  - ✅ **UTILISER** des noms qui décrivent le **type de document** ou le **format** (ex: `spec-document-analyse.md`, `spec-diagramme-uml.md`)
-- **Réutilisabilité** : Une spec doit pouvoir s'appliquer à **plusieurs livrables** du même type.
+  - ❌ **NE PAS** nommer les fichiers d'après les livrables (ex: `capacité-analyse.md`, `capacité-use-case-v1.md`)
+  - ✅ **UTILISER** des noms qui décrivent le **type de savoir-faire** (ex: `capacité-analyse-besoin.md`, `capacité-diagramme-uml.md`)
+- **Réutilisabilité** : Une capacité doit pouvoir être invoquée par plusieurs actions.
 - **Structure Recommandée** :
-  - `spec-format-[nom].md` : Pour les formats techniques (PlantUML, Mermaid, Markdown structuré)
-  - `spec-type-[nom].md` : Pour les types de documents (Document d'analyse, Plan de conception, etc.)
+  - `capacité-format-[nom].md` : Pour les formats techniques
+  - `capacité-methode-[nom].md` : Pour les méthodes d'analyse ou de conception
 - **Exemple de Bonne Pratique** :
-  - Au lieu de : `spec-analyse.md` → Utiliser : `spec-document-analyse.md`
-  - Au lieu de : `spec-use-case-v1.md` → Utiliser : `spec-diagramme-use-case.md`
+  - Au lieu de : `spec-analyse.md` dans `resources/`
+  - Utiliser : `capacité-analyse-fichiers.md` dans `capacités/`
 
 ## 3. Algorithme de Refactoring
 

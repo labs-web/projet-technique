@@ -16,8 +16,25 @@ description: Expert unifié de la gestion, création et maintenance des composan
 4. **Templates** : Interdiction de créer un fichier "from scratch" ; toujours instancier le template correspondant dans `resources/`.
 
 ---
-
-## ⚡ Actions (Capacités Atomiques)
+ 
+ ## 🛠️ Capacités (Savoir-Faire Technique)
+ *Documentation des fichiers situés dans le dossier `capacités/`*
+ 
+ ### 1. `capacités-skill.md`
+ - **Rôle** : Standards pour la gestion des Skills (Structure, Nommage).
+ - **Règles Clés** : Tout skill doit avoir un `SKILL.md` et un `resources/`.
+ 
+ ### 2. `capacités-rule.md`
+ - **Rôle** : Standards pour la gestion des Règles (Contexte, Mémoire).
+ - **Règles Clés** : Une règle par fichier catégorie, Frontmatter trigger.
+ 
+ ### 3. `capacités-workflow.md`
+ - **Rôle** : Standards pour la gestion des Workflows (Processus).
+ - **Règles Clés** : Pattern "Menu Interactif", Validation humaine obligatoire.
+ 
+ ---
+ 
+ ## ⚡ Actions (Capacités Atomiques)
 
 ### Action A : Manage Skill (Gérer Compétence)
 > **Description** : Créer ou mettre à jour un fichier Skill en respectant `capacités-skill.md`.
@@ -30,7 +47,7 @@ description: Expert unifié de la gestion, création et maintenance des composan
   - **Nommage** : Le nom est un **Rôle Humain** (ex: `analyste-uml`).
   - Le fichier respecte la structure `template-skill.md`.
   - Le dossier du skill est créé en `kebab-case`.
-  - **Capacités génériques** : Les fichiers dans `resources/` doivent être **indépendants des livrables** (voir `capacités-skill.md` section "Capacités dans resources/").
+  - **Capacités génériques** : Les fichiers de savoir-faire (Standards, Règles) doivent être dans le dossier `capacités/` et non dans `resources/` (voir `capacités-skill.md`).
   - **Cohérence Skill ↔ Workflow** : Si le skill possède un workflow d'exécution (menu interactif), les actions du skill doivent correspondre exactement aux actions du workflow.
   - **Déport des Contraintes** : Les instructions complexes, templates spécifiques et règles détaillées DOIVENT être dans un fichier de capacité (`capacités/capacité-[nom].md`) et non dans le SKILL.md.
 - **📝 Instructions Détaillées** :

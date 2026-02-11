@@ -1,4 +1,4 @@
-# Spécifications : Gestion des Règles (Rules)
+# Capacité : Gestion des Règles (Rules)
 
 ## 1. Structure Obligatoire
 
