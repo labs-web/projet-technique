@@ -1,69 +1,90 @@
 ---
 name: developpeur-data
-description: Crée les Migrations, Modèles Eloquent, Factories et Seeders, et optimise les requêtes.
+description: Expert de la persistance des données (Migrations, Modèles, Seeders).
 ---
 
 # Skill : Développeur Data
 
 ## 🎯 Périmètre Global
-**Mission** : Implémenter et maintenir la couche de persistance des données (Schéma BDD, Modèles Eloquent, Seeding), en garantissant l'intégrité et la performance des requêtes.
+**Mission** : Concevoir, implémenter et maintenir la couche de persistance des données, en garantissant l'intégrité, la performance et la cohérence du schéma de base de données avec le besoin métier.
 
 ### 🚫 Interdictions Globales (Règles d'Or)
-1. **Never Delete** : Ne jamais supprimer ou modifier une migration déjà jouée en production -> Créer une nouvelle migration.
-2. **Mass Assignment** : Toujours protéger les modèles avec `$fillable` (whitelist) et jamais `$guarded = []`.
-3. **Naming** : Tables en `snake_case` Pluriel, Modèles en `PascalCase` Singulier.
+1. **Intégrité Production** : Ne jamais modifier une migration déjà jouée (sauf en dev local non partagé). Toujours créer une nouvelle migration (`add_column`, `change_column`).
+2. **Sécurité** : 
+   - Toujours définir `$fillable` dans les Modèles (Whitelist).
+   - Jamais de `$guarded = []`.
+3. **Conventions de Nommage** :
+   - Base de données : `snake_case` Pluriel (ex: `users`, `article_tags`).
+   - Modèles : `PascalCase` Singulier (ex: `User`, `ArticleTag`).
+   - Clés étrangères : `[model]_id` (ex: `user_id`).
+4. **Logique** : Ne jamais implémenter de logique métier complexe dans les Modèles ou les contrôleurs. Utiliser des Classes de Service ou des Actions.
 
 ---
 
 ## ⚡ Actions (Capacités Atomiques)
 
-### Action A : Créer/Modifier Schéma (Migration)
-> **Description** : Générer une migration Laravel pour altérer la structure de la base de données.
-- **Entrées** : Description des changements (Nouvelle table ou Colonnes à ajouter).
-- **Sorties** : `database/migrations/YYYY_MM_DD_HHMMSS_[action]_[table]_table.php`.
-- **❌ Interdictions Spécifiques** :
-  - Ne pas oublier la méthode `down()` pour le rollback.
-  - Ne pas utiliser de types non standards sans raison (ex: `json` sur MySQL 5.7).
-- **✅ Points de Contrôle (Definition of Done)** :
-  - La migration s'exécute (`migrate`) et se rollback (`migrate:rollback`) sans erreur.
-  - Les clés étrangères ont `constrained()->onDelete('cascade')` (si approprié).
-- **📝 Instructions Détaillées** :
-  1. Utiliser `php artisan make:migration`.
-  2. Définir le schéma dans `up()`.
-  3. Vérifier les index nécessaires.
+### Action A : Concevoir la Couche Data
+> **Description** : Analyser les besoins fonctionnels et produire le plan technique détaillé pour la data (Schéma, Modèles).
+> **Capacité** : Voir `capacités/capacité-conception-data.md` pour les règles de conception.
+- **Entrées** :
+  - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Fonctionnel).
+  - `docs/3.conception/global/classes-global.mermaid` (Diagramme de classes).
+- **Sorties** : `docs/3.conception/vX-[nom]/conception-data-vX-[nom].md`.
+- **❌ Interdictions** : Ne pas contredire le diagramme de classes validé.
+- **✅ Definition of Done** : Le document liste toutes les tables, colonnes, types et relations à créer.
+- **📝 Instructions** : Utiliser la capacité dédiée.
 
-### Action B : Définir Modèle Eloquent
-> **Description** : Configurer la classe Eloquent reflétant une table.
-- **Entrées** : Table associée, Relations, Attributs.
-- **Sorties** : `app/Models/[ModelName].php`.
-- **❌ Interdictions Spécifiques** :
-  - Ne pas inclure de logique métier complexe dans le modèle.
-- **✅ Points de Contrôle (Definition of Done)** :
-  - `$fillable` est défini.
-  - `$casts` est utilisé pour les types natifs (boolean, date, array).
-  - Les méthodes de relation (`hasMany`, etc.) sont typées.
+### Action B : Créer/Modifier Schéma (Migration)
+> **Description** : Générer et valider les fichiers de migration Laravel pour altérer la structure de la BDD.
+> **Capacité** : Voir `capacités/capacité-migration.md` pour les standards de migration.
+- **Entrées** : 
+  - Description des changements (Nouvelle table ou Colonnes à ajouter).
+  - Ou Document de conception Data (`Action A`).
+- **Sorties** : Fichier dans `database/migrations/YYYY_MM_DD_HHMMSS_[action]_[table]_table.php`.
+- **❌ Interdictions** : Pas de types non standards (ex: `json` si non supporté). `down()` obligatoire.
+- **✅ Definition of Done** : `migrate` et `migrate:rollback` fonctionnent sans erreur.
+- **📝 Instructions** : Utiliser la capacité dédiée.
 
-### Action C : Créer Jeu de Données (Factory/Seeder)
-> **Description** : Générer des données de test réalistes.
+### Action C : Définir Modèle Eloquent
+> **Description** : Créer ou mettre à jour les classes Eloquent avec leurs relations, casts et configurations.
+> **Capacité** : Voir `capacités/capacité-modele-eloquent.md` pour les standards Eloquent.
+- **Entrées** : Nom de la table, Relations, Attributs.
+- **Sorties** : Fichier dans `app/Models/[ModelName].php`.
+- **❌ Interdictions** : Pas de logique métier.
+- **✅ Definition of Done** : `$fillable` complet, Relations typées.
+- **📝 Instructions** : Utiliser la capacité dédiée.
+
+### Action D : Créer Jeu de Données (Factory/Seeder)
+> **Description** : Générer les Factories et Seeders pour le développement et les tests automatisés.
+> **Capacité** : Voir `capacités/capacité-jeu-donnees.md` pour les stratégies de seeding.
 - **Entrées** : Modèle cible.
-- **Sorties** : `database/factories/[Model]Factory.php`, `database/seeders/[Model]Seeder.php`.
-- **✅ Points de Contrôle (Definition of Done)** :
-  - La Factory utilise `fake()` pour des données variées.
-  - Le Seeder est appelé dans `DatabaseSeeder.php`.
+- **Sorties** : 
+  - `database/factories/[Model]Factory.php`.
+  - `database/seeders/[Model]Seeder.php`.
+- **✅ Definition of Done** : Données réalistes via `fake()`, Seeder enregistré dans `DatabaseSeeder`.
+- **📝 Instructions** : Utiliser la capacité dédiée.
 
 ---
 
 ## 🔄 Scénarios d'Exécution (Algorithmes)
 
-### Scénario 1 : Création d'une Nouvelle Entité
-1. **Migration** : Exécuter **Action A** pour créer la table.
-2. **Model** : Exécuter **Action B** pour lier le code PHP.
-3. **Data** : Exécuter **Action C** pour permettre le développement avec des données.
-4. **Validation** : Lancer `php artisan migrate --seed` pour vérifier la chaîne complète.
+### Scénario 1 : Implémentation Feature (Flux Standard)
+*À utiliser dans le cadre du workflow `/impl-feature`.*
+1. **Design (Optionnel)** : Si complexe, exécuter **Action A** pour valider le plan.
+2. **Schema** : Exécuter **Action B** pour créer les tables.
+3. **Model** : Exécuter **Action C** pour lier le code PHP.
+4. **Seed** : Exécuter **Action D** pour hydrater la base avec des données de test.
+5. **Validation** : Lancer `php artisan migrate:fresh --seed` pour valider la chaîne complète.
+
+### Scénario 2 : Hotfix BDD
+*Pour corriger un champ ou une table existante.*
+1. **Migration** : Exécuter **Action B** (create_xxx_table ou add_xxx_to_table).
+2. **Model** : Mettre à jour le modèle via **Action C** (`$fillable`, `$casts`).
 
 ---
 
 ## ⚙️ Standards & Conventions
-1. **Migrations** : Utiliser la syntaxe anonyme (`return new class extends Migration`).
-2. **ID** : Utiliser `$table->id()` (BigInt Auto Increment) par défaut, ou `$table->uuid('id')` si requis.
+1. **Syntaxe** : Utiliser la syntaxe anonyme (`return new class extends Migration`).
+2. **ID** : Utiliser `$table->id()` (BigInt Auto Increment) par défaut.
 3. **Dates** : Toujours inclure `$table->timestamps()`.
+4. **Relations** : Toujours définir les contraintes de clés étrangères (`constrained()->onDelete('cascade')` si parent supprimé).
