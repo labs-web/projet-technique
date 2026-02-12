@@ -3,8 +3,6 @@ name: concepteur-uml
 description: Expert en modélisation technique et conception (Diagrammes de Classes et de BDD avec Mermaid).
 ---
 
-
-
 # Skill : Concepteur UML
 
 ## 🎯 Périmètre Global
@@ -21,9 +19,9 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
 
 ### Action A1 : Modéliser le Domaine (Global)
 > **Description** : Créer le diagramme de classes global de l'application (Vision Cible).
-- **Capacités Utilisées** :
-  - `capacités/capacité-mermaid.md`
-  - `capacités/capacité-diagramme-classes.md`
+> **Capacités Utilisées** :
+> - `capacités/capacité-mermaid.md`
+> - `capacités/capacité-diagramme-classes.md`
 - **Entrées** :
   - `docs/2.analyse/global/fonctionnalite-global.md` (Vision d'ensemble).
   - `docs/2.analyse/global/rules-business.md` (Règles de gestion transverses).
@@ -40,9 +38,9 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
 
 ### Action A2 : Modéliser le Domaine (Focus Version)
 > **Description** : Créer le diagramme de classes spécifique aux entités impactées par une version.
-- **Capacités Utilisées** :
-  - `capacités/capacité-mermaid.md`
-  - `capacités/capacité-diagramme-classes.md`
+> **Capacités Utilisées** :
+> - `capacités/capacité-mermaid.md`
+> - `capacités/capacité-diagramme-classes.md`
 - **Entrées** :
   - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Spécifications de la version).
   - `docs/2.analyse/global/fonctionnalite-global.md` (Contexte).
@@ -56,20 +54,6 @@ description: Expert en modélisation technique et conception (Diagrammes de Clas
   1. **Analyse** : Identifier le delta fonctionnel de la version.
   2. **Modélisation** : Détailler les attributs et méthodes spécifiques à cette itération.
   3. **Sauvegarde** : Produire le fichier dans le dossier de version `docs/3.conception/vX-[nom]/`.
-
-### Action C1 : Rédiger la Conception Technique
-> **Description** : Produire le document de conception technique détaillé par couches (Front/Http/Métier/Data).
-- **Capacités Utilisées** :
-  - `capacités/capacité-conception-technique.md` (Contient la Structure, les Interdictions et le Processus détaillé).
-- **Entrées** :
-  - `docs/2.analyse/vX-[nom]/analyse-vX-[nom].md` (Analyse fonctionnelle).
-  - `docs/3.conception/global/classes-global.mermaid` (Modèle de données global).
-- **Sorties** : `docs/3.conception/vX-[nom]/conception-technique-vX-[nom].md`
-- **📝 Instructions d'Orchestration** :
-  1. **Structure & Règles** : Suivre scrupuleusement le plan et les interdictions définis dans `capacité-conception-technique.md`.
-  2. **Architecture Front-end** : Définir l'arborescence des Vues (`views/**/*.blade.php`), les Layouts et les Partials nécessaires pour couvrir le besoin.
-  3. **Rédaction Technique** : Remplir les autres couches (Http/Métier/Data) en traduisant le besoin fonctionnel en spécifications techniques (Contrôleurs, Modèles, Migrations).
-  4. **Revue** : Vérifier que toutes les exigences fonctionnelles sont couvertes par une implémentation technique.
 
 ---
 
