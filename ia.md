@@ -1,0 +1,1 @@
+<!-- ia : /raffinement-agent chaque SKILL doit avoire un Worflow d'execution, il faut créer les worflow manquantes  -->

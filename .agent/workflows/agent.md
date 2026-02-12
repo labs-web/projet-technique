@@ -41,3 +41,9 @@ Voulez-vous exécuter ce plan ? (Tapez 'oui' pour valider)
 2. **Exécuter** la tâche en déléguant au Skill ou Workflow identifié.
    - Utiliser les outils adéquats (`multi_replace_file_content`, `run_command`, etc.) ou invoquer le skill via son workflow.
 3. **Confirmer** la fin de chaque traitement.
+
+### Étape 4 : Nettoyage & Clôture
+**Pour chaque directive traitée avec succès** :
+1. **Supprimer** proprement le commentaire contenant la directive `ia :` dans le fichier source.
+   - Utiliser `replace_file_content` en ciblant le bloc exact.
+2. **Confirmer** au développeur : "✅ Directive exécutée et nettoyée."
